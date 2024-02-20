@@ -23,7 +23,7 @@ export class GameComponent implements OnInit {
       physics: {
         default: 'matter',
         matter: {
-          debug:true,
+          debug: false,
           gravity: { y: 0 }
         }
       },

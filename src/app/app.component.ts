@@ -6,5 +6,14 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'Game';
+  public navigation = [
+    {
+      link: 'game-page',
+      label: 'Game'
+    },
+    {
+      link: 'tutorial-page',
+      label: 'Tutorial'
+    }
+  ];
 }

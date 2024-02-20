@@ -1,14 +1,22 @@
 <mat-drawer-container class="app" autosize>
   <mat-drawer #drawer class="app__sidenav" mode="side">
-    <p>Sidenav</p>
+    <mat-list role="list">
+      @for (item of navigation; track item) {
+        <mat-list-item [routerLink]="item.link" [routerLinkActive]="item.link" role="listitem">
+          {{item.label}}
+        </mat-list-item>
+      }
+    </mat-list>
   </mat-drawer>
 
   <div class="app__sidenav-content">
     <main>
-      <a [routerLink]="'game-page'">{{title}}</a>
-      <button type="button" mat-button (click)="drawer.toggle()">
-        Toggle sidenav
-      </button>
+      <mat-toolbar>
+        <button mat-icon-button aria-label="Menu icon" (click)="drawer.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span>My App</span>
+      </mat-toolbar>
 
       <router-outlet/>
     </main>

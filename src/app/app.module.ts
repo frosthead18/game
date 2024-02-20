@@ -6,29 +6,38 @@ import { AppComponent } from './app.component';
 import {MatDrawer, MatDrawerContainer, MatSidenavModule} from "@angular/material/sidenav";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import {MatButton} from "@angular/material/button";
+import {MatButton, MatButtonModule} from "@angular/material/button";
 import {GameModule} from "./game/game.module";
-import { TutorialComponent } from './tutorial/tutorial/tutorial.component';
+import {TutorialModule} from "./tutorial/tutorial.module";
+import {MatListModule} from "@angular/material/list";
+import {DashboardModule} from "./dashboard/dashboard.module";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatIconModule} from "@angular/material/icon";
 
 
 const materialModules = [
   MatDrawerContainer,
   MatDrawer,
   MatSidenavModule,
-  MatButton
+  MatButton,
+  MatListModule,
+  MatToolbarModule,
+  MatButtonModule,
+  MatIconModule
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
-    TutorialComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     ...materialModules,
-    GameModule
+    GameModule,
+    TutorialModule,
+    DashboardModule
   ],
   exports: [
     ...materialModules

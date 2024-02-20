@@ -18,7 +18,6 @@ export class MainScene extends Phaser.Scene {
     this.player.setSize(1, 1);
     this.player.setScale(1.3, 1.3)
 
-
     this.keys = this.input.keyboard?.addKeys({
       'up': Phaser.Input.Keyboard.KeyCodes.W,
       'down': Phaser.Input.Keyboard.KeyCodes.S,
