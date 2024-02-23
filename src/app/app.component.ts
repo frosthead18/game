@@ -14,6 +14,10 @@ export class AppComponent {
     {
       link: 'tutorial-page',
       label: 'Tutorial'
+    },
+    {
+      link: 'planes-page',
+      label: 'Planes'
     }
   ];
 }

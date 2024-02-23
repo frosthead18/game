@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {GameComponent} from "./game/game-page/game.component";
 import {TutorialPageComponent} from "./tutorial/tutorial-page/tutorial-page.component";
 import {DashboardPageComponent} from "./dashboard/dashboard-page/dashboard-page.component";
+import {PlanesPageComponent} from "./planes/planes-page/planes-page.component";
 
 const routes: Routes = [
   {
@@ -16,6 +17,12 @@ const routes: Routes = [
     loadChildren: () => import('./tutorial/tutorial.module').then(m => m.TutorialModule),
     pathMatch: 'full',
     component: TutorialPageComponent
+  },
+  {
+    path: 'planes-page',
+    loadChildren: () => import('./planes/planes.module').then(m => m.PlanesModule),
+    pathMatch: 'full',
+    component: PlanesPageComponent
   },
   {
     path: 'dashboard',

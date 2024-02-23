@@ -13,7 +13,6 @@ export class MainScene extends Phaser.Scene {
   }
 
   create() {
-    console.log('create method');
     this.player = this.matter.add.sprite(100, 100, 'player');
     this.player.setSize(1, 1);
     this.player.setScale(1.3, 1.3)
@@ -109,7 +108,6 @@ export class MainScene extends Phaser.Scene {
   }
 
   preload() {
-    console.log('preload method');
     this.load.spritesheet("player", "assets/characters/player.png", {
       frameWidth: 48,
       frameHeight: 48
@@ -117,7 +115,6 @@ export class MainScene extends Phaser.Scene {
   }
 
   override update() {
-    console.log('update method');
     //================================
     //  first priority, set default:
     //================================

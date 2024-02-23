@@ -16,7 +16,7 @@ export class TutorialPageComponent implements OnInit {
       type: Phaser.AUTO,
       width: '800',
       height: '600',
-      parent: 'gameContainer',
+      parent: 'tutorialGameContainer',
       physics: {
         default: 'arcade',
         arcade: {

@@ -25,7 +25,9 @@
       "ScriptHost",
     ],
     "allowSyntheticDefaultImports": true,
-    "allowJs": true
+    "allowJs": true,
+    "typeRoots": ["./node_modules/phaser/types"],
+    "types": ["Phaser"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
