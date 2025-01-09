@@ -18,6 +18,10 @@ export class AppComponent {
     {
       link: 'planes-page',
       label: 'Planes'
+    },
+    {
+      link: 'radical-page',
+      label: 'Radical'
     }
   ];
 }

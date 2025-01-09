@@ -4,6 +4,7 @@ import {GameComponent} from "./game/game-page/game.component";
 import {TutorialPageComponent} from "./tutorial/tutorial-page/tutorial-page.component";
 import {DashboardPageComponent} from "./dashboard/dashboard-page/dashboard-page.component";
 import {PlanesPageComponent} from "./planes/planes-page/planes-page.component";
+import {RadicalPageComponent} from "./radical/radical-page/radical-page.component";
 
 const routes: Routes = [
   {
@@ -23,6 +24,12 @@ const routes: Routes = [
     loadChildren: () => import('./planes/planes.module').then(m => m.PlanesModule),
     pathMatch: 'full',
     component: PlanesPageComponent
+  },
+  {
+    path: 'radical-page',
+    loadChildren: () => import('./radical/radical.module').then(m => m.RadicalModule),
+    pathMatch: 'full',
+    component: RadicalPageComponent
   },
   {
     path: 'dashboard',

@@ -13,6 +13,7 @@ import {MatListModule} from "@angular/material/list";
 import {DashboardModule} from "./dashboard/dashboard.module";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
+import {RadicalModule} from "./radical/radical.module";
 
 
 const materialModules = [
@@ -37,7 +38,8 @@ const materialModules = [
     ...materialModules,
     GameModule,
     TutorialModule,
-    DashboardModule
+    DashboardModule,
+    RadicalModule
   ],
   exports: [
     ...materialModules

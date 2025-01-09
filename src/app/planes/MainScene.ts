@@ -26,6 +26,7 @@ export class MainScene extends Phaser.Scene {
 
   override update() {
     Phaser.Actions.IncY(this.planes, -1, -0.025);
+    Phaser.Actions.IncX(this.planes, 1, -0.025);
 
     Phaser.Actions.WrapInRectangle(this.planes, this.cameras.main.getBounds(), 128);
   }
