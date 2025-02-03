@@ -14,6 +14,7 @@ import {DashboardModule} from "./dashboard/dashboard.module";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import {RadicalModule} from "./radical/radical.module";
+import {BattleArmourModule} from "./battle-armour/battle-armour.module";
 
 
 const materialModules = [
@@ -39,7 +40,8 @@ const materialModules = [
     GameModule,
     TutorialModule,
     DashboardModule,
-    RadicalModule
+    RadicalModule,
+    BattleArmourModule,
   ],
   exports: [
     ...materialModules

@@ -5,41 +5,58 @@ import {TutorialPageComponent} from "./tutorial/tutorial-page/tutorial-page.comp
 import {DashboardPageComponent} from "./dashboard/dashboard-page/dashboard-page.component";
 import {PlanesPageComponent} from "./planes/planes-page/planes-page.component";
 import {RadicalPageComponent} from "./radical/radical-page/radical-page.component";
+import {BattleArmourPageComponent} from "./battle-armour/battle-armour-page/battle-armour-page.component";
+
+export const routPaths = {
+  gamePage: 'game',
+  tutorial: 'tutorial',
+  planesPage: 'planes',
+  radicalPage: 'radical',
+  battleArmour: 'battle-armour',
+  dashboard: 'dashboard',
+  root: ''
+}
 
 const routes: Routes = [
   {
-    path: 'game-page',
+    path: routPaths.gamePage,
     loadChildren: () => import('./game/game.module').then(m => m.GameModule),
     pathMatch: 'full',
     component: GameComponent
   },
   {
-    path: 'tutorial-page',
+    path: routPaths.tutorial,
     loadChildren: () => import('./tutorial/tutorial.module').then(m => m.TutorialModule),
     pathMatch: 'full',
     component: TutorialPageComponent
   },
   {
-    path: 'planes-page',
+    path: routPaths.planesPage,
     loadChildren: () => import('./planes/planes.module').then(m => m.PlanesModule),
     pathMatch: 'full',
     component: PlanesPageComponent
   },
   {
-    path: 'radical-page',
+    path: routPaths.radicalPage,
     loadChildren: () => import('./radical/radical.module').then(m => m.RadicalModule),
     pathMatch: 'full',
     component: RadicalPageComponent
   },
   {
-    path: 'dashboard',
+    path: routPaths.battleArmour,
+    loadChildren: () => import('./battle-armour/battle-armour.module').then(m => m.BattleArmourModule),
+    pathMatch: 'full',
+    component: BattleArmourPageComponent
+  },
+  {
+    path: routPaths.dashboard,
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
     pathMatch: 'full',
     component: DashboardPageComponent
   },
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: routPaths.dashboard,
     pathMatch: 'full'
   }
 ];

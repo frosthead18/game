@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {routPaths} from "./app-routing.module";
 
 @Component({
   selector: 'game-root',
@@ -8,20 +9,24 @@ import { Component } from '@angular/core';
 export class AppComponent {
   public navigation = [
     {
-      link: 'game-page',
+      link: routPaths.gamePage,
       label: 'Game'
     },
     {
-      link: 'tutorial-page',
+      link: routPaths.tutorial,
       label: 'Tutorial'
     },
     {
-      link: 'planes-page',
+      link: routPaths.planesPage,
       label: 'Planes'
     },
     {
-      link: 'radical-page',
+      link: routPaths.radicalPage,
       label: 'Radical'
+    },
+    {
+      link: routPaths.battleArmour,
+      label: 'Battle Armour'
     }
   ];
 }
