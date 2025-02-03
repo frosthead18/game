@@ -2,9 +2,8 @@ export class MainScene extends Phaser.Scene {
   private player!: Phaser.Physics.Matter.Sprite;
   private keys!: any;
 
-  //player variables used for later
+  //player status variables used for later
   private isKnockedDown: boolean = false; //is our player knocked down?
-  private isAttacking: boolean = false; //is our player attacking?
   private lastDirection: string = "down";//what was the last direction our player was facing?
   private playerVelocity = new Phaser.Math.Vector2(); //track player velocity in a 2d vector
 
@@ -115,82 +114,96 @@ export class MainScene extends Phaser.Scene {
   }
 
   override update() {
-    //================================
-    //  first priority, set default:
-    //================================
-    //if No input set to standing still
-    if (this.keys.up.isUp && this.keys.down.isUp && this.keys.left.isUp && this.keys.right.isUp && this.keys.space.isUp && !this.isKnockedDown) {
-      this.player.anims.play('stand_' + this.lastDirection, true);
+    if (this.isIdle()) {
+      this.playIdleAnimation();
     }
 
-    //================================
-    //  Next set important variables
-    //================================
-    //set attacking flag if currently attacking
-    this.isAttacking = this.keys.space.isDown;
-    //set isKnockedDown to false if we are no longer in the knocked down animation
-    if (this.player.anims.currentAnim?.key == 'stand_' + this.lastDirection) {
+    this.updateKnockdownStatus();
+
+    if (this.isKnockedDown) {
+      if (this.keys.s1.isDown) {
+        this.triggerKnockdown();
+      }
+
+      return;
+    }
+
+    if (this.keys.space.isDown) {
+      this.handleAttack();
+
+      return; // Prevent movement updates while attacking
+    }
+
+    this.handleMovement();
+  }
+
+  private isIdle(): boolean {
+    return (
+      this.keys.up.isUp &&
+      this.keys.down.isUp &&
+      this.keys.left.isUp &&
+      this.keys.right.isUp &&
+      this.keys.space.isUp &&
+      !this.isKnockedDown
+    );
+  }
+
+// Play standing animation
+  private playIdleAnimation(): void {
+    this.player.anims.play('stand_' + this.lastDirection, true);
+  }
+
+// Update knockdown status
+  private updateKnockdownStatus(): void {
+    if (this.player.anims.currentAnim?.key === 'stand_' + this.lastDirection) {
       this.isKnockedDown = false;
     }
+  }
 
-    //================================
-    //  Game Logic
-    //================================
-    //we can't do anything if we are currently knocked down/incapacitated
-    if (!this.isKnockedDown) {
-      //set the isKnockedDown flag if conditions are met and run the appropriate animation
-      if (this.keys.s1.isDown) {
-        this.player.setVelocity(0, this.playerVelocity.y);
-        this.isKnockedDown = true;
-        this.player.anims.play('dead');
-        this.player.anims.stopAfterRepeat(0);
-        this.player.anims.chain('laying');
-        this.player.anims.chain('stand_' + this.lastDirection);
+  // Trigger knockdown sequence
+  private triggerKnockdown(): void {
+    this.player.setVelocity(0, this.playerVelocity.y);
+    this.isKnockedDown = true;
+    // @ts-ignore
+    this.player.anims.play('dead').stopAfterRepeat(0);
+    this.player.anims.chain('laying');
+    this.player.anims.chain('stand_' + this.lastDirection);
+  }
 
-        return; //skip the rest of the update
-      }
+
+  // Handle attack
+  private handleAttack(): void {
+    this.player.setVelocity(0, 0);
+    this.player.anims.play('attack_' + this.lastDirection, true);
+  }
+
+  // Handle movement
+  private handleMovement(): void {
+    let moveX = 0;
+    let moveY = 0;
+
+    if (this.keys.left.isDown) {
+      moveX = -1;
+      this.player.setFlipX(true);
+      this.lastDirection = "left";
+    } else if (this.keys.right.isDown) {
+      moveX = 1;
+      this.player.setFlipX(false);
+      this.lastDirection = "right";
     }
 
-    if (this.isAttacking) {
-      this.playerVelocity.x = 0;
-      this.playerVelocity.y = 0;
-      this.player.anims.play('attack_' + this.lastDirection, true);
-    } else { //not attacking, check movement
-      if (this.keys.up.isDown) {  // Move up
-        this.playerVelocity.y = -1;
-        if (this.playerVelocity.x == 0) {
-          this.player.anims.play('up', true);
-        }
-        this.lastDirection = "up";
-      } else if (this.keys.down.isDown) {   // Move down
-        this.playerVelocity.y = 1;
-        if (this.playerVelocity.x == 0) {
-          this.player.anims.play('down', true);
-        }
-        this.lastDirection = "down";
-      } else {
-        // Stop vertical movement
-        this.playerVelocity.y = 0;
-      }
-
-      if (this.keys.left.isDown) { // Move left
-        this.player.setFlipX(true);
-        this.playerVelocity.x = -1;
-        this.player.anims.play('move_x', true); //only do the x animation if we arent moving diag
-        this.lastDirection = "left";
-      } else if (this.keys.right.isDown) {  // Move right
-        this.playerVelocity.x = 1;
-        this.player.anims.play('move_x', true);
-        this.player.setFlipX(false);
-        this.lastDirection = "right";
-      } else {
-        // Stop horizontal movement
-        this.playerVelocity.x = 0;
-      }
-
+    if (this.keys.up.isDown) {
+      moveY = -1;
+      this.lastDirection = "up";
+    } else if (this.keys.down.isDown) {
+      moveY = 1;
+      this.lastDirection = "down";
     }
-    this.playerVelocity.normalize();
-    this.playerVelocity.scale(1.2);
-    this.player.setVelocity(this.playerVelocity.x, this.playerVelocity.y);
+
+    if (moveX !== 0 || moveY !== 0) {
+      this.player.anims.play(moveX !== 0 ? "move_x" : this.lastDirection, true);
+    }
+
+    this.player.setVelocity(moveX, moveY);
   }
 }

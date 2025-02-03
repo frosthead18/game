@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {MainScene} from "../MainScene";
 import Phaser from "phaser";
+import {MainScene} from "../MainScene";
 
 @Component({
   selector: 'game-tutorial-page',

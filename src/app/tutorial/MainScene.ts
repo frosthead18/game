@@ -5,6 +5,7 @@ export class MainScene extends Phaser.Scene {
   private platforms!: Phaser.Physics.Arcade.StaticGroup;
   private player!: Phaser.Physics.Arcade.Sprite;
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
+  private keys!: Phaser.Types.Input.Keyboard.CursorKeys;
 
   private stars!: Phaser.Physics.Arcade.Group
   private bombs!: Phaser.Physics.Arcade.Group
@@ -18,19 +19,19 @@ export class MainScene extends Phaser.Scene {
   }
 
   create() {
-    // create keyboard input
-    this.cursors = this.input.keyboard?.createCursorKeys() as Phaser.Types.Input.Keyboard.CursorKeys;
+    this.createKeyboardInput();
 
     this.createEnvironment();
-    // @ts-ignore
-    this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000000' });
 
     this.createPlayer();
+
     this.createStars();
 
     this.bombs = this.physics.add.group();
 
     this.initColliders();
+
+    this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', color: '#000000' });
   }
 
   preload() {
@@ -134,22 +135,34 @@ export class MainScene extends Phaser.Scene {
   }
 
   private bindKeys(): void {
-    if (this.cursors.left.isDown) {
+    const left = this.cursors.left.isDown || this.keys.left.isDown;
+    const right = this.cursors.right.isDown || this.keys.right.isDown;
+    const up = this.cursors.up.isDown || this.keys.up.isDown || this.keys.space.isDown;
+
+    if (left) {
       this.player.setVelocityX(-160);
-
       this.player.anims.play('left', true);
-    } else if (this.cursors.right.isDown) {
+    } else if (right) {
       this.player.setVelocityX(160);
-
       this.player.anims.play('right', true);
     } else {
       this.player.setVelocityX(0);
-
       this.player.anims.play('turn');
     }
 
-    if (this.cursors.up.isDown && this.player.body?.touching.down) {
+    if (up && this.player.body?.touching.down) {
       this.player.setVelocityY(-330);
     }
+  }
+
+  private createKeyboardInput(): void {
+    this.cursors = this.input.keyboard?.createCursorKeys() as Phaser.Types.Input.Keyboard.CursorKeys;
+
+    this.keys = this.input.keyboard?.addKeys({
+      'up': Phaser.Input.Keyboard.KeyCodes.W,
+      'left': Phaser.Input.Keyboard.KeyCodes.A,
+      'right': Phaser.Input.Keyboard.KeyCodes.D,
+      'space': Phaser.Input.Keyboard.KeyCodes.SPACE,
+    }) as Phaser.Types.Input.Keyboard.CursorKeys;
   }
 }
