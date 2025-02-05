@@ -27,6 +27,10 @@ export class AppComponent {
     {
       link: routPaths.battleArmour,
       label: 'Battle Armour'
+    },
+    {
+      link: routPaths.dungeon,
+      label: 'Dungeon'
     }
   ];
 }

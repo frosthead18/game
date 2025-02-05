@@ -19,7 +19,6 @@ export class PlanesPageComponent implements OnInit {
       backgroundColor: '#2d2d2d',
       scene: [ MainScene ],
       parent: 'planesGameContainer',
-
     };
   }
 

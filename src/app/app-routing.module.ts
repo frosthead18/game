@@ -6,6 +6,7 @@ import {DashboardPageComponent} from "./dashboard/dashboard-page/dashboard-page.
 import {PlanesPageComponent} from "./planes/planes-page/planes-page.component";
 import {RadicalPageComponent} from "./radical/radical-page/radical-page.component";
 import {BattleArmourPageComponent} from "./battle-armour/battle-armour-page/battle-armour-page.component";
+import {DungeonPageComponent} from "./dungeon/dungeon-page/dungeon-page.component";
 
 export const routPaths = {
   gamePage: 'game',
@@ -13,6 +14,7 @@ export const routPaths = {
   planesPage: 'planes',
   radicalPage: 'radical',
   battleArmour: 'battle-armour',
+  dungeon: 'dungeon',
   dashboard: 'dashboard',
   root: ''
 }
@@ -47,6 +49,12 @@ const routes: Routes = [
     loadChildren: () => import('./battle-armour/battle-armour.module').then(m => m.BattleArmourModule),
     pathMatch: 'full',
     component: BattleArmourPageComponent
+  },
+  {
+    path: routPaths.dungeon,
+    loadChildren: () => import('./dungeon/dungeon.module').then(m => m.DungeonModule),
+    pathMatch: 'full',
+    component: DungeonPageComponent
   },
   {
     path: routPaths.dashboard,
