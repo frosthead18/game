@@ -1320,8 +1320,8 @@
                  "properties":[
                         {
                          "name":"collides",
-                         "type":"string",
-                         "value":""
+                         "type":"bool",
+                         "value":false
                         }]
                 }, 
                 {
@@ -1329,8 +1329,8 @@
                  "properties":[
                         {
                          "name":"collides",
-                         "type":"string",
-                         "value":""
+                         "type":"bool",
+                         "value":false
                         }]
                 }, 
                 {
@@ -1392,8 +1392,8 @@
                  "properties":[
                         {
                          "name":"collides",
-                         "type":"string",
-                         "value":""
+                         "type":"bool",
+                         "value":true
                         }]
                 }, 
                 {
@@ -1401,8 +1401,8 @@
                  "properties":[
                         {
                          "name":"collides",
-                         "type":"string",
-                         "value":""
+                         "type":"bool",
+                         "value":true
                         }]
                 }, 
                 {
@@ -1410,8 +1410,8 @@
                  "properties":[
                         {
                          "name":"collides",
-                         "type":"string",
-                         "value":""
+                         "type":"bool",
+                         "value":true
                         }]
                 }, 
                 {
@@ -1419,8 +1419,8 @@
                  "properties":[
                         {
                          "name":"collides",
-                         "type":"string",
-                         "value":""
+                         "type":"bool",
+                         "value":true
                         }]
                 }, 
                 {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="1">
  <editorsettings>
-  <export target="../tiles/dungeon-01.json" format="json"/>
+  <export target="../../../assets/dungeon/tiles/dungeon-01.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="dungeon" tilewidth="16" tileheight="16" tilecount="160" columns="10">
   <image source="../tiles/dungeon_tiles.png" width="160" height="256"/>
@@ -602,12 +602,12 @@
   </tile>
   <tile id="132">
    <properties>
-    <property name="collides" value=""/>
+    <property name="collides" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="133">
    <properties>
-    <property name="collides" value=""/>
+    <property name="collides" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="134">
@@ -642,22 +642,22 @@
   </tile>
   <tile id="141">
    <properties>
-    <property name="collides" value=""/>
+    <property name="collides" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="142">
    <properties>
-    <property name="collides" value=""/>
+    <property name="collides" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="143">
    <properties>
-    <property name="collides" value=""/>
+    <property name="collides" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="144">
    <properties>
-    <property name="collides" value=""/>
+    <property name="collides" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="145">

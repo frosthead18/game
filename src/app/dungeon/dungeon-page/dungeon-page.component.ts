@@ -20,7 +20,8 @@ export class DungeonPageComponent implements OnInit {
       physics: {
         default: 'arcade',
         arcade: {
-          gravity: { y: 0 }
+          gravity: { y: 0 },
+          debug: true,
         }
       },
       scene: [ Preloader, Game ],
