@@ -7,7 +7,7 @@ import {Lizard} from "../enemies/lizard/Lizard";
 export class Game extends Phaser.Scene {
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
   private faune!: Phaser.Physics.Arcade.Sprite;
-  private lizard!: Phaser.Physics.Arcade.Sprite;
+  private lizards!: Phaser.Physics.Arcade.Group;
   private lastFauneDirection: FauneMovement = FauneMovement.idleDown;
 
   constructor() {
@@ -38,7 +38,7 @@ export class Game extends Phaser.Scene {
     this.faune.body?.setSize(this.faune.width * 0.5, this.faune.height * 0.8);
 
     // enemy creation
-    const lizards = this.physics.add.group({
+    this.lizards = this.physics.add.group({
       classType: Lizard,
       createCallback: (gameObject: Phaser.GameObjects.GameObject) => {
         const lizardGameObject = gameObject as Lizard;
@@ -47,12 +47,12 @@ export class Game extends Phaser.Scene {
       }
     });
 
-    lizards.get(256, 128, 'lizard');
-
+    this.lizards.get(256, 128, 'lizard');
 
     // set character collision
     this.physics.add.collider(this.faune, wallsLayer as ArcadeColliderType);
-    this.physics.add.collider(lizards, wallsLayer as ArcadeColliderType);
+    this.physics.add.collider(this.lizards, wallsLayer as ArcadeColliderType);
+    this.physics.add.collider(this.faune, this.lizards);
 
     this.cameras.main.startFollow(this.faune, true);
   }

@@ -63,6 +63,7 @@ export class Lizard extends Phaser.Physics.Arcade.Sprite {
 
   override destroy(fromScene?: boolean) {
     this.moveEvent.destroy();
+
     super.destroy(fromScene);
   }
 
