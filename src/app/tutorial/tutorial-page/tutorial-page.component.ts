@@ -15,8 +15,8 @@ export class TutorialPageComponent implements OnInit {
   constructor() {
     this.config = {
       type: Phaser.AUTO,
-      width: '800',
-      height: '600',
+      width: 800,
+      height: 600,
       parent: 'tutorialGameContainer',
       physics: {
         default: 'arcade',
@@ -25,7 +25,13 @@ export class TutorialPageComponent implements OnInit {
           debug: false
         }
       },
-      scene: [MainScene]
+      scene: [MainScene],
+      scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: 800,
+        height: 600
+      }
     };
   }
 

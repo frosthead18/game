@@ -15,8 +15,8 @@ export class GameComponent implements OnInit {
   constructor() {
     this.config = {
       type: Phaser.AUTO,
-      height: '100%',
-      width: '100%',
+      width: 800,
+      height: 600,
       scene: [ MainScene ],
       parent: 'gameContainer',
       title: "Grim RPG",
@@ -28,6 +28,12 @@ export class GameComponent implements OnInit {
           gravity: { x: 0, y: 0 }
         }
       },
+      scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: 800,
+        height: 600
+      }
     };
   }
 

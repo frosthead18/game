@@ -20,6 +20,12 @@ export class PlanesPageComponent implements OnInit {
       backgroundColor: '#2d2d2d',
       scene: [ MainScene ],
       parent: 'planesGameContainer',
+      scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: 800,
+        height: 600
+      }
     };
   }
 

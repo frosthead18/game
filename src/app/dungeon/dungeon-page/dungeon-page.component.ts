@@ -28,7 +28,10 @@ export class DungeonPageComponent implements OnInit {
       scene: [ Preloader, Game ],
       parent: 'dungeonGameContainer',
       scale: {
-        zoom: 2
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: 400,
+        height: 250
       }
     };
   }
