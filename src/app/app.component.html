@@ -1,4 +1,4 @@
-<mat-drawer-container class="app" autosize>
+<mat-drawer-container class="app" [class.dark-theme]="isDarkTheme" autosize>
   <mat-drawer #drawer class="app__sidenav" mode="side">
     <mat-list role="list">
       @for (item of navigation; track item) {
@@ -11,11 +11,17 @@
 
   <div class="app__sidenav-content">
     <main>
-      <mat-toolbar>
+      <mat-toolbar color="primary">
         <button mat-icon-button aria-label="Menu icon" (click)="drawer.toggle()">
           <mat-icon>menu</mat-icon>
         </button>
         <span>My App</span>
+        <span class="spacer"></span>
+        <button mat-icon-button
+                (click)="toggleTheme()"
+                [attr.aria-label]="isDarkTheme ? 'Switch to light theme' : 'Switch to dark theme'">
+          <mat-icon>{{ isDarkTheme ? 'light_mode' : 'dark_mode' }}</mat-icon>
+        </button>
       </mat-toolbar>
 
       <router-outlet/>

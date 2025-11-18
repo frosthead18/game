@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {routPaths} from "./app-routing.module";
 
 @Component({
@@ -7,7 +7,9 @@ import {routPaths} from "./app-routing.module";
     styleUrl: './app.component.scss',
     standalone: false
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  public isDarkTheme = false;
+
   public navigation = [
     {
       link: routPaths.gamePage,
@@ -34,4 +36,16 @@ export class AppComponent {
       label: 'Dungeon'
     }
   ];
+
+  ngOnInit() {
+    // Load saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    this.isDarkTheme = savedTheme === 'dark';
+  }
+
+  toggleTheme() {
+    this.isDarkTheme = !this.isDarkTheme;
+    // Save theme preference
+    localStorage.setItem('theme', this.isDarkTheme ? 'dark' : 'light');
+  }
 }

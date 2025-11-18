@@ -3,6 +3,7 @@
 .app {
   width: 100vw;
   height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
 
   &__sidenav {
     padding: 20px;
@@ -23,6 +24,10 @@
 
       mat-toolbar {
         flex-shrink: 0;
+
+        .spacer {
+          flex: 1 1 auto;
+        }
       }
 
       router-outlet {
@@ -44,3 +49,17 @@ mat-list-item {
     background-color: rgba(0, 0, 0, 0.08);
   }
 }
+
+// Dark theme specific overrides
+.dark-theme {
+  mat-list-item {
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+
+    &.active {
+      background-color: rgba(255, 255, 255, 0.12);
+    }
+  }
+}
+
