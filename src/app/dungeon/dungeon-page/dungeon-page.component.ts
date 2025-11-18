@@ -6,7 +6,6 @@ import {Preloader} from "../scenes/Preloader";
 @Component({
     selector: 'game-dungeon-page',
     templateUrl: './dungeon-page.component.html',
-    styleUrl: './dungeon-page.component.scss',
     standalone: false,
     host: {
       class: 'block w-full h-full'

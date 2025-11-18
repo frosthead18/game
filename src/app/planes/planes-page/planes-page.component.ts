@@ -5,7 +5,6 @@ import {MainScene} from "../MainScene";
 @Component({
     selector: 'game-planes-page',
     templateUrl: './planes-page.component.html',
-    styleUrl: './planes-page.component.scss',
     standalone: false,
     host: {
       class: 'block w-full h-full'

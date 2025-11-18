@@ -60,7 +60,6 @@ All game page components updated to use Tailwind classes instead of duplicate CS
 @Component({
   selector: 'game-dungeon-page',
   templateUrl: './dungeon-page.component.html',
-  styleUrl: './dungeon-page.component.scss',
   host: {
     class: 'block w-full h-full'  // ✨ Tailwind classes
   }

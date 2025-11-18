@@ -5,7 +5,6 @@ import Phaser from "phaser";
 @Component({
     selector: 'game-tutorial-page',
     templateUrl: './tutorial-page.component.html',
-    styleUrl: './tutorial-page.component.scss',
     standalone: false,
     host: {
       class: 'block w-full h-full'
