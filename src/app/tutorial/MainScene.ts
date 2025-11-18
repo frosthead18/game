@@ -51,7 +51,7 @@ export class MainScene extends Phaser.Scene {
     this.bindKeys();
   }
 
-  private collectStar (_player: Phaser.GameObjects.GameObject, star: Phaser.GameObjects.GameObject): void {
+  private collectStar (_player: ArcadeGameObject | Phaser.Tilemaps.Tile | Phaser.Physics.Arcade.Body | Phaser.Physics.Arcade.StaticBody, star: ArcadeGameObject | Phaser.Tilemaps.Tile | Phaser.Physics.Arcade.Body | Phaser.Physics.Arcade.StaticBody): void {
     (star as ArcadeSprite).disableBody(true, true);
 
     this.score += 10;
@@ -73,7 +73,7 @@ export class MainScene extends Phaser.Scene {
     }
   }
 
-  private hitBomb (_player: Phaser.GameObjects.GameObject, _bomb: Phaser.GameObjects.GameObject): void {
+  private hitBomb (_player: ArcadeGameObject | Phaser.Tilemaps.Tile | Phaser.Physics.Arcade.Body | Phaser.Physics.Arcade.StaticBody, _bomb: ArcadeGameObject | Phaser.Tilemaps.Tile | Phaser.Physics.Arcade.Body | Phaser.Physics.Arcade.StaticBody): void {
     this.physics.pause();
     this.player.setTint(0xff0000);
     this.player.anims.play('turn');
