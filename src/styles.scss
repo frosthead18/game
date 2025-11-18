@@ -1,4 +1,24 @@
-@import "@angular/material/prebuilt-themes/indigo-pink.css";
+// Import custom Material theme
+@use './theme.scss';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+// Global styles
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #fafafa;
+}
+
+// Optional: Smooth scrolling
+* {
+  box-sizing: border-box;
+}
+
+// Game-specific styles
+.mat-drawer-container {
+  height: 100%;
+}
