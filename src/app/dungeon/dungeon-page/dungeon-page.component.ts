@@ -7,7 +7,10 @@ import {Preloader} from "../scenes/Preloader";
     selector: 'game-dungeon-page',
     templateUrl: './dungeon-page.component.html',
     styleUrl: './dungeon-page.component.scss',
-    standalone: false
+    standalone: false,
+    host: {
+      class: 'block w-full h-full'
+    }
 })
 export class DungeonPageComponent implements OnInit {
   private phaserGame!: Phaser.Game;

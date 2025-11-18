@@ -6,7 +6,10 @@ import {MainScene} from "../MainScene";
     selector: 'game-planes-page',
     templateUrl: './planes-page.component.html',
     styleUrl: './planes-page.component.scss',
-    standalone: false
+    standalone: false,
+    host: {
+      class: 'block w-full h-full'
+    }
 })
 export class PlanesPageComponent implements OnInit {
   private phaserGame!: Phaser.Game;

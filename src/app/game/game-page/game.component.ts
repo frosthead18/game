@@ -6,7 +6,10 @@ import Phaser from 'phaser';
     selector: 'game-page-game-page',
     templateUrl: './game.component.html',
     styleUrl: './game.component.scss',
-    standalone: false
+    standalone: false,
+    host: {
+      class: 'block w-full h-full'
+    }
 })
 export class GameComponent implements OnInit {
   private phaserGame!: Phaser.Game;

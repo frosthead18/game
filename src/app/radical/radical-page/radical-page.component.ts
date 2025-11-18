@@ -6,7 +6,10 @@ import {MainScene} from "../MainScene";
     selector: 'game-radical-page',
     templateUrl: './radical-page.component.html',
     styleUrl: './radical-page.component.scss',
-    standalone: false
+    standalone: false,
+    host: {
+      class: 'block w-full h-full'
+    }
 })
 export class RadicalPageComponent implements OnInit {
   private phaserGame!: Phaser.Game;
