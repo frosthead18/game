@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import {routPaths} from "./app-routing.module";
 
 @Component({
-  selector: 'game-root',
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+    selector: 'game-root',
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss',
+    standalone: false
 })
 export class AppComponent {
   public navigation = [

@@ -3,9 +3,10 @@ import Phaser from "phaser";
 import {MainScene} from "../MainScene";
 
 @Component({
-  selector: 'game-radical-page',
-  templateUrl: './radical-page.component.html',
-  styleUrl: './radical-page.component.scss'
+    selector: 'game-radical-page',
+    templateUrl: './radical-page.component.html',
+    styleUrl: './radical-page.component.scss',
+    standalone: false
 })
 export class RadicalPageComponent implements OnInit {
   private phaserGame!: Phaser.Game;
@@ -26,9 +27,7 @@ export class RadicalPageComponent implements OnInit {
       physics: {
         default: 'arcade',
         arcade: {
-          gravity: {
-            y: 0
-          }
+          gravity: { x: 0, y: 0 }
         }
       }
     };

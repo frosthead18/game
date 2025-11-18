@@ -3,9 +3,10 @@ import {MainScene} from "../MainScene";
 import Phaser from "phaser";
 
 @Component({
-  selector: 'game-tutorial-page',
-  templateUrl: './tutorial-page.component.html',
-  styleUrl: './tutorial-page.component.scss'
+    selector: 'game-tutorial-page',
+    templateUrl: './tutorial-page.component.html',
+    styleUrl: './tutorial-page.component.scss',
+    standalone: false
 })
 export class TutorialPageComponent implements OnInit {
   private phaserGame!: Phaser.Game;
@@ -20,7 +21,7 @@ export class TutorialPageComponent implements OnInit {
       physics: {
         default: 'arcade',
         arcade: {
-          gravity: { y: 300 },
+          gravity: { x: 0, y: 300 },
           debug: false
         }
       },

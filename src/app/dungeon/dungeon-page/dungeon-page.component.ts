@@ -4,9 +4,10 @@ import {Game} from "../scenes/Game";
 import {Preloader} from "../scenes/Preloader";
 
 @Component({
-  selector: 'game-dungeon-page',
-  templateUrl: './dungeon-page.component.html',
-  styleUrl: './dungeon-page.component.scss'
+    selector: 'game-dungeon-page',
+    templateUrl: './dungeon-page.component.html',
+    styleUrl: './dungeon-page.component.scss',
+    standalone: false
 })
 export class DungeonPageComponent implements OnInit {
   private phaserGame!: Phaser.Game;
@@ -20,7 +21,7 @@ export class DungeonPageComponent implements OnInit {
       physics: {
         default: 'arcade',
         arcade: {
-          gravity: { y: 0 },
+          gravity: { x: 0, y: 0 },
           debug: true,
         }
       },

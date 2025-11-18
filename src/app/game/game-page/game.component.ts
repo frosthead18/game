@@ -3,9 +3,10 @@ import {MainScene} from "../MainScene";
 import Phaser from 'phaser';
 
 @Component({
-  selector: 'game-page-game-page',
-  templateUrl: './game.component.html',
-  styleUrl: './game.component.scss'
+    selector: 'game-page-game-page',
+    templateUrl: './game.component.html',
+    styleUrl: './game.component.scss',
+    standalone: false
 })
 export class GameComponent implements OnInit {
   private phaserGame!: Phaser.Game;
@@ -24,7 +25,7 @@ export class GameComponent implements OnInit {
         default: 'matter',
         matter: {
           debug: false,
-          gravity: { y: 0 }
+          gravity: { x: 0, y: 0 }
         }
       },
     };

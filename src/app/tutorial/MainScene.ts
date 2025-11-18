@@ -1,14 +1,16 @@
-import GameObjectWithBody = Phaser.Types.Physics.Arcade.GameObjectWithBody;
-import Tile = Phaser.Tilemaps.Tile;
+import PhysicsGroup = Phaser.Physics.Arcade.Group;
+import StaticPhysicsGroup = Phaser.Physics.Arcade.StaticGroup;
+import ArcadeSprite = Phaser.Physics.Arcade.Sprite;
+import ArcadeGameObject = Phaser.Types.Physics.Arcade.GameObjectWithBody;
 
 export class MainScene extends Phaser.Scene {
-  private platforms!: Phaser.Physics.Arcade.StaticGroup;
+  private platforms!: StaticPhysicsGroup;
   private player!: Phaser.Physics.Arcade.Sprite;
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
   private keys!: Phaser.Types.Input.Keyboard.CursorKeys;
 
-  private stars!: Phaser.Physics.Arcade.Group
-  private bombs!: Phaser.Physics.Arcade.Group
+  private stars!: PhysicsGroup
+  private bombs!: PhysicsGroup
 
   private score = 0;
   private scoreText!: Phaser.GameObjects.Text;
@@ -49,29 +51,29 @@ export class MainScene extends Phaser.Scene {
     this.bindKeys();
   }
 
-  private collectStar (player: Tile | GameObjectWithBody, star: Tile | GameObjectWithBody): void {
-    // @ts-ignore
-    star.disableBody(true, true);
+  private collectStar (_player: Phaser.GameObjects.GameObject, star: Phaser.GameObjects.GameObject): void {
+    (star as ArcadeSprite).disableBody(true, true);
 
     this.score += 10;
     this.scoreText.setText('Score: ' + this.score);
 
     if (this.stars.countActive(true) === 0) {
       this.stars.children.iterate((child) => {
-        // @ts-ignore
-        return child.enableBody(true, child.x, 0, true, true);
+        const sprite = child as ArcadeSprite;
+        sprite.enableBody(true, sprite.x, 0, true, true);
+        return true;
       });
 
       const x = (this.player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
 
-      const bomb = this.bombs.create(x, 16, 'bomb');
+      const bomb = this.bombs.create(x, 16, 'bomb') as ArcadeSprite;
       bomb.setBounce(1);
       bomb.setCollideWorldBounds(true);
       bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
     }
   }
 
-  private hitBomb (player: Tile | GameObjectWithBody, bomb: Tile | GameObjectWithBody): void {
+  private hitBomb (_player: Phaser.GameObjects.GameObject, _bomb: Phaser.GameObjects.GameObject): void {
     this.physics.pause();
     this.player.setTint(0xff0000);
     this.player.anims.play('turn');
@@ -120,9 +122,10 @@ export class MainScene extends Phaser.Scene {
       setXY: { x: 12, y: 0, stepX: 70 }
     });
 
-    this.stars.children.iterate( (child) => {
-      // @ts-ignore
-      return child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+    this.stars.children.iterate((child) => {
+      const sprite = child as ArcadeSprite;
+      sprite.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+      return true;
     });
   }
 

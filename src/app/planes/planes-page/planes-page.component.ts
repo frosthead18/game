@@ -3,9 +3,10 @@ import Phaser from "phaser";
 import {MainScene} from "../MainScene";
 
 @Component({
-  selector: 'game-planes-page',
-  templateUrl: './planes-page.component.html',
-  styleUrl: './planes-page.component.scss'
+    selector: 'game-planes-page',
+    templateUrl: './planes-page.component.html',
+    styleUrl: './planes-page.component.scss',
+    standalone: false
 })
 export class PlanesPageComponent implements OnInit {
   private phaserGame!: Phaser.Game;
