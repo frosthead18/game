@@ -3,7 +3,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
-    "forceConsistentCasingInFileNames": true,
+    "forceConsistentCasingInFileNames": false,
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
@@ -24,13 +24,7 @@
       "dom",
       "ScriptHost"
     ],
-    "allowJs": true,
-    "typeRoots": [
-      "./node_modules/phaser/types"
-    ],
-    "types": [
-      "Phaser"
-    ]
+    "allowJs": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
