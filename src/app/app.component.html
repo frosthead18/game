@@ -10,12 +10,13 @@
   </mat-drawer>
 
   <mat-drawer-content class="flex flex-col">
-    <mat-toolbar color="primary" class="flex-shrink-0">
+    <mat-toolbar color="primary" class="!flex !flex-row !items-center">
       <button mat-icon-button aria-label="Menu icon" (click)="drawer.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
+
       <span>My App</span>
-      <span class="flex-1"></span>
+
       <button mat-icon-button
               (click)="toggleTheme()"
               [attr.aria-label]="isDarkTheme ? 'Switch to light theme' : 'Switch to dark theme'">
