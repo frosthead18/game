@@ -5,7 +5,7 @@ import {MainScene} from "../MainScene";
 @Component({
     selector: 'game-radical-page',
     templateUrl: './radical-page.component.html',
-    styleUrl: '/src/styles/_game-shared.scss',
+    styleUrl: '../../../styles/_game-shared.scss',
     standalone: false,
     host: {
       class: 'block w-full h-full'

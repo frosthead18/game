@@ -6,7 +6,7 @@ import {Preloader} from "../scenes/Preloader";
 @Component({
     selector: 'game-dungeon-page',
     templateUrl: './dungeon-page.component.html',
-    styleUrl: '/src/styles/_game-shared.scss',
+    styleUrl: '../../../styles/_game-shared.scss',
     standalone: false
 })
 export class DungeonPageComponent implements OnInit {
@@ -31,8 +31,6 @@ export class DungeonPageComponent implements OnInit {
         mode: Phaser.Scale.FIT,
         parent: 'dungeonGameContainer',
         autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: 400,
-        height: 250,
         fullscreenTarget: 'dungeonGameContainer'
       }
     };

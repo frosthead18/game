@@ -5,11 +5,8 @@ import Phaser from 'phaser';
 @Component({
     selector: 'game-page-game-page',
     templateUrl: './game.component.html',
-    styleUrl: '/src/styles/_game-shared.scss',
+    styleUrl: '../../../styles/_game-shared.scss',
     standalone: false,
-    host: {
-      class: 'block w-full h-full'
-    }
 })
 export class GameComponent implements OnInit {
   private phaserGame!: Phaser.Game;
