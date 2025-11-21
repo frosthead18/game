@@ -1,5 +1,5 @@
-<mat-drawer-container class="app w-screen h-screen" [class.dark-theme]="isDarkTheme" autosize>
-  <mat-drawer #drawer class="app__sidenav" mode="side">
+<mat-drawer-container class="w-screen h-screen transition-colors duration-300" [class.dark-theme]="isDarkTheme" autosize>
+  <mat-drawer #drawer class="p-5 min-w-[200px]" mode="side">
     <mat-list role="list">
       @for (item of navigation; track item) {
         <mat-list-item [routerLink]="item.link" [routerLinkActive]="item.link" role="listitem">
@@ -9,14 +9,14 @@
     </mat-list>
   </mat-drawer>
 
-  <div class="app__sidenav-content">
-    <main>
-      <mat-toolbar color="primary">
+  <div class="flex h-full items-stretch">
+    <main class="w-full h-full flex flex-col">
+      <mat-toolbar color="primary" class="flex-shrink-0">
         <button mat-icon-button aria-label="Menu icon" (click)="drawer.toggle()">
           <mat-icon>menu</mat-icon>
         </button>
         <span>My App</span>
-        <span class="spacer"></span>
+        <span class="flex-1"></span>
         <button mat-icon-button
                 (click)="toggleTheme()"
                 [attr.aria-label]="isDarkTheme ? 'Switch to light theme' : 'Switch to dark theme'">
