@@ -1,4 +1,4 @@
-<mat-drawer-container class="w-screen h-screen transition-colors duration-300" [class.dark-theme]="isDarkTheme" autosize>
+<mat-drawer-container class="w-screen h-screen transition-colors duration-300" [class.dark-theme]="isDarkTheme">
   <mat-drawer #drawer class="p-5 min-w-[200px]" mode="side">
     <mat-list role="list">
       @for (item of navigation; track item) {
@@ -9,22 +9,20 @@
     </mat-list>
   </mat-drawer>
 
-  <div class="flex h-full items-stretch">
-    <main class="w-full h-full flex flex-col">
-      <mat-toolbar color="primary" class="flex-shrink-0">
-        <button mat-icon-button aria-label="Menu icon" (click)="drawer.toggle()">
-          <mat-icon>menu</mat-icon>
-        </button>
-        <span>My App</span>
-        <span class="flex-1"></span>
-        <button mat-icon-button
-                (click)="toggleTheme()"
-                [attr.aria-label]="isDarkTheme ? 'Switch to light theme' : 'Switch to dark theme'">
-          <mat-icon>{{ isDarkTheme ? 'light_mode' : 'dark_mode' }}</mat-icon>
-        </button>
-      </mat-toolbar>
+  <mat-drawer-content class="flex flex-col">
+    <mat-toolbar color="primary" class="flex-shrink-0">
+      <button mat-icon-button aria-label="Menu icon" (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>My App</span>
+      <span class="flex-1"></span>
+      <button mat-icon-button
+              (click)="toggleTheme()"
+              [attr.aria-label]="isDarkTheme ? 'Switch to light theme' : 'Switch to dark theme'">
+        <mat-icon>{{ isDarkTheme ? 'light_mode' : 'dark_mode' }}</mat-icon>
+      </button>
+    </mat-toolbar>
 
-      <router-outlet/>
-    </main>
-  </div>
+    <router-outlet/>
+  </mat-drawer-content>
 </mat-drawer-container>
