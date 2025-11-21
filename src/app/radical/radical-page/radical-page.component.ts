@@ -5,11 +5,7 @@ import {MainScene} from "../MainScene";
 @Component({
     selector: 'game-radical-page',
     templateUrl: './radical-page.component.html',
-    styleUrl: '../../../styles/_game-shared.scss',
-    standalone: false,
-    host: {
-      class: 'block w-full h-full'
-    }
+    standalone: false
 })
 export class RadicalPageComponent implements OnInit {
   private phaserGame!: Phaser.Game;

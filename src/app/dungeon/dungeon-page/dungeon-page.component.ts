@@ -6,7 +6,6 @@ import {Preloader} from "../scenes/Preloader";
 @Component({
     selector: 'game-dungeon-page',
     templateUrl: './dungeon-page.component.html',
-    styleUrl: '../../../styles/_game-shared.scss',
     standalone: false
 })
 export class DungeonPageComponent implements OnInit {

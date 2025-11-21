@@ -5,7 +5,6 @@ import {MainScene} from "../MainScene";
 @Component({
     selector: 'game-planes-page',
     templateUrl: './planes-page.component.html',
-    styleUrl: '../../../styles/_game-shared.scss',
     standalone: false,
 })
 export class PlanesPageComponent implements OnInit {

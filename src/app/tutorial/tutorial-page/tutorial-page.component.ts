@@ -5,7 +5,6 @@ import Phaser from "phaser";
 @Component({
     selector: 'game-tutorial-page',
     templateUrl: './tutorial-page.component.html',
-    styleUrl: '../../../styles/_game-shared.scss',
     standalone: false,
 })
 export class TutorialPageComponent implements OnInit {
