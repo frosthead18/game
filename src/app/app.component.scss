@@ -9,25 +9,36 @@
   }
 
   &__sidenav-content {
-    @apply flex h-full items-stretch justify-stretch;
+    display: flex;
+    height: 100%;
+    align-items: stretch;
+    justify-content: stretch;
 
     main {
-      @apply w-full h-full flex flex-col;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
 
       mat-toolbar {
-        @apply flex-shrink-0;
+        flex-shrink: 0;
 
         .spacer {
-          @apply flex-1;
+          flex: 1 1 auto;
         }
       }
 
       router-outlet {
-        @apply hidden;
+        display: none;
       }
 
       router-outlet + * {
-        @apply flex-1 flex w-full h-full overflow-hidden;
+        flex: 1 1 0;
+        min-height: 0;
+        min-width: 0;
+        display: block;
+        width: 100%;
+        overflow: hidden;
       }
     }
   }
