@@ -57,15 +57,13 @@ export class Game extends Phaser.Scene {
   }
 
   private createPlayer(): void {
-    this.faune = this.physics.add.existing(
-      new Faune(
-        this,
-        GAME_CONFIG.player.startX,
-        GAME_CONFIG.player.startY,
-        ASSET_KEYS.faune,
-        'walk-down-3.png'
-      )
-    ) as Faune;
+    this.faune = new Faune(
+      this,
+      GAME_CONFIG.player.startX,
+      GAME_CONFIG.player.startY,
+      ASSET_KEYS.faune,
+      'walk-down-3.png'
+    );
     this.faune.setCursors(this.cursors);
   }
 
