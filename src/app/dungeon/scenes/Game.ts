@@ -3,10 +3,11 @@ import ArcadeColliderType = Phaser.Types.Physics.Arcade.ArcadeColliderType;
 import {createLizardAnimations, LizardMovement} from "../enemies/lizard/lizard-animations";
 import {createFauneAnimations, FauneMovement} from "../characters/faune/faune-animations";
 import {Lizard} from "../enemies/lizard/Lizard";
+import {Faune} from "../characters/faune/Faune";
 
 export class Game extends Phaser.Scene {
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
-  private faune!: Phaser.Physics.Arcade.Sprite;
+  private faune!: Faune;
   private lizards!: Phaser.Physics.Arcade.Group;
   private lastFauneDirection: FauneMovement = FauneMovement.idleDown;
 
@@ -34,7 +35,7 @@ export class Game extends Phaser.Scene {
     createLizardAnimations(this.anims);
 
     // character creation
-    this.faune = this.physics.add.sprite(128, 128, 'faune', 'walk-down-3.png');
+    this.faune = this.physics.add.existing(new Faune(this, 128, 128, 'faune', 'walk-down-3.png')) as Faune;
     this.faune.body?.setSize(this.faune.width * 0.5, this.faune.height * 0.8);
 
     // enemy creation
