@@ -1,116 +1,112 @@
 import TilemapLayer = Phaser.Tilemaps.TilemapLayer;
 import ArcadeColliderType = Phaser.Types.Physics.Arcade.ArcadeColliderType;
-import {createLizardAnimations, LizardMovement} from "../enemies/lizard/lizard-animations";
-import {createFauneAnimations, FauneMovement} from "../characters/faune/faune-animations";
+import {createLizardAnimations} from "../enemies/lizard/lizard-animations";
+import {createFauneAnimations} from "../characters/faune/faune-animations";
 import {Lizard} from "../enemies/lizard/Lizard";
 import {Faune} from "../characters/faune/Faune";
+import {ASSET_KEYS, GAME_CONFIG, SCENE_KEYS} from "../constants";
 
 export class Game extends Phaser.Scene {
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
   private faune!: Faune;
   private lizards!: Phaser.Physics.Arcade.Group;
-  private lastFauneDirection: FauneMovement = FauneMovement.idleDown;
 
   constructor() {
-    super('game');
+    super(SCENE_KEYS.game);
   }
 
   preload(): void {
     this.cursors = this.input.keyboard?.createCursorKeys() as Phaser.Types.Input.Keyboard.CursorKeys;
   }
 
-  create() : void {
-    const gameMap = this.make.tilemap({key: 'dungeon'});
-    const tileSet = gameMap.addTilesetImage('dungeon', 'tiles');
+  create(): void {
+    const wallsLayer = this.createMap();
+    this.createAnimations();
+    this.createPlayer();
+    this.createEnemies();
+    this.setupCollisions(wallsLayer);
+    this.setupCamera();
+  }
 
-    gameMap.createLayer('Ground',(tileSet as Phaser.Tilemaps.Tileset), 0, 0);
-    const wallsLayer = gameMap.createLayer('Walls',(tileSet as Phaser.Tilemaps.Tileset), 0, 0);
+  override update(time: number, delta: number): void {
+    // Updates are handled in individual character classes
+  }
+
+  private createMap(): TilemapLayer | null {
+    const gameMap = this.make.tilemap({key: ASSET_KEYS.dungeon});
+    const tileSet = gameMap.addTilesetImage(ASSET_KEYS.dungeon, ASSET_KEYS.tiles);
+
+    if (!tileSet) {
+      console.error('Failed to load tileset');
+      return null;
+    }
+
+    gameMap.createLayer('Ground', tileSet, 0, 0);
+    const wallsLayer = gameMap.createLayer('Walls', tileSet, 0, 0);
     wallsLayer?.setCollisionByProperty({collides: true});
 
-    // debug collision layout
+    // Uncomment to debug collision layout
     // this.debugCollisionLayout(wallsLayer);
 
-    // create animations
+    return wallsLayer;
+  }
+
+  private createAnimations(): void {
     createFauneAnimations(this.anims);
     createLizardAnimations(this.anims);
+  }
 
-    // character creation
-    this.faune = this.physics.add.existing(new Faune(this, 128, 128, 'faune', 'walk-down-3.png')) as Faune;
-    this.faune.body?.setSize(this.faune.width * 0.5, this.faune.height * 0.8);
+  private createPlayer(): void {
+    this.faune = this.physics.add.existing(
+      new Faune(
+        this,
+        GAME_CONFIG.player.startX,
+        GAME_CONFIG.player.startY,
+        ASSET_KEYS.faune,
+        'walk-down-3.png'
+      )
+    ) as Faune;
+    this.faune.setCursors(this.cursors);
+  }
 
-    // enemy creation
+  private createEnemies(): void {
     this.lizards = this.physics.add.group({
       classType: Lizard,
       createCallback: (gameObject: Phaser.GameObjects.GameObject) => {
-        const lizardGameObject = gameObject as Lizard;
-
-        lizardGameObject!.body!.onCollide = true;
+        const lizard = gameObject as Lizard;
+        if (lizard.body) {
+          lizard.body.onCollide = true;
+        }
       }
     });
 
-    this.lizards.get(256, 128, 'lizard');
-
-    // set character collision
-    this.physics.add.collider(this.faune, wallsLayer as ArcadeColliderType);
-    this.physics.add.collider(this.lizards, wallsLayer as ArcadeColliderType);
-    this.physics.add.collider(this.faune, this.lizards);
-
-    this.cameras.main.startFollow(this.faune, true);
+    this.lizards.get(GAME_CONFIG.lizard.startX, GAME_CONFIG.lizard.startY, ASSET_KEYS.lizard);
   }
 
-  override update(time: number, delta: number) {
-    if (!this.cursors || !this.faune) {
+  private setupCollisions(wallsLayer: TilemapLayer | null): void {
+    if (!wallsLayer) {
       return;
     }
 
-    this.handleFauneMovement()
+    this.physics.add.collider(this.faune, wallsLayer as ArcadeColliderType);
+    this.physics.add.collider(this.lizards, wallsLayer as ArcadeColliderType);
+    this.physics.add.collider(this.faune, this.lizards);
   }
 
-  private handleFauneMovement(): void {
-    const speed = 100;
-    let moveX = 0;
-    let moveY = 0;
-
-    if (this.cursors.left?.isDown) {
-      moveX = -1;
-      this.faune.setFlipX(true);
-      this.lastFauneDirection = FauneMovement.runSide;
-    } else if (this.cursors.right?.isDown) {
-      moveX = 1;
-      this.faune.setFlipX(false);
-      this.lastFauneDirection = FauneMovement.runSide;
-    }
-
-    if (this.cursors.up?.isDown) {
-      moveY = -1;
-      this.lastFauneDirection = FauneMovement.runUp;
-    } else if (this.cursors.down?.isDown) {
-      moveY = 1;
-      this.lastFauneDirection = FauneMovement.runDown;
-    }
-
-    if (moveX !== 0 || moveY !== 0) {
-      this.faune.anims.play(this.lastFauneDirection, true);
-    } else {
-      this.handleFauneIdleAnimation()
-    }
-
-    this.faune.setVelocity(moveX * speed, moveY * speed);
+  private setupCamera(): void {
+    this.cameras.main.startFollow(this.faune, true);
   }
 
-  private handleFauneIdleAnimation(): void {
-    const idleAction = this.lastFauneDirection.replace(/-.*?-/, '-idle-');
+  private debugCollisionLayout(wallsLayer: TilemapLayer | null): void {
+    if (!wallsLayer) {
+      return;
+    }
 
-    this.faune.anims.play(idleAction);
-  }
-
-  private debugCollisionLayout(wallsLayer: TilemapLayer | null) {
-    const debugGraphics = this.add.graphics().setAlpha(0.7);
-
-    wallsLayer?.renderDebug(debugGraphics, {
+    const debugGraphics = this.add.graphics().setAlpha(GAME_CONFIG.debug.collisionAlpha);
+    wallsLayer.renderDebug(debugGraphics, {
       tileColor: null,
-      collidingTileColor: new Phaser.Display.Color(243, 234,48, 255),
+      collidingTileColor: new Phaser.Display.Color(243, 234, 48, 255),
       faceColor: new Phaser.Display.Color(40, 39, 37, 255),
-    })
+    });
   }
 }

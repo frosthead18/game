@@ -1,0 +1,15 @@
+# Project Cursor Rules
+
+## File Creation Preferences
+
+- **Do NOT create `index.ts` files** for module exports
+- **Do NOT create refactoring summary/conclusion files** (e.g., REFACTORING.md, SUMMARY.md)
+- Keep imports explicit and direct to specific files
+
+## Code Organization
+
+- Focus on clean, maintainable code structure
+- Extract constants and configuration
+- Use proper TypeScript typing
+- Follow separation of concerns principle
+

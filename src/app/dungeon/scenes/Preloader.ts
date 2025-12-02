@@ -1,17 +1,38 @@
+import {ASSET_KEYS, ASSET_PATHS, SCENE_KEYS} from "../constants";
+
 export class Preloader extends Phaser.Scene {
   constructor() {
-    super('preloader');
+    super(SCENE_KEYS.preloader);
   }
 
   preload(): void {
-    this.load.image('tiles', 'assets/dungeon/tiles/dungeon_tiles.png');
-    this.load.tilemapTiledJSON('dungeon', 'assets/dungeon/tiles/dungeon-01.json');
-
-    this.load.atlas('faune', 'assets/dungeon/characters/fauna.png', 'assets/dungeon/characters/fauna.json');
-    this.load.atlas('lizard', 'assets/dungeon/enemies/lizard.png', 'assets/dungeon/enemies/lizard.json');
+    this.loadTilemap();
+    this.loadCharacters();
+    this.loadEnemies();
   }
 
-  create() : void {
-    this.scene.start('game')
+  create(): void {
+    this.scene.start(SCENE_KEYS.game);
+  }
+
+  private loadTilemap(): void {
+    this.load.image(ASSET_KEYS.tiles, ASSET_PATHS.tiles.image);
+    this.load.tilemapTiledJSON(ASSET_KEYS.dungeon, ASSET_PATHS.tiles.json);
+  }
+
+  private loadCharacters(): void {
+    this.load.atlas(
+      ASSET_KEYS.faune,
+      ASSET_PATHS.characters.faune.image,
+      ASSET_PATHS.characters.faune.atlas
+    );
+  }
+
+  private loadEnemies(): void {
+    this.load.atlas(
+      ASSET_KEYS.lizard,
+      ASSET_PATHS.enemies.lizard.image,
+      ASSET_PATHS.enemies.lizard.atlas
+    );
   }
 }

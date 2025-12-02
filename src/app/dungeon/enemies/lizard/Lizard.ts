@@ -1,4 +1,5 @@
 import {LizardMovement} from "./lizard-animations";
+import {GAME_CONFIG} from "../../constants";
 
 export enum Directions {
   UP,
@@ -7,71 +8,78 @@ export enum Directions {
   RIGHT,
 }
 
-const getRandomDirection = (exclude: Directions) => {
-  let lizardDirection = Phaser.Math.Between(0,3);
+const MIN_DIRECTION = 0;
+const MAX_DIRECTION = 3;
 
-  while (lizardDirection === exclude) {
-    lizardDirection = Phaser.Math.Between(0,3);
+const getRandomDirection = (exclude: Directions): Directions => {
+  let newDirection = Phaser.Math.Between(MIN_DIRECTION, MAX_DIRECTION);
+
+  while (newDirection === exclude) {
+    newDirection = Phaser.Math.Between(MIN_DIRECTION, MAX_DIRECTION);
   }
 
-  return lizardDirection;
-}
+  return newDirection;
+};
 
 export class Lizard extends Phaser.Physics.Arcade.Sprite {
-  private lizardDirection: Directions = Directions.LEFT;
+  private direction: Directions = Directions.LEFT;
   private moveEvent: Phaser.Time.TimerEvent;
 
-  constructor(screen: Phaser.Scene, x: number, y: number, texture: string, frame?: string | number) {
-    super(screen, x, y, texture, frame);
+  constructor(scene: Phaser.Scene, x: number, y: number, texture: string, frame?: string | number) {
+    super(scene, x, y, texture, frame);
 
     this.anims.play(LizardMovement.run);
 
-    screen.physics.world.on(Phaser.Physics.Arcade.Events.TILE_COLLIDE, this.handleTileCollision, this);
+    scene.physics.world.on(Phaser.Physics.Arcade.Events.TILE_COLLIDE, this.handleTileCollision, this);
 
-    this.moveEvent = screen.time.addEvent({
-      delay: 2000,
+    this.moveEvent = scene.time.addEvent({
+      delay: GAME_CONFIG.lizard.directionChangeDelay,
       loop: true,
       callback: () => {
-        this.lizardDirection = getRandomDirection(this.lizardDirection);
+        this.direction = getRandomDirection(this.direction);
       }
-    })
+    });
   }
 
-  override preUpdate(time: number, delta: number) {
+  override preUpdate(time: number, delta: number): void {
     super.preUpdate(time, delta);
 
-    const speed = 50;
-
-    switch (this.lizardDirection) {
-      case Directions.UP:
-        this.setVelocity(0, -speed);
-        break
-
-      case Directions.DOWN:
-        this.setVelocity(0, speed)
-        break
-
-      case Directions.RIGHT:
-        this.setVelocity(speed, 0)
-        break
-
-      case Directions.LEFT:
-        this.setVelocity(-speed, 0)
-        break
-    }
+    this.updateMovement();
   }
 
-  override destroy(fromScene?: boolean) {
+  override destroy(fromScene?: boolean): void {
     this.moveEvent.destroy();
-
     super.destroy(fromScene);
   }
 
-  private handleTileCollision(gameObject: Phaser.GameObjects.GameObject, tile: Phaser.Tilemaps.Tile) {
+  private updateMovement(): void {
+    const speed = GAME_CONFIG.lizard.speed;
+
+    switch (this.direction) {
+      case Directions.UP:
+        this.setVelocity(0, -speed);
+        break;
+
+      case Directions.DOWN:
+        this.setVelocity(0, speed);
+        break;
+
+      case Directions.RIGHT:
+        this.setVelocity(speed, 0);
+        break;
+
+      case Directions.LEFT:
+        this.setVelocity(-speed, 0);
+        break;
+    }
+  }
+
+  private handleTileCollision(gameObject: Phaser.GameObjects.GameObject, tile: Phaser.Tilemaps.Tile): void {
     if (gameObject !== this) {
-      return
+      return;
     }
 
-    this.lizardDirection = getRandomDirection(this.lizardDirection);
+    this.direction = getRandomDirection(this.direction);
   }
 }
+
