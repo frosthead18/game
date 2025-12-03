@@ -46,7 +46,7 @@ export class Game extends Phaser.Scene {
     wallsLayer?.setCollisionByProperty({collides: true});
 
     // Uncomment to debug collision layout
-    // this.debugCollisionLayout(wallsLayer);
+    this.debugCollisionLayout(wallsLayer);
 
     return wallsLayer;
   }
