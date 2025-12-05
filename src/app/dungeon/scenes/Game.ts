@@ -3,6 +3,7 @@ import ArcadeColliderType = Phaser.Types.Physics.Arcade.ArcadeColliderType;
 import {createLizardAnimations} from "../enemies/lizard/lizard-animations";
 import {createFauneAnimations} from "../characters/faune/faune-animations";
 import {Lizard} from "../enemies/lizard/Lizard";
+import '../characters/faune/Faune'
 import {Faune} from "../characters/faune/Faune";
 import {ASSET_KEYS, GAME_CONFIG, SCENE_KEYS} from "../constants";
 
@@ -57,13 +58,7 @@ export class Game extends Phaser.Scene {
   }
 
   private createPlayer(): void {
-    this.faune = new Faune(
-      this,
-      GAME_CONFIG.player.startX,
-      GAME_CONFIG.player.startY,
-      ASSET_KEYS.faune,
-      'walk-down-3.png'
-    );
+    this.faune = this.add.faune(128, 128, 'faune');
     this.faune.setCursors(this.cursors);
   }
 
@@ -89,6 +84,15 @@ export class Game extends Phaser.Scene {
     this.physics.add.collider(this.faune, wallsLayer as ArcadeColliderType);
     this.physics.add.collider(this.lizards, wallsLayer as ArcadeColliderType);
     this.physics.add.collider(this.faune, this.lizards);
+  }
+
+  private handlePlayerLizardCollision(object1: Phaser.GameObjects.GameObject, object2: Phaser.GameObjects.GameObject): void {
+    const lizard = object2 as Lizard
+		
+		const dx = this.faune.x - lizard.x
+		const dy = this.faune.y - lizard.y
+
+		const dir = new Phaser.Math.Vector2(dx, dy).normalize().scale(200)
   }
 
   private setupCamera(): void {

@@ -1,6 +1,14 @@
 import {FauneMovement} from "./faune-animations";
 import {GAME_CONFIG} from "../../constants";
 
+declare global {
+  namespace Phaser.GameObjects {
+    interface GameObjectFactory {
+      faune(x: number, y: number, texture: string, frame?: string | number): Faune;
+    }
+  }
+}
+
 export class Faune extends Phaser.Physics.Arcade.Sprite {
   private lastDirection: FauneMovement = FauneMovement.idleDown;
   private cursors?: Phaser.Types.Input.Keyboard.CursorKeys;
@@ -13,7 +21,6 @@ export class Faune extends Phaser.Physics.Arcade.Sprite {
     scene.physics.add.existing(this);
 
     this.anims.play(FauneMovement.idleDown);
-    this.configureBody();
   }
 
   setCursors(cursors: Phaser.Types.Input.Keyboard.CursorKeys): void {
@@ -28,13 +35,6 @@ export class Faune extends Phaser.Physics.Arcade.Sprite {
     }
 
     this.handleMovement();
-  }
-
-  private configureBody(): void {
-    this.body?.setSize(
-      this.width * GAME_CONFIG.player.bodyWidthRatio,
-      this.height * GAME_CONFIG.player.bodyHeightRatio
-    );
   }
 
   private handleMovement(): void {
@@ -73,4 +73,19 @@ export class Faune extends Phaser.Physics.Arcade.Sprite {
     this.anims.play(idleAction);
   }
 }
+
+Phaser.GameObjects.GameObjectFactory.register('faune', function (this: Phaser.GameObjects.GameObjectFactory, x: number, y: number, texture: string, frame?: string | number) {
+  const faune = new Faune(this.scene, x, y, texture, frame);
+
+  this.displayList.add(faune);
+  this.updateList.add(faune);
+  this.scene.physics.world.enable(faune, Phaser.Physics.Arcade.DYNAMIC_BODY);
+
+  faune.body?.setSize(
+    faune.width * GAME_CONFIG.player.bodyWidthRatio,
+    faune.height * GAME_CONFIG.player.bodyHeightRatio
+  );
+
+  return faune;
+});
 
