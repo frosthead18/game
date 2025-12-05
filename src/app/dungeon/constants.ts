@@ -5,7 +5,8 @@
 // Scene keys
 export const SCENE_KEYS = {
   preloader: 'preloader',
-  game: 'game'
+  game: 'game',
+  gameUI: 'game-ui'
 } as const;
 
 // Asset keys
@@ -13,7 +14,10 @@ export const ASSET_KEYS = {
   tiles: 'tiles',
   dungeon: 'dungeon',
   faune: 'faune',
-  lizard: 'lizard'
+  lizard: 'lizard',
+  treasure: 'treasure',
+  knife: 'knife',
+  uiHeart: 'ui-heart'
 } as const;
 
 // Asset paths
@@ -33,6 +37,24 @@ export const ASSET_PATHS = {
       image: 'assets/dungeon/enemies/lizard.png',
       atlas: 'assets/dungeon/enemies/lizard.json'
     }
+  },
+  items: {
+    treasure: {
+      image: 'assets/dungeon/items/treasure.png',
+      atlas: 'assets/dungeon/items/treasure.json'
+    }
+  },
+  weapons: {
+    knife: {
+      image: 'assets/dungeon/weapons/weapon_knife.png',
+      atlas: 'assets/dungeon/weapons/weapon_knife.json'
+    }
+  },
+  ui: {
+    heart: {
+      image: 'assets/dungeon/ui/ui_heart.png',
+      atlas: 'assets/dungeon/ui/ui_heart.json'
+    }
   }
 } as const;
 
@@ -43,13 +65,24 @@ export const GAME_CONFIG = {
     startY: 128,
     speed: 100,
     bodyWidthRatio: 0.5,
-    bodyHeightRatio: 0.8
+    bodyHeightRatio: 0.8,
+    maxHealth: 3,
+    knockbackSpeed: 200,
+    damageTimeDelay: 250
   },
   lizard: {
     startX: 256,
     startY: 128,
     speed: 50,
-    directionChangeDelay: 2000
+    directionChangeDelay: 2000,
+    damage: 1
+  },
+  knife: {
+    speed: 300,
+    damage: 1
+  },
+  chest: {
+    coinsValue: 50
   },
   debug: {
     collisionAlpha: 0.7

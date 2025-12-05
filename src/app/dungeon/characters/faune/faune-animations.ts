@@ -7,6 +7,7 @@ export enum FauneMovement {
   runDown = 'faune-run-down',
   runUp = 'faune-run-up',
   runSide = 'faune-run-side',
+  faintDown = 'faune-faint-down'
 }
 
 export const createFauneAnimations = (anims: Phaser.Animations.AnimationManager): void => {
@@ -61,5 +62,11 @@ export const createFauneAnimations = (anims: Phaser.Animations.AnimationManager)
     }),
     repeat: ANIMATION_CONFIG.repeatInfinite,
     frameRate: ANIMATION_CONFIG.faune.frameRate
+  });
+
+  // Faint/death animation
+  anims.create({
+    key: FauneMovement.faintDown,
+    frames: [{key: ASSET_KEYS.faune, frame: 'faint.png'}]
   });
 };

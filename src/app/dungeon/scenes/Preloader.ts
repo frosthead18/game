@@ -9,6 +9,9 @@ export class Preloader extends Phaser.Scene {
     this.loadTilemap();
     this.loadCharacters();
     this.loadEnemies();
+    this.loadItems();
+    this.loadWeapons();
+    this.loadUI();
   }
 
   create(): void {
@@ -34,5 +37,22 @@ export class Preloader extends Phaser.Scene {
       ASSET_PATHS.enemies.lizard.image,
       ASSET_PATHS.enemies.lizard.atlas
     );
+  }
+
+  private loadItems(): void {
+    this.load.atlas(
+      ASSET_KEYS.treasure,
+      ASSET_PATHS.items.treasure.image,
+      ASSET_PATHS.items.treasure.atlas
+    );
+  }
+
+  private loadWeapons(): void {
+    this.load.image('knife', 'assets/dungeon/weapons/knife.png')
+  }
+
+  private loadUI(): void {
+    this.load.image('ui-heart-empty', 'assets/dungeon/ui/ui_heart_empty.png');
+    this.load.image('ui-heart-full', 'assets/dungeon/ui/ui_heart_full.png');
   }
 }

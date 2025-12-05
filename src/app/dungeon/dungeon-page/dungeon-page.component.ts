@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import Phaser from "phaser";
 import {Game} from "../scenes/Game";
 import {Preloader} from "../scenes/Preloader";
+import {GameUI} from "../scenes/GameUI";
 
 @Component({
     selector: 'game-dungeon-page',
@@ -24,7 +25,7 @@ export class DungeonPageComponent implements OnInit {
           debug: true,
         }
       },
-      scene: [ Preloader, Game ],
+      scene: [ Preloader, Game, GameUI ],
       parent: 'dungeonGameContainer',
       scale: {
         mode: Phaser.Scale.FIT,
