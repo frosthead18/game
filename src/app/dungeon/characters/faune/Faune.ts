@@ -49,6 +49,10 @@ export class Faune extends Phaser.Physics.Arcade.Sprite {
     this.activeChest = chest;
   }
 
+  clearChest(): void {
+    this.activeChest = undefined;
+  }
+
   get health(): number {
     return this._health;
   }
@@ -78,6 +82,10 @@ export class Faune extends Phaser.Physics.Arcade.Sprite {
     }
   }
 
+  private getCurrentTime(): number {
+    return this.scene.time.now;
+  }
+
   private handleMovement(): void {
     if (!this.cursors) {
       return;
@@ -89,9 +97,13 @@ export class Faune extends Phaser.Physics.Arcade.Sprite {
     // Handle space bar for chest opening
     if (Phaser.Input.Keyboard.JustDown(this.cursors.space!)) {
       if (this.activeChest) {
+        console.log('[Faune] Space pressed, attempting to open chest');
         const coins = this.activeChest.open();
+        console.log(`[Faune] Chest opened, received ${coins} coins`);
         this._coins += coins;
         sceneEvents.emit(EVENTS.PLAYER_COINS_CHANGED, this._coins);
+      } else {
+        console.log('[Faune] Space pressed but no active chest');
       }
       return;
     }
@@ -140,6 +152,7 @@ export class Faune extends Phaser.Physics.Arcade.Sprite {
       return;
     }
 
+    console.log(`[Faune] Exiting DAMAGE state at ${time}, returning to IDLE`);
     this.healthState = HealthState.IDLE;
     this.setTint(0xffffff);
   }
@@ -198,14 +211,18 @@ export class Faune extends Phaser.Physics.Arcade.Sprite {
     sceneEvents.emit(EVENTS.PLAYER_HEALTH_CHANGED, this._health);
 
     if (this._health <= 0) {
+      console.log('[Faune] Player DEAD');
       this.healthState = HealthState.DEAD;
       this.anims.play(FauneMovement.faintDown);
       this.setVelocity(0, 0);
       sceneEvents.emit(EVENTS.PLAYER_DIED);
     } else {
+      const currentTime = this.getCurrentTime();
+      this.damageTime = currentTime + GAME_CONFIG.player.damageTimeDelay;
       this.healthState = HealthState.DAMAGE;
-      this.damageTime = Date.now() + GAME_CONFIG.player.damageTimeDelay;
 
+      console.log(`[Faune] Entering DAMAGE state at ${currentTime}, will exit at ${this.damageTime}`);
+      
       this.setVelocity(dir.x, dir.y);
       this.setTint(0xff0000);
     }

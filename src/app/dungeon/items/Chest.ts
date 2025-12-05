@@ -10,7 +10,13 @@ export class Chest extends Phaser.Physics.Arcade.Sprite {
   constructor(scene: Phaser.Scene, x: number, y: number, texture: string, frame?: string | number) {
     super(scene, x, y, texture, frame);
 
-    this.play('chest-closed');
+    // Set initial closed state
+    if (this.anims && this.anims.exists('chest-closed')) {
+      this.play('chest-closed');
+    } else {
+      // Fallback to first frame if animation doesn't exist
+      this.setFrame('chest_empty_open_anim_f0.png');
+    }
   }
 
   /**
@@ -19,11 +25,21 @@ export class Chest extends Phaser.Physics.Arcade.Sprite {
    */
   open(): number {
     if (this.opened) {
+      console.log('[Chest] Already opened, returning 0 coins');
       return 0;
     }
 
+    console.log('[Chest] Opening chest, playing animation');
     this.opened = true;
-    this.play('chest-open');
+    
+    // Check if animation exists before playing
+    if (this.anims && this.anims.exists('chest-open')) {
+      this.play('chest-open');
+    } else {
+      console.warn('[Chest] Animation "chest-open" not found, skipping animation');
+      // Still set the chest to open state frame if animation doesn't exist
+      this.setFrame('chest_empty_open_anim_f2.png');
+    }
 
     return GAME_CONFIG.chest.coinsValue;
   }

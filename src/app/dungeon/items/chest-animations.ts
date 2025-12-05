@@ -16,14 +16,19 @@ export function createChestAnimations(anims: Phaser.Animations.AnimationManager)
   // Closed chest (idle state)
   anims.create({
     key: ChestAnimation.closed,
-    frames: [{key: ASSET_KEYS.treasure, frame: 0}],
+    frames: [{key: ASSET_KEYS.treasure, frame: 'chest_empty_open_anim_f0.png'}],
     frameRate: ANIMATION_CONFIG.faune.frameRate
   });
 
   // Opening chest animation
   anims.create({
     key: ChestAnimation.open,
-    frames: anims.generateFrameNumbers(ASSET_KEYS.treasure, {start: 0, end: 2}),
+    frames: anims.generateFrameNames(ASSET_KEYS.treasure, {
+      prefix: 'chest_empty_open_anim_f',
+      suffix: '.png',
+      start: 0,
+      end: 2
+    }),
     frameRate: ANIMATION_CONFIG.faune.frameRate
   });
 }

@@ -18,6 +18,7 @@ export class Game extends Phaser.Scene {
   private knives!: Phaser.Physics.Arcade.Group;
   private chests!: Phaser.Physics.Arcade.StaticGroup;
   private playerLizardsCollider?: Phaser.Physics.Arcade.Collider;
+  private isOverlappingChest = false;
 
   constructor() {
     super(SCENE_KEYS.game);
@@ -42,7 +43,12 @@ export class Game extends Phaser.Scene {
   }
 
   override update(time: number, delta: number): void {
-    // Updates are handled in individual character classes
+    // Clear chest overlap flag at start of frame
+    // Will be set back to true by overlap callback if still overlapping
+    if (!this.isOverlappingChest) {
+      this.faune.clearChest();
+    }
+    this.isOverlappingChest = false;
   }
 
   private createMap(): TilemapLayer | null {
@@ -128,8 +134,7 @@ export class Game extends Phaser.Scene {
       this
     );
 
-    // Chest collisions and overlap
-    this.physics.add.collider(this.faune, this.chests);
+    // Chest overlap (no collision so player can overlap and interact)
     this.physics.add.overlap(
       this.faune,
       this.chests,
@@ -183,6 +188,8 @@ export class Game extends Phaser.Scene {
     object2: Phaser.Types.Physics.Arcade.GameObjectWithBody | Phaser.Physics.Arcade.Body | Phaser.Physics.Arcade.StaticBody | Phaser.Tilemaps.Tile
   ): void {
     const chest = object2 as Chest;
+    console.log('[Game] Player overlapping with chest, setting active chest');
+    this.isOverlappingChest = true;
     this.faune.setChest(chest);
   }
 
