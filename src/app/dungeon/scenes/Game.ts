@@ -83,8 +83,8 @@ export class Game extends Phaser.Scene {
     });
 
     // Create some chests at specific positions
-    this.chests.get(128, 256, ASSET_KEYS.treasure);
-    this.chests.get(400, 200, ASSET_KEYS.treasure);
+    this.chests.get(32, 188, ASSET_KEYS.treasure);
+    this.chests.get(616, 284, ASSET_KEYS.treasure);
   }
 
   private createEnemies(): void {
