@@ -20,6 +20,7 @@ export class Game extends Phaser.Scene {
   private playerLizardsCollider?: Phaser.Physics.Arcade.Collider;
   private isOverlappingChest = false;
   private tilemap!: Phaser.Tilemaps.Tilemap;
+  private wallsLayer!: TilemapLayer | null;
 
   constructor() {
     super(SCENE_KEYS.game);
@@ -62,15 +63,15 @@ export class Game extends Phaser.Scene {
     }
 
     this.tilemap.createLayer('Ground', tileSet, 0, 0);
-    const wallsLayer = this.tilemap.createLayer('Walls', tileSet, 0, 0);
-    wallsLayer?.setCollisionByProperty({collides: true});
+    this.wallsLayer = this.tilemap.createLayer('Walls', tileSet, 0, 0);
+    this.wallsLayer?.setCollisionByProperty({collides: true});
 
     // Uncomment to debug collision layout
-    // if (wallsLayer) {
-    //   debugDraw(wallsLayer, this);
+    // if (this.wallsLayer) {
+    //   debugDraw(this.wallsLayer, this);
     // }
 
-    return wallsLayer;
+    return this.wallsLayer;
   }
 
   private createAnimations(): void {
@@ -113,7 +114,9 @@ export class Game extends Phaser.Scene {
       
       if (position) {
         spawnPositions.push(position);
-        this.lizards.get(position.x, position.y, ASSET_KEYS.lizard);
+        const lizard = this.lizards.create(position.x, position.y, ASSET_KEYS.lizard) as Lizard;
+        lizard.setActive(true);
+        lizard.setVisible(true);
       } else {
         console.warn(`[Game] Failed to find valid spawn position for lizard ${i + 1}`);
       }
@@ -136,6 +139,15 @@ export class Game extends Phaser.Scene {
     for (let attempt = 0; attempt < config.maxSpawnAttempts; attempt++) {
       const x = Phaser.Math.Between(minX, maxX);
       const y = Phaser.Math.Between(minY, maxY);
+
+      // Check if this position is on a walkable tile (not a wall)
+      if (this.wallsLayer) {
+        const tile = this.wallsLayer.getTileAtWorldXY(x, y);
+        if (tile && tile.collides) {
+          // Position is on a wall, skip it
+          continue;
+        }
+      }
 
       // Check if this position is far enough from all existing positions
       let validPosition = true;
