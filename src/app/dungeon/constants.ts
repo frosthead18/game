@@ -73,9 +73,19 @@ export const GAME_CONFIG = {
   lizard: {
     startX: 256,
     startY: 128,
-    speed: 50,
+    baseSpeed: 50,
+    baseDamage: 1,
+    baseHp: 1,
     directionChangeDelay: 2000,
-    damage: 1
+    hpScaleFactor: 0.5,
+    speedScaleFactor: 0.1,
+    minLevel: 1,
+    maxLevel: 10,
+    defaultLevel: 1,
+    spawnCount: 3,
+    minSpawnDistance: 150,
+    spawnAreaMargin: 50,
+    maxSpawnAttempts: 50
   },
   knife: {
     speed: 300,

@@ -19,6 +19,7 @@ export class Game extends Phaser.Scene {
   private chests!: Phaser.Physics.Arcade.StaticGroup;
   private playerLizardsCollider?: Phaser.Physics.Arcade.Collider;
   private isOverlappingChest = false;
+  private tilemap!: Phaser.Tilemaps.Tilemap;
 
   constructor() {
     super(SCENE_KEYS.game);
@@ -52,16 +53,16 @@ export class Game extends Phaser.Scene {
   }
 
   private createMap(): TilemapLayer | null {
-    const gameMap = this.make.tilemap({key: ASSET_KEYS.dungeon});
-    const tileSet = gameMap.addTilesetImage(ASSET_KEYS.dungeon, ASSET_KEYS.tiles);
+    this.tilemap = this.make.tilemap({key: ASSET_KEYS.dungeon});
+    const tileSet = this.tilemap.addTilesetImage(ASSET_KEYS.dungeon, ASSET_KEYS.tiles);
 
     if (!tileSet) {
       console.error('Failed to load tileset');
       return null;
     }
 
-    gameMap.createLayer('Ground', tileSet, 0, 0);
-    const wallsLayer = gameMap.createLayer('Walls', tileSet, 0, 0);
+    this.tilemap.createLayer('Ground', tileSet, 0, 0);
+    const wallsLayer = this.tilemap.createLayer('Walls', tileSet, 0, 0);
     wallsLayer?.setCollisionByProperty({collides: true});
 
     // Uncomment to debug collision layout
@@ -104,7 +105,55 @@ export class Game extends Phaser.Scene {
       }
     });
 
-    this.lizards.get(GAME_CONFIG.lizard.startX, GAME_CONFIG.lizard.startY, ASSET_KEYS.lizard);
+    // Spawn multiple lizards at random positions
+    const spawnPositions: { x: number; y: number }[] = [];
+    
+    for (let i = 0; i < GAME_CONFIG.lizard.spawnCount; i++) {
+      const position = this.getRandomSpawnPosition(spawnPositions);
+      
+      if (position) {
+        spawnPositions.push(position);
+        this.lizards.get(position.x, position.y, ASSET_KEYS.lizard);
+      } else {
+        console.warn(`[Game] Failed to find valid spawn position for lizard ${i + 1}`);
+      }
+    }
+  }
+
+  private getRandomSpawnPosition(existingPositions: { x: number; y: number }[]): { x: number; y: number } | null {
+    const config = GAME_CONFIG.lizard;
+    const margin = config.spawnAreaMargin;
+    
+    // Use actual tilemap dimensions in pixels
+    const mapWidth = this.tilemap.widthInPixels;
+    const mapHeight = this.tilemap.heightInPixels;
+    
+    const minX = margin;
+    const maxX = mapWidth - margin;
+    const minY = margin;
+    const maxY = mapHeight - margin;
+
+    for (let attempt = 0; attempt < config.maxSpawnAttempts; attempt++) {
+      const x = Phaser.Math.Between(minX, maxX);
+      const y = Phaser.Math.Between(minY, maxY);
+
+      // Check if this position is far enough from all existing positions
+      let validPosition = true;
+      for (const existing of existingPositions) {
+        const distance = Phaser.Math.Distance.Between(x, y, existing.x, existing.y);
+        if (distance < config.minSpawnDistance) {
+          validPosition = false;
+          break;
+        }
+      }
+
+      if (validPosition) {
+        return { x, y };
+      }
+    }
+
+    // Failed to find a valid position after max attempts
+    return null;
   }
 
   private createKnives(): void {
@@ -197,12 +246,17 @@ export class Game extends Phaser.Scene {
     object1: Phaser.Types.Physics.Arcade.GameObjectWithBody | Phaser.Physics.Arcade.Body | Phaser.Physics.Arcade.StaticBody | Phaser.Tilemaps.Tile,
     object2: Phaser.Types.Physics.Arcade.GameObjectWithBody | Phaser.Physics.Arcade.Body | Phaser.Physics.Arcade.StaticBody | Phaser.Tilemaps.Tile
   ): void {
-    // Destroy knife and lizard on hit
     const knife = object1 as Phaser.Physics.Arcade.Image;
     const lizard = object2 as Lizard;
 
+    // Always destroy the knife on hit
     knife.destroy();
-    lizard.destroy();
+
+    // Apply damage to lizard and only destroy if health reaches 0
+    const isAlive = lizard.takeDamage(GAME_CONFIG.knife.damage);
+    if (!isAlive) {
+      lizard.destroy();
+    }
   }
 
   private handleKnifeWallCollision(
