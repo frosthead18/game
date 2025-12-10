@@ -84,7 +84,7 @@ export const ASSET_PATHS = {
       atlas: 'assets/dungeon/enemies/angel.json'
     },
     big_demon: {
-      image: 'assets/dungeon/enemies/big_demonjson.png',
+      image: 'assets/dungeon/enemies/big_demon.png',
       atlas: 'assets/dungeon/enemies/big_demon.json'
     },
     big_zombie: {
