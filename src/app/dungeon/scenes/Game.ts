@@ -1,23 +1,24 @@
 import TilemapLayer = Phaser.Tilemaps.TilemapLayer;
 import ArcadeColliderType = Phaser.Types.Physics.Arcade.ArcadeColliderType;
-import {createLizardAnimations} from "../enemies/lizard/lizard-animations";
+import {createAllEnemyAnimations} from "../enemies/enemy-animations";
 import {createFauneAnimations} from "../characters/faune/faune-animations";
 import {createChestAnimations} from "../items/chest-animations";
-import {Lizard} from "../enemies/lizard/Lizard";
+import {BaseEnemy} from "../enemies/BaseEnemy";
+import {EnemyFactory} from "../enemies/EnemyFactory";
 import '../characters/faune/Faune'
 import {Faune} from "../characters/faune/Faune";
 import {Chest} from "../items/Chest";
-import {ASSET_KEYS, GAME_CONFIG, SCENE_KEYS} from "../constants";
+import {ASSET_KEYS, GAME_CONFIG, SCENE_KEYS, EnemyType} from "../constants";
 import {sceneEvents, EVENTS} from "../events/EventsCenter";
 import {debugDraw} from "../utils/debug";
 
 export class Game extends Phaser.Scene {
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
   private faune!: Faune;
-  private lizards!: Phaser.Physics.Arcade.Group;
+  private enemies!: Phaser.Physics.Arcade.Group;
   private knives!: Phaser.Physics.Arcade.Group;
   private chests!: Phaser.Physics.Arcade.StaticGroup;
-  private playerLizardsCollider?: Phaser.Physics.Arcade.Collider;
+  private playerEnemiesCollider?: Phaser.Physics.Arcade.Collider;
   private isOverlappingChest = false;
   private tilemap!: Phaser.Tilemaps.Tilemap;
   private wallsLayer!: TilemapLayer | null;
@@ -76,7 +77,7 @@ export class Game extends Phaser.Scene {
 
   private createAnimations(): void {
     createFauneAnimations(this.anims);
-    createLizardAnimations(this.anims);
+    createAllEnemyAnimations(this.anims);
     createChestAnimations(this.anims);
   }
 
@@ -96,17 +97,33 @@ export class Game extends Phaser.Scene {
   }
 
   private createEnemies(): void {
-    this.lizards = this.physics.add.group({
-      classType: Lizard,
+    this.enemies = this.physics.add.group({
+      classType: BaseEnemy,
       createCallback: (gameObject: Phaser.GameObjects.GameObject) => {
-        const lizard = gameObject as Lizard;
-        if (lizard.body) {
-          lizard.body.onCollide = true;
+        const enemy = gameObject as BaseEnemy;
+        if (enemy.body) {
+          enemy.body.onCollide = true;
         }
       }
     });
 
-    // Spawn multiple lizards at random positions
+    // Define enemy type weights for varied spawning
+    // Higher numbers = more common
+    const enemyWeights: Partial<Record<EnemyType, number>> = {
+      [EnemyType.GOBLIN]: 5,
+      [EnemyType.IMP]: 5,
+      [EnemyType.SKELET]: 4,
+      [EnemyType.ZOMBIE]: 4,
+      [EnemyType.SLUG]: 3,
+      [EnemyType.LIZARD_M]: 3,
+      [EnemyType.MASKED_ORC]: 2,
+      [EnemyType.CHORT]: 2,
+      [EnemyType.OGRE]: 1,
+      [EnemyType.KNIGHT_M]: 1,
+      [EnemyType.KNIGHT_F]: 1
+    };
+
+    // Spawn multiple enemies at random positions
     const spawnPositions: { x: number; y: number }[] = [];
     
     for (let i = 0; i < GAME_CONFIG.lizard.spawnCount; i++) {
@@ -114,11 +131,19 @@ export class Game extends Phaser.Scene {
       
       if (position) {
         spawnPositions.push(position);
-        const lizard = this.lizards.create(position.x, position.y, ASSET_KEYS.lizard) as Lizard;
-        lizard.setActive(true);
-        lizard.setVisible(true);
+        
+        // Get a random enemy type based on weights
+        const enemyType = EnemyFactory.getWeightedRandomEnemyType(enemyWeights);
+        
+        // Create enemy using factory
+        const enemy = EnemyFactory.createEnemy(this, position.x, position.y, enemyType);
+        
+        // Add to group
+        this.enemies.add(enemy);
+        enemy.setActive(true);
+        enemy.setVisible(true);
       } else {
-        console.warn(`[Game] Failed to find valid spawn position for lizard ${i + 1}`);
+        console.warn(`[Game] Failed to find valid spawn position for enemy ${i + 1}`);
       }
     }
   }
@@ -184,13 +209,13 @@ export class Game extends Phaser.Scene {
 
     // Wall collisions
     this.physics.add.collider(this.faune, wallsLayer as ArcadeColliderType);
-    this.physics.add.collider(this.lizards, wallsLayer as ArcadeColliderType);
+    this.physics.add.collider(this.enemies, wallsLayer as ArcadeColliderType);
 
-    // Player-lizard collision with damage handling
-    this.playerLizardsCollider = this.physics.add.collider(
+    // Player-enemy collision with damage handling
+    this.playerEnemiesCollider = this.physics.add.collider(
       this.faune,
-      this.lizards,
-      this.handlePlayerLizardCollision,
+      this.enemies,
+      this.handlePlayerEnemyCollision,
       undefined,
       this
     );
@@ -204,11 +229,11 @@ export class Game extends Phaser.Scene {
       this
     );
 
-    // Knife-lizard collision
+    // Knife-enemy collision
     this.physics.add.collider(
       this.knives,
-      this.lizards,
-      this.handleKnifeLizardCollision,
+      this.enemies,
+      this.handleKnifeEnemyCollision,
       undefined,
       this
     );
@@ -223,14 +248,14 @@ export class Game extends Phaser.Scene {
     );
   }
 
-  private handlePlayerLizardCollision(
+  private handlePlayerEnemyCollision(
     object1: Phaser.Types.Physics.Arcade.GameObjectWithBody | Phaser.Physics.Arcade.Body | Phaser.Physics.Arcade.StaticBody | Phaser.Tilemaps.Tile,
     object2: Phaser.Types.Physics.Arcade.GameObjectWithBody | Phaser.Physics.Arcade.Body | Phaser.Physics.Arcade.StaticBody | Phaser.Tilemaps.Tile
   ): void {
-    const lizard = object2 as Lizard;
+    const enemy = object2 as BaseEnemy;
 
-    const dx = this.faune.x - lizard.x;
-    const dy = this.faune.y - lizard.y;
+    const dx = this.faune.x - enemy.x;
+    const dy = this.faune.y - enemy.y;
 
     const dir = new Phaser.Math.Vector2(dx, dy).normalize().scale(GAME_CONFIG.player.knockbackSpeed);
 
@@ -239,8 +264,8 @@ export class Game extends Phaser.Scene {
     sceneEvents.emit(EVENTS.PLAYER_HEALTH_CHANGED, this.faune.health);
 
     if (this.faune.health <= 0) {
-      // Stop player-lizard collisions when dead
-      this.playerLizardsCollider?.destroy();
+      // Stop player-enemy collisions when dead
+      this.playerEnemiesCollider?.destroy();
     }
   }
 
@@ -254,20 +279,20 @@ export class Game extends Phaser.Scene {
     this.faune.setChest(chest);
   }
 
-  private handleKnifeLizardCollision(
+  private handleKnifeEnemyCollision(
     object1: Phaser.Types.Physics.Arcade.GameObjectWithBody | Phaser.Physics.Arcade.Body | Phaser.Physics.Arcade.StaticBody | Phaser.Tilemaps.Tile,
     object2: Phaser.Types.Physics.Arcade.GameObjectWithBody | Phaser.Physics.Arcade.Body | Phaser.Physics.Arcade.StaticBody | Phaser.Tilemaps.Tile
   ): void {
     const knife = object1 as Phaser.Physics.Arcade.Image;
-    const lizard = object2 as Lizard;
+    const enemy = object2 as BaseEnemy;
 
     // Always destroy the knife on hit
     knife.destroy();
 
-    // Apply damage to lizard and only destroy if health reaches 0
-    const isAlive = lizard.takeDamage(GAME_CONFIG.knife.damage);
+    // Apply damage to enemy and only destroy if health reaches 0
+    const isAlive = enemy.takeDamage(GAME_CONFIG.knife.damage);
     if (!isAlive) {
-      lizard.destroy();
+      enemy.destroy();
     }
   }
 
