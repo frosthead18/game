@@ -48,7 +48,7 @@ export class Preloader extends Phaser.Scene {
   }
 
   private loadWeapons(): void {
-    this.load.image('knife', 'assets/dungeon/weapons/knife.png')
+    this.load.image('knife', ASSET_PATHS.weapons.knife.image)
   }
 
   private loadUI(): void {

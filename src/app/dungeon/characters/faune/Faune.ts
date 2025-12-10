@@ -29,12 +29,6 @@ export class Faune extends Phaser.Physics.Arcade.Sprite {
 
   constructor(scene: Phaser.Scene, x: number, y: number, texture: string, frame?: string | number) {
     super(scene, x, y, texture, frame);
-
-    // Add sprite to scene
-    scene.add.existing(this);
-    scene.physics.add.existing(this);
-
-    this.anims.play(FauneMovement.idleDown);
   }
 
   setCursors(cursors: Phaser.Types.Input.Keyboard.CursorKeys): void {
@@ -240,6 +234,8 @@ Phaser.GameObjects.GameObjectFactory.register('faune', function (this: Phaser.Ga
     faune.width * GAME_CONFIG.player.bodyWidthRatio,
     faune.height * GAME_CONFIG.player.bodyHeightRatio
   );
+
+  faune.anims.play(FauneMovement.idleDown);
 
   return faune;
 });
