@@ -28,8 +28,8 @@ export const ASSET_PATHS = {
   },
   characters: {
     faune: {
-      image: 'assets/dungeon/characters/fauna.png',
-      atlas: 'assets/dungeon/characters/fauna.json'
+      image: 'assets/dungeon/characters/faune.png',
+      atlas: 'assets/dungeon/characters/faune.json'
     }
   },
   enemies: {
