@@ -34,8 +34,8 @@ export const ASSET_PATHS = {
   },
   enemies: {
     lizard: {
-      image: 'assets/dungeon/enemies/lizard.png',
-      atlas: 'assets/dungeon/enemies/lizard.json'
+      image: 'assets/dungeon/enemies/lizard_m.png',
+      atlas: 'assets/dungeon/enemies/lizard_m.json'
     }
   },
   items: {

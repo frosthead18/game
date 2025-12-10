@@ -81,7 +81,7 @@ export class Game extends Phaser.Scene {
   }
 
   private createPlayer(): void {
-    this.faune = this.add.faune(128, 128, 'faune');
+    this.faune = this.add.faune(128, 128, ASSET_KEYS.faune);
     this.faune.setCursors(this.cursors);
   }
 
