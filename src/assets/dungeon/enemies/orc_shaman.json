@@ -1,0 +1,188 @@
+{
+	"textures": [
+		{
+			"image": "orc_shaman.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 15,
+				"h": 127
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "orc_shaman_idle_anim_f0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 7,
+						"w": 13,
+						"h": 16
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 13,
+						"h": 16
+					}
+				},
+				{
+					"filename": "orc_shaman_idle_anim_f1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 8,
+						"w": 13,
+						"h": 15
+					},
+					"frame": {
+						"x": 0,
+						"y": 16,
+						"w": 13,
+						"h": 15
+					}
+				},
+				{
+					"filename": "orc_shaman_idle_anim_f2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 9,
+						"w": 13,
+						"h": 14
+					},
+					"frame": {
+						"x": 0,
+						"y": 31,
+						"w": 13,
+						"h": 14
+					}
+				},
+				{
+					"filename": "orc_shaman_idle_anim_f3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 8,
+						"w": 13,
+						"h": 15
+					},
+					"frame": {
+						"x": 0,
+						"y": 45,
+						"w": 13,
+						"h": 15
+					}
+				},
+				{
+					"filename": "orc_shaman_run_anim_f0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 6,
+						"w": 13,
+						"h": 17
+					},
+					"frame": {
+						"x": 0,
+						"y": 60,
+						"w": 13,
+						"h": 17
+					}
+				},
+				{
+					"filename": "orc_shaman_run_anim_f1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 5,
+						"w": 15,
+						"h": 17
+					},
+					"frame": {
+						"x": 0,
+						"y": 77,
+						"w": 15,
+						"h": 17
+					}
+				},
+				{
+					"filename": "orc_shaman_run_anim_f2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 6,
+						"w": 14,
+						"h": 17
+					},
+					"frame": {
+						"x": 0,
+						"y": 94,
+						"w": 14,
+						"h": 17
+					}
+				},
+				{
+					"filename": "orc_shaman_run_anim_f3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 7,
+						"w": 13,
+						"h": 16
+					},
+					"frame": {
+						"x": 0,
+						"y": 111,
+						"w": 13,
+						"h": 16
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:33d36f7d77e0acc3de3d090aeccf3996:ae1a0db20870bb4b5980de1e74109917:4436bc7d86c92fe8037ec1ee23b51128$"
+	}
+}

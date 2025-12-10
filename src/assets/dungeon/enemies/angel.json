@@ -1,0 +1,188 @@
+{
+	"textures": [
+		{
+			"image": "angel.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 15,
+				"h": 105
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "angel_idle_anim_f0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 3,
+						"w": 15,
+						"h": 13
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 13
+					}
+				},
+				{
+					"filename": "angel_idle_anim_f1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 3,
+						"w": 15,
+						"h": 13
+					},
+					"frame": {
+						"x": 0,
+						"y": 13,
+						"w": 15,
+						"h": 13
+					}
+				},
+				{
+					"filename": "angel_idle_anim_f2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 5,
+						"w": 15,
+						"h": 11
+					},
+					"frame": {
+						"x": 0,
+						"y": 26,
+						"w": 15,
+						"h": 11
+					}
+				},
+				{
+					"filename": "angel_idle_anim_f3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 4,
+						"w": 15,
+						"h": 12
+					},
+					"frame": {
+						"x": 0,
+						"y": 37,
+						"w": 15,
+						"h": 12
+					}
+				},
+				{
+					"filename": "angel_run_anim_f0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 2,
+						"w": 15,
+						"h": 14
+					},
+					"frame": {
+						"x": 0,
+						"y": 49,
+						"w": 15,
+						"h": 14
+					}
+				},
+				{
+					"filename": "angel_run_anim_f1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 1,
+						"w": 15,
+						"h": 14
+					},
+					"frame": {
+						"x": 0,
+						"y": 63,
+						"w": 15,
+						"h": 14
+					}
+				},
+				{
+					"filename": "angel_run_anim_f2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 1,
+						"w": 15,
+						"h": 15
+					},
+					"frame": {
+						"x": 0,
+						"y": 77,
+						"w": 15,
+						"h": 15
+					}
+				},
+				{
+					"filename": "angel_run_anim_f3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 3,
+						"w": 15,
+						"h": 13
+					},
+					"frame": {
+						"x": 0,
+						"y": 92,
+						"w": 15,
+						"h": 13
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:186885ef7733b18dd4ae22bbf13a87c8:abec674c45ee6e5e2d787d03aaacc4c0:ad2e011111cde493d0250dfab53f63f2$"
+	}
+}
