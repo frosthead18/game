@@ -76,25 +76,9 @@ export class Game extends Phaser.Scene {
   }
 
   private createAnimations(): void {
-    console.log('[Game] Creating animations...');
-    
-    // Verify a few textures are available before creating animations
-    const testEnemies = [EnemyType.ANGEL, EnemyType.IMP, EnemyType.SLUG];
-    testEnemies.forEach(enemyType => {
-      const texture = this.textures.get(enemyType);
-      if (texture && texture.key !== '__MISSING') {
-        const frames = texture.getFrameNames();
-        console.log(`[Game] Texture '${enemyType}' available with ${frames.length} frames`, frames.slice(0, 3));
-      } else {
-        console.error(`[Game] Texture '${enemyType}' NOT available!`);
-      }
-    });
-    
     createFauneAnimations(this.anims);
     createAllEnemyAnimations(this.anims);
     createChestAnimations(this.anims);
-    
-    console.log('[Game] Animations created');
   }
 
   private createPlayer(): void {

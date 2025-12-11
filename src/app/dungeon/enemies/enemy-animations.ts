@@ -7,8 +7,6 @@ export const createEnemyAnimations = (anims: Phaser.Animations.AnimationManager,
   const config = ENEMY_CONFIGS[enemyType];
   const animConfig = ANIMATION_CONFIG.enemy;
 
-  console.log(`[Animation] Creating ${config.animationType} animations for ${enemyType}`);
-
   switch (config.animationType) {
     case 'standard':
       // Standard enemies have idle and run animations
@@ -61,11 +59,6 @@ function createStandardAnimations(
     suffix: '.png'
   });
   
-  console.log(`[Animation] ${enemyType}_idle: generated ${idleFrames.length} frames`);
-  if (idleFrames.length === 0) {
-    console.error(`[Animation] No frames found for ${enemyType}_idle! Check texture atlas.`);
-  }
-  
   anims.create({
     key: `${enemyType}_idle`,
     frames: idleFrames,
@@ -80,11 +73,6 @@ function createStandardAnimations(
     prefix: runPrefix,
     suffix: '.png'
   });
-  
-  console.log(`[Animation] ${enemyType}_run: generated ${runFrames.length} frames`);
-  if (runFrames.length === 0) {
-    console.error(`[Animation] No frames found for ${enemyType}_run! Check texture atlas.`);
-  }
   
   anims.create({
     key: `${enemyType}_run`,
@@ -106,49 +94,40 @@ function createAdvancedAnimations(
   animConfig: typeof ANIMATION_CONFIG.enemy
 ): void {
   // Hit animation (single frame)
-  const hitFrames = anims.generateFrameNames(enemyType, {
-    start: 0,
-    end: 0,
-    prefix: hitPrefix,
-    suffix: '.png'
-  });
-  console.log(`[Animation] ${enemyType}_hit: generated ${hitFrames.length} frames`);
-  
   anims.create({
     key: `${enemyType}_hit`,
-    frames: hitFrames,
+    frames: anims.generateFrameNames(enemyType, {
+      start: 0,
+      end: 0,
+      prefix: hitPrefix,
+      suffix: '.png'
+    }),
     repeat: 0,
     frameRate: animConfig.frameRate
   });
 
   // Idle animation
-  const idleFrames = anims.generateFrameNames(enemyType, {
-    start: animConfig.frameStart,
-    end: animConfig.frameEnd,
-    prefix: idlePrefix,
-    suffix: '.png'
-  });
-  console.log(`[Animation] ${enemyType}_idle: generated ${idleFrames.length} frames`);
-  
   anims.create({
     key: `${enemyType}_idle`,
-    frames: idleFrames,
+    frames: anims.generateFrameNames(enemyType, {
+      start: animConfig.frameStart,
+      end: animConfig.frameEnd,
+      prefix: idlePrefix,
+      suffix: '.png'
+    }),
     repeat: ANIMATION_CONFIG.repeatInfinite,
     frameRate: animConfig.frameRate
   });
 
   // Run animation
-  const runFrames = anims.generateFrameNames(enemyType, {
-    start: animConfig.frameStart,
-    end: animConfig.frameEnd,
-    prefix: runPrefix,
-    suffix: '.png'
-  });
-  console.log(`[Animation] ${enemyType}_run: generated ${runFrames.length} frames`);
-  
   anims.create({
     key: `${enemyType}_run`,
-    frames: runFrames,
+    frames: anims.generateFrameNames(enemyType, {
+      start: animConfig.frameStart,
+      end: animConfig.frameEnd,
+      prefix: runPrefix,
+      suffix: '.png'
+    }),
     repeat: ANIMATION_CONFIG.repeatInfinite,
     frameRate: animConfig.frameRate
   });
@@ -169,11 +148,6 @@ function createSimpleAnimation(
     prefix: animPrefix,
     suffix: '.png'
   });
-  console.log(`[Animation] ${enemyType}_anim: generated ${animFrames.length} frames`);
-  if (animFrames.length === 0) {
-    console.error(`[Animation] No frames found for ${enemyType}_anim! Check texture atlas.`);
-  }
-  
   anims.create({
     key: `${enemyType}_anim`,
     frames: animFrames,

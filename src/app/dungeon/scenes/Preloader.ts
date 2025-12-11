@@ -15,18 +15,6 @@ export class Preloader extends Phaser.Scene {
   }
 
   create(): void {
-    console.log('[Preloader] All assets loaded, starting game scene');
-    
-    // Verify some textures are loaded
-    Object.values(EnemyType).slice(0, 5).forEach(enemyType => {
-      const texture = this.textures.get(enemyType);
-      if (texture && texture.key !== '__MISSING') {
-        console.log(`[Preloader] ✓ Texture '${enemyType}' loaded with ${texture.getFrameNames().length} frames`);
-      } else {
-        console.error(`[Preloader] ✗ Texture '${enemyType}' NOT loaded!`);
-      }
-    });
-    
     this.scene.start(SCENE_KEYS.game);
   }
 
@@ -48,7 +36,6 @@ export class Preloader extends Phaser.Scene {
     Object.values(EnemyType).forEach(enemyType => {
       const enemyPath = ASSET_PATHS.enemies[enemyType as keyof typeof ASSET_PATHS.enemies];
       if (enemyPath) {
-        console.log(`[Preloader] Loading enemy: ${enemyType} from ${enemyPath.atlas}`);
         this.load.atlas(
           enemyType,
           enemyPath.image,

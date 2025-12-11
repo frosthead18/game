@@ -68,19 +68,11 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
    * Initialize the enemy after it's been added to the scene
    */
   public init(): void {
-    console.log(`[BaseEnemy] Initializing ${this._enemyType} at (${this.x}, ${this.y})`);
-    
     // Check if texture is loaded
     const texture = this.scene.textures.get(this._enemyType);
     if (!texture || texture.key === '__MISSING') {
       console.error(`[BaseEnemy] Texture '${this._enemyType}' not found!`);
       return;
-    }
-    
-    const frameNames = texture.getFrameNames();
-    console.log(`[BaseEnemy] Texture '${this._enemyType}' has ${frameNames.length} frames`);
-    if (frameNames.length > 0) {
-      console.log(`[BaseEnemy] First few frames:`, frameNames.slice(0, 5));
     }
     
     if (!this._animationStarted) {
@@ -191,19 +183,14 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
     const animationType = this._config.animationType;
     const animKey = animationType === 'simple' ? `${this._enemyType}_anim` : `${this._enemyType}_run`;
     
-    console.log(`[BaseEnemy] Playing animation '${animKey}' for ${this._enemyType}`);
-    
-    // Check if animation exists
-    if (!this.anims.exists(animKey)) {
-      console.error(`[BaseEnemy] Animation '${animKey}' does not exist for ${this._enemyType}!`);
+    // Check if animation exists in scene's animation manager (not sprite's component)
+    if (!this.scene.anims.exists(animKey)) {
+      console.error(`[BaseEnemy] Animation '${animKey}' does not exist in scene for ${this._enemyType}!`);
       return;
     }
     
-    const result = this.anims.play(animKey, true);
-    
-    console.log(`[BaseEnemy] Animation play result:`, result);
-    console.log(`[BaseEnemy] Animation state - isPlaying:`, this.anims.isPlaying, 'currentAnim:', this.anims.currentAnim?.key);
-    console.log(`[BaseEnemy] Sprite state - visible:`, this.visible, 'active:', this.active, 'texture:', this.texture.key);
+    // Play the animation
+    this.anims.play(animKey, true);
   }
 }
 
