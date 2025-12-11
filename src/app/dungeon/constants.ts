@@ -256,7 +256,7 @@ export const GAME_CONFIG = {
     minLevel: 1,
     maxLevel: 10,
     defaultLevel: 1,
-    spawnCount: 30,
+    spawnCount: 35,
     minSpawnDistance: 150,
     spawnAreaMargin: 50,
     maxSpawnAttempts: 50

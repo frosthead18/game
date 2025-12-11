@@ -69,6 +69,20 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
    */
   public init(): void {
     console.log(`[BaseEnemy] Initializing ${this._enemyType} at (${this.x}, ${this.y})`);
+    
+    // Check if texture is loaded
+    const texture = this.scene.textures.get(this._enemyType);
+    if (!texture || texture.key === '__MISSING') {
+      console.error(`[BaseEnemy] Texture '${this._enemyType}' not found!`);
+      return;
+    }
+    
+    const frameNames = texture.getFrameNames();
+    console.log(`[BaseEnemy] Texture '${this._enemyType}' has ${frameNames.length} frames`);
+    if (frameNames.length > 0) {
+      console.log(`[BaseEnemy] First few frames:`, frameNames.slice(0, 5));
+    }
+    
     if (!this._animationStarted) {
       this._animationStarted = true;
       this.playRunAnimation();
@@ -175,7 +189,7 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
 
   protected playRunAnimation(): void {
     const animationType = this._config.animationType;
-    const animKey = animationType === 'simple' ? `${this._enemyType}-anim` : `${this._enemyType}-run`;
+    const animKey = animationType === 'simple' ? `${this._enemyType}_anim` : `${this._enemyType}_run`;
     
     console.log(`[BaseEnemy] Playing animation '${animKey}' for ${this._enemyType}`);
     
@@ -185,15 +199,11 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
       return;
     }
     
-    if (animationType === 'simple') {
-      // Simple enemies have a single animation
-      this.anims.play(animKey, true);
-    } else {
-      // Standard and advanced enemies have run animations
-      this.anims.play(animKey, true);
-    }
+    const result = this.anims.play(animKey, true);
     
-    console.log(`[BaseEnemy] Animation started, visible:`, this.visible, 'active:', this.active);
+    console.log(`[BaseEnemy] Animation play result:`, result);
+    console.log(`[BaseEnemy] Animation state - isPlaying:`, this.anims.isPlaying, 'currentAnim:', this.anims.currentAnim?.key);
+    console.log(`[BaseEnemy] Sprite state - visible:`, this.visible, 'active:', this.active, 'texture:', this.texture.key);
   }
 }
 
