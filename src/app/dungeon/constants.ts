@@ -12,38 +12,64 @@ export const SCENE_KEYS = {
 // Enemy types enum
 export enum EnemyType {
   ANGEL = 'angel',
+  BANDIT = 'bandit',
+  BEAR = 'bear',
   BIG_DEMON = 'big_demon',
   BIG_ZOMBIE = 'big_zombie',
+  CENTAUR_F = 'centaur_f',
+  CENTAUR_M = 'centaur_m',
   CHORT = 'chort',
   DOC = 'doc',
   DWARF_F = 'dwarf_f',
   DWARF_M = 'dwarf_m',
   ELF_F = 'elf_f',
+  ELF_FOREST_F = 'elf_forest_f',
+  ELF_FOREST_M = 'elf_forest_m',
+  ELF_KNIGHT = 'elf_knight',
   ELF_M = 'elf_m',
+  ENT = 'ent',
+  FAIRY = 'fairy',
+  FOREST_GUARDIAN = 'forest_guardian',
+  GNOLL_BRUTE = 'gnoll_brute',
+  GNOLL_OVERSEER = 'gnoll_overseer',
+  GNOLL_SCOUT = 'gnoll_scout',
+  GNOLL_SHAMAN = 'gnoll_shaman',
   GOBLIN = 'goblin',
+  GOLEM = 'golem',
   ICE_ZOMBIE = 'ice_zombie',
   IMP = 'imp',
+  KNIGHT_ELITE = 'knight_elite',
   KNIGHT_F = 'knight_f',
+  KNIGHT_HEAVY = 'knight_heavy',
+  KNIGHT_LARGE = 'knight_large',
+  KNIGHT_LARGE_ELITE = 'knight_large_elite',
   KNIGHT_M = 'knight_m',
   LIZARD = 'lizard',
   LIZARD_F = 'lizard_f',
   LIZARD_M = 'lizard_m',
   MASKED_ORC = 'masked_orc',
   MUDDY = 'muddy',
+  MUSHROOM_LARGE = 'mushroom_large',
+  MUSHROOM_NORMAL = 'mushroom_normal',
   NECROMANCER = 'necromancer',
   OGRE = 'ogre',
   ORC_SHAMAN = 'orc_shaman',
   ORC_WARRIOR = 'orc_warrior',
   ORK_WARRIOR = 'ork_warrior',
   PUMPKIN = 'pumpkin',
+  RANGER = 'ranger',
   SKELET = 'skelet',
   SLUG = 'slug',
   SWAMPY = 'swampy',
+  THIEF = 'thief',
   TINY_SLUG = 'tiny_slug',
   TINY_ZOMBIE = 'tiny_zombie',
+  TROLL_FOREST = 'troll_forest',
+  WIZARD_FOREST = 'wizard_forest',
   WIZZARD_F = 'wizzard_f',
   WIZZARD_M = 'wizzard_m',
   WOGOL = 'wogol',
+  WOLF = 'wolf',
   ZOMBIE = 'zombie'
 }
 
@@ -210,6 +236,110 @@ export const ASSET_PATHS = {
     zombie: {
       image: 'assets/dungeon/enemies/zombie.png',
       atlas: 'assets/dungeon/enemies/zombie.json'
+    },
+    bandit: {
+      image: 'assets/dungeon/enemies/bandit.png',
+      atlas: 'assets/dungeon/enemies/bandit.json'
+    },
+    bear: {
+      image: 'assets/dungeon/enemies/bear.png',
+      atlas: 'assets/dungeon/enemies/bear.json'
+    },
+    centaur_f: {
+      image: 'assets/dungeon/enemies/centaur_f.png',
+      atlas: 'assets/dungeon/enemies/centaur_f.json'
+    },
+    centaur_m: {
+      image: 'assets/dungeon/enemies/centaur_m.png',
+      atlas: 'assets/dungeon/enemies/centaur_m.json'
+    },
+    elf_forest_f: {
+      image: 'assets/dungeon/enemies/elf_forest_f.png',
+      atlas: 'assets/dungeon/enemies/elf_forest_f.json'
+    },
+    elf_forest_m: {
+      image: 'assets/dungeon/enemies/elf_forest_m.png',
+      atlas: 'assets/dungeon/enemies/elf_forest_m.json'
+    },
+    elf_knight: {
+      image: 'assets/dungeon/enemies/elf_knight.png',
+      atlas: 'assets/dungeon/enemies/elf_knight.json'
+    },
+    ent: {
+      image: 'assets/dungeon/enemies/ent.png',
+      atlas: 'assets/dungeon/enemies/ent.json'
+    },
+    fairy: {
+      image: 'assets/dungeon/enemies/fairy.png',
+      atlas: 'assets/dungeon/enemies/fairy.json'
+    },
+    forest_guardian: {
+      image: 'assets/dungeon/enemies/forest_guardian.png',
+      atlas: 'assets/dungeon/enemies/forest_guardian.json'
+    },
+    gnoll_brute: {
+      image: 'assets/dungeon/enemies/gnoll_brute.png',
+      atlas: 'assets/dungeon/enemies/gnoll_brute.json'
+    },
+    gnoll_overseer: {
+      image: 'assets/dungeon/enemies/gnoll_overseer.png',
+      atlas: 'assets/dungeon/enemies/gnoll_overseer.json'
+    },
+    gnoll_scout: {
+      image: 'assets/dungeon/enemies/gnoll_scout.png',
+      atlas: 'assets/dungeon/enemies/gnoll_scout.json'
+    },
+    gnoll_shaman: {
+      image: 'assets/dungeon/enemies/gnoll_shaman.png',
+      atlas: 'assets/dungeon/enemies/gnoll_shaman.json'
+    },
+    golem: {
+      image: 'assets/dungeon/enemies/golem.png',
+      atlas: 'assets/dungeon/enemies/golem.json'
+    },
+    knight_elite: {
+      image: 'assets/dungeon/enemies/knight_elite.png',
+      atlas: 'assets/dungeon/enemies/knight_elite.json'
+    },
+    knight_heavy: {
+      image: 'assets/dungeon/enemies/knight_heavy.png',
+      atlas: 'assets/dungeon/enemies/knight_heavy.json'
+    },
+    knight_large: {
+      image: 'assets/dungeon/enemies/knight_large.png',
+      atlas: 'assets/dungeon/enemies/knight_large.json'
+    },
+    knight_large_elite: {
+      image: 'assets/dungeon/enemies/knight_large_elite.png',
+      atlas: 'assets/dungeon/enemies/knight_large_elite.json'
+    },
+    mushroom_large: {
+      image: 'assets/dungeon/enemies/mushroom_large.png',
+      atlas: 'assets/dungeon/enemies/mushroom_large.json'
+    },
+    mushroom_normal: {
+      image: 'assets/dungeon/enemies/mushroom_normal.png',
+      atlas: 'assets/dungeon/enemies/mushroom_normal.json'
+    },
+    ranger: {
+      image: 'assets/dungeon/enemies/ranger.png',
+      atlas: 'assets/dungeon/enemies/ranger.json'
+    },
+    thief: {
+      image: 'assets/dungeon/enemies/thief.png',
+      atlas: 'assets/dungeon/enemies/thief.json'
+    },
+    troll_forest: {
+      image: 'assets/dungeon/enemies/troll_forest.png',
+      atlas: 'assets/dungeon/enemies/troll_forest.json'
+    },
+    wizard_forest: {
+      image: 'assets/dungeon/enemies/wizard_forest.png',
+      atlas: 'assets/dungeon/enemies/wizard_forest.json'
+    },
+    wolf: {
+      image: 'assets/dungeon/enemies/wolf.png',
+      atlas: 'assets/dungeon/enemies/wolf.json'
     }
   },
   items: {
@@ -290,6 +420,12 @@ export const ANIMATION_CONFIG = {
     frameRate: 10,
     frameStart: 0,
     frameEnd: 3
+  },
+  // For new enemies with 1-4 frame numbering
+  enemyNew: {
+    frameRate: 10,
+    frameStart: 1,
+    frameEnd: 4
   }
 } as const;
 
@@ -307,6 +443,8 @@ export interface EnemyConfig {
   runFramePrefix?: string;
   hitFramePrefix?: string;
   animFramePrefix?: string;
+  frameStart?: number;  // Custom frame start (defaults to ANIMATION_CONFIG.enemy.frameStart)
+  frameEnd?: number;    // Custom frame end (defaults to ANIMATION_CONFIG.enemy.frameEnd)
 }
 
 // Enemy configurations
@@ -595,6 +733,281 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseDamage: 2,
     baseHp: 2,
     animFramePrefix: 'zombie_anim_f'
+  },
+
+  // New enemies with lowercase naming convention (frames 1-4)
+  [EnemyType.BANDIT]: {
+    animationType: 'standard',
+    baseSpeed: 55,
+    baseDamage: 2,
+    baseHp: 2,
+    idleFramePrefix: 'bandit_idle_',
+    runFramePrefix: 'bandit_walk_',
+    frameStart: 1,
+    frameEnd: 4
+  },
+  [EnemyType.BEAR]: {
+    animationType: 'standard',
+    baseSpeed: 40,
+    baseDamage: 3,
+    baseHp: 5,
+    scale: 1.3,
+    idleFramePrefix: 'bear_idle_',
+    runFramePrefix: 'bear_walk_',
+    frameStart: 1,
+    frameEnd: 4
+  },
+  [EnemyType.CENTAUR_F]: {
+    animationType: 'standard',
+    baseSpeed: 60,
+    baseDamage: 2,
+    baseHp: 3,
+    scale: 1.1,
+    idleFramePrefix: 'centaur_F_idle_',
+    runFramePrefix: 'centaur_F_walk_',
+    frameStart: 1,
+    frameEnd: 4
+  },
+  [EnemyType.CENTAUR_M]: {
+    animationType: 'standard',
+    baseSpeed: 60,
+    baseDamage: 2,
+    baseHp: 3,
+    scale: 1.1,
+    idleFramePrefix: 'centaur_M_idle_',
+    runFramePrefix: 'centaur_M_walk_',
+    frameStart: 1,
+    frameEnd: 4
+  },
+  [EnemyType.ELF_FOREST_F]: {
+    animationType: 'standard',
+    baseSpeed: 65,
+    baseDamage: 1,
+    baseHp: 2,
+    idleFramePrefix: 'elf_F_idle_',
+    runFramePrefix: 'elf_F_walk_',
+    frameStart: 1,
+    frameEnd: 4
+  },
+  [EnemyType.ELF_FOREST_M]: {
+    animationType: 'standard',
+    baseSpeed: 65,
+    baseDamage: 1,
+    baseHp: 2,
+    idleFramePrefix: 'elf_M_idle_',
+    runFramePrefix: 'elf_M_walk_',
+    frameStart: 1,
+    frameEnd: 4
+  },
+  [EnemyType.ELF_KNIGHT]: {
+    animationType: 'standard',
+    baseSpeed: 50,
+    baseDamage: 3,
+    baseHp: 4,
+    idleFramePrefix: 'elvenknight_idle_',
+    runFramePrefix: 'elvenknight_walk_',
+    frameStart: 1,
+    frameEnd: 4
+  },
+  [EnemyType.ENT]: {
+    animationType: 'standard',
+    baseSpeed: 30,
+    baseDamage: 3,
+    baseHp: 6,
+    scale: 1.4,
+    idleFramePrefix: 'ent_idle_',
+    runFramePrefix: 'ent_walk_',
+    frameStart: 1,
+    frameEnd: 4
+  },
+  [EnemyType.FAIRY]: {
+    animationType: 'standard',
+    baseSpeed: 70,
+    baseDamage: 1,
+    baseHp: 1,
+    scale: 0.8,
+    idleFramePrefix: 'fairy_Idle + Walk_',
+    runFramePrefix: 'fairy_Idle + Walk_',
+    frameStart: 1,
+    frameEnd: 4
+  },
+  [EnemyType.FOREST_GUARDIAN]: {
+    animationType: 'standard',
+    baseSpeed: 35,
+    baseDamage: 4,
+    baseHp: 7,
+    scale: 1.5,
+    idleFramePrefix: 'forestguardian_idle_',
+    runFramePrefix: 'forestguardian_walk_',
+    frameStart: 1,
+    frameEnd: 4
+  },
+  [EnemyType.GNOLL_BRUTE]: {
+    animationType: 'standard',
+    baseSpeed: 45,
+    baseDamage: 3,
+    baseHp: 4,
+    scale: 1.2,
+    idleFramePrefix: 'gnollbrute_idle_',
+    runFramePrefix: 'gnollbrute_walk_',
+    frameStart: 1,
+    frameEnd: 4
+  },
+  [EnemyType.GNOLL_OVERSEER]: {
+    animationType: 'standard',
+    baseSpeed: 50,
+    baseDamage: 2,
+    baseHp: 3,
+    idleFramePrefix: 'gnolloverseer_idle_',
+    runFramePrefix: 'gnolloverseer_walk_',
+    frameStart: 1,
+    frameEnd: 4
+  },
+  [EnemyType.GNOLL_SCOUT]: {
+    animationType: 'standard',
+    baseSpeed: 60,
+    baseDamage: 2,
+    baseHp: 2,
+    idleFramePrefix: 'gnollscout_idle_',
+    runFramePrefix: 'gnollscout_walk_',
+    frameStart: 1,
+    frameEnd: 4
+  },
+  [EnemyType.GNOLL_SHAMAN]: {
+    animationType: 'standard',
+    baseSpeed: 45,
+    baseDamage: 2,
+    baseHp: 3,
+    idleFramePrefix: 'gnollshaman_idle_',
+    runFramePrefix: 'gnollshaman_walk_',
+    frameStart: 1,
+    frameEnd: 4
+  },
+  [EnemyType.GOLEM]: {
+    animationType: 'standard',
+    baseSpeed: 25,
+    baseDamage: 4,
+    baseHp: 8,
+    scale: 1.5,
+    idleFramePrefix: 'golem_idle_',
+    runFramePrefix: 'golem_walk_',
+    frameStart: 1,
+    frameEnd: 6
+  },
+  [EnemyType.KNIGHT_ELITE]: {
+    animationType: 'standard',
+    baseSpeed: 45,
+    baseDamage: 4,
+    baseHp: 5,
+    idleFramePrefix: 'eliteknight_idle_',
+    runFramePrefix: 'eliteknight_walk_',
+    frameStart: 1,
+    frameEnd: 4
+  },
+  [EnemyType.KNIGHT_HEAVY]: {
+    animationType: 'standard',
+    baseSpeed: 35,
+    baseDamage: 4,
+    baseHp: 6,
+    scale: 1.2,
+    idleFramePrefix: 'heavyknight_idle_',
+    runFramePrefix: 'heavyknight_walk_',
+    frameStart: 1,
+    frameEnd: 4
+  },
+  [EnemyType.KNIGHT_LARGE]: {
+    animationType: 'standard',
+    baseSpeed: 30,
+    baseDamage: 5,
+    baseHp: 7,
+    scale: 1.4,
+    idleFramePrefix: 'largeknight_idle_',
+    runFramePrefix: 'largeknight_walk_',
+    frameStart: 1,
+    frameEnd: 4
+  },
+  [EnemyType.KNIGHT_LARGE_ELITE]: {
+    animationType: 'standard',
+    baseSpeed: 35,
+    baseDamage: 5,
+    baseHp: 8,
+    scale: 1.4,
+    idleFramePrefix: 'largeeliteknight_idle_',
+    runFramePrefix: 'largeeliteknight_walk_',
+    frameStart: 1,
+    frameEnd: 4
+  },
+  [EnemyType.MUSHROOM_LARGE]: {
+    animationType: 'standard',
+    baseSpeed: 20,
+    baseDamage: 2,
+    baseHp: 4,
+    scale: 1.2,
+    idleFramePrefix: 'largemushroom_idle_',
+    runFramePrefix: 'largemushroom_walk_',
+    frameStart: 1,
+    frameEnd: 4
+  },
+  [EnemyType.MUSHROOM_NORMAL]: {
+    animationType: 'standard',
+    baseSpeed: 25,
+    baseDamage: 1,
+    baseHp: 3,
+    idleFramePrefix: 'normalmushroom_idle_',
+    runFramePrefix: 'normalmushroom_walk_',
+    frameStart: 1,
+    frameEnd: 4
+  },
+  [EnemyType.RANGER]: {
+    animationType: 'standard',
+    baseSpeed: 60,
+    baseDamage: 2,
+    baseHp: 3,
+    idleFramePrefix: 'ranger_idle_',
+    runFramePrefix: 'ranger_walk_',
+    frameStart: 1,
+    frameEnd: 4
+  },
+  [EnemyType.THIEF]: {
+    animationType: 'standard',
+    baseSpeed: 70,
+    baseDamage: 2,
+    baseHp: 2,
+    idleFramePrefix: 'thief_idle_',
+    runFramePrefix: 'thief_walk_',
+    frameStart: 1,
+    frameEnd: 4
+  },
+  [EnemyType.TROLL_FOREST]: {
+    animationType: 'standard',
+    baseSpeed: 35,
+    baseDamage: 4,
+    baseHp: 6,
+    scale: 1.3,
+    idleFramePrefix: 'troll_idle_',
+    runFramePrefix: 'troll_walk_',
+    frameStart: 1,
+    frameEnd: 4
+  },
+  [EnemyType.WIZARD_FOREST]: {
+    animationType: 'standard',
+    baseSpeed: 45,
+    baseDamage: 3,
+    baseHp: 3,
+    idleFramePrefix: 'wizard_Idle + Walk_',
+    runFramePrefix: 'wizard_Idle + Walk_',
+    frameStart: 1,
+    frameEnd: 4
+  },
+  [EnemyType.WOLF]: {
+    animationType: 'standard',
+    baseSpeed: 70,
+    baseDamage: 2,
+    baseHp: 2,
+    idleFramePrefix: 'wolf_idle_',
+    runFramePrefix: 'wolf_walk_',
+    frameStart: 1,
+    frameEnd: 4
   }
 } as const;
 

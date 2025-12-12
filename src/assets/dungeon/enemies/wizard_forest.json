@@ -10,7 +10,7 @@
 			"scale": 1,
 			"frames": [
 				{
-					"filename": "Wizard_Idle + Walk_1.png",
+					"filename": "wizard_Idle + Walk_1.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -31,7 +31,7 @@
 					}
 				},
 				{
-					"filename": "Wizard_Idle + Walk_2.png",
+					"filename": "wizard_Idle + Walk_2.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -52,7 +52,7 @@
 					}
 				},
 				{
-					"filename": "Wizard_Idle + Walk_3.png",
+					"filename": "wizard_Idle + Walk_3.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -73,7 +73,7 @@
 					}
 				},
 				{
-					"filename": "Wizard_Idle + Walk_4.png",
+					"filename": "wizard_Idle + Walk_4.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
