@@ -1,0 +1,188 @@
+{
+	"textures": [
+		{
+			"image": "knight_heavy.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 54,
+				"h": 58
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "HeavyKnight_Walk_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 10,
+						"w": 18,
+						"h": 21
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 18,
+						"h": 21
+					}
+				},
+				{
+					"filename": "HeavyKnight_Walk_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 11,
+						"w": 18,
+						"h": 21
+					},
+					"frame": {
+						"x": 0,
+						"y": 21,
+						"w": 18,
+						"h": 21
+					}
+				},
+				{
+					"filename": "HeavyKnight_Idle_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 12,
+						"w": 18,
+						"h": 20
+					},
+					"frame": {
+						"x": 18,
+						"y": 0,
+						"w": 18,
+						"h": 20
+					}
+				},
+				{
+					"filename": "HeavyKnight_Walk_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 12,
+						"w": 18,
+						"h": 20
+					},
+					"frame": {
+						"x": 36,
+						"y": 0,
+						"w": 18,
+						"h": 20
+					}
+				},
+				{
+					"filename": "HeavyKnight_Idle_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 13,
+						"w": 18,
+						"h": 19
+					},
+					"frame": {
+						"x": 18,
+						"y": 20,
+						"w": 18,
+						"h": 19
+					}
+				},
+				{
+					"filename": "HeavyKnight_Idle_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 13,
+						"w": 18,
+						"h": 19
+					},
+					"frame": {
+						"x": 18,
+						"y": 39,
+						"w": 18,
+						"h": 19
+					}
+				},
+				{
+					"filename": "HeavyKnight_Walk_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 13,
+						"w": 18,
+						"h": 19
+					},
+					"frame": {
+						"x": 36,
+						"y": 20,
+						"w": 18,
+						"h": 19
+					}
+				},
+				{
+					"filename": "HeavyKnight_Idle_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 14,
+						"w": 18,
+						"h": 18
+					},
+					"frame": {
+						"x": 36,
+						"y": 39,
+						"w": 18,
+						"h": 18
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:1917ee3bdb95063aa3705c400e7c8f86:0271bf0f0c59ea6e2802089d5169c11e:5258462a3e17f90c2ec78bf68616d03c$"
+	}
+}

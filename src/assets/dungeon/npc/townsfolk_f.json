@@ -1,0 +1,188 @@
+{
+	"textures": [
+		{
+			"image": "townsfolk_f.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 69,
+				"h": 32
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "Townsfolk_F_Idle_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 15,
+						"w": 17,
+						"h": 17
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 17,
+						"h": 17
+					}
+				},
+				{
+					"filename": "Townsfolk_F_Idle_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 17,
+						"w": 18,
+						"h": 15
+					},
+					"frame": {
+						"x": 0,
+						"y": 17,
+						"w": 18,
+						"h": 15
+					}
+				},
+				{
+					"filename": "Townsfolk_F_Walk_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 15,
+						"w": 17,
+						"h": 17
+					},
+					"frame": {
+						"x": 17,
+						"y": 0,
+						"w": 17,
+						"h": 17
+					}
+				},
+				{
+					"filename": "Townsfolk_F_Walk_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 17,
+						"w": 17,
+						"h": 15
+					},
+					"frame": {
+						"x": 18,
+						"y": 17,
+						"w": 17,
+						"h": 15
+					}
+				},
+				{
+					"filename": "Townsfolk_F_Idle_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 16,
+						"w": 17,
+						"h": 16
+					},
+					"frame": {
+						"x": 34,
+						"y": 0,
+						"w": 17,
+						"h": 16
+					}
+				},
+				{
+					"filename": "Townsfolk_F_Idle_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 16,
+						"w": 17,
+						"h": 16
+					},
+					"frame": {
+						"x": 35,
+						"y": 16,
+						"w": 17,
+						"h": 16
+					}
+				},
+				{
+					"filename": "Townsfolk_F_Walk_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 16,
+						"w": 17,
+						"h": 16
+					},
+					"frame": {
+						"x": 51,
+						"y": 0,
+						"w": 17,
+						"h": 16
+					}
+				},
+				{
+					"filename": "Townsfolk_F_Walk_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 16,
+						"w": 17,
+						"h": 16
+					},
+					"frame": {
+						"x": 52,
+						"y": 16,
+						"w": 17,
+						"h": 16
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:b98c6998218e71a76851cf1ea494fb83:8804357d79e3db09e612e987cd49463b:795eb8847603708adb4b8dbe4de723b3$"
+	}
+}

@@ -1,0 +1,188 @@
+{
+	"textures": [
+		{
+			"image": "gnoll_brute.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 60,
+				"h": 61
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "GnollBrute_Walk_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 10,
+						"w": 18,
+						"h": 21
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 18,
+						"h": 21
+					}
+				},
+				{
+					"filename": "GnollBrute_Idle_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 13,
+						"w": 18,
+						"h": 19
+					},
+					"frame": {
+						"x": 1,
+						"y": 24,
+						"w": 18,
+						"h": 19
+					}
+				},
+				{
+					"filename": "GnollBrute_Idle_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 13,
+						"w": 18,
+						"h": 19
+					},
+					"frame": {
+						"x": 21,
+						"y": 1,
+						"w": 18,
+						"h": 19
+					}
+				},
+				{
+					"filename": "GnollBrute_Walk_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 13,
+						"w": 18,
+						"h": 19
+					},
+					"frame": {
+						"x": 41,
+						"y": 1,
+						"w": 18,
+						"h": 19
+					}
+				},
+				{
+					"filename": "GnollBrute_Walk_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 12,
+						"w": 18,
+						"h": 19
+					},
+					"frame": {
+						"x": 21,
+						"y": 22,
+						"w": 18,
+						"h": 19
+					}
+				},
+				{
+					"filename": "GnollBrute_Idle_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 15,
+						"w": 18,
+						"h": 17
+					},
+					"frame": {
+						"x": 21,
+						"y": 43,
+						"w": 18,
+						"h": 17
+					}
+				},
+				{
+					"filename": "GnollBrute_Idle_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 15,
+						"w": 18,
+						"h": 17
+					},
+					"frame": {
+						"x": 41,
+						"y": 22,
+						"w": 18,
+						"h": 17
+					}
+				},
+				{
+					"filename": "GnollBrute_Walk_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 15,
+						"w": 18,
+						"h": 17
+					},
+					"frame": {
+						"x": 41,
+						"y": 41,
+						"w": 18,
+						"h": 17
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:269947bfa4a78917620c51084d9170b2:7778897db68cc7d9a06e3c533635b8b0:42ab7449535e8c130f1e8c6c7ab1dd4c$"
+	}
+}

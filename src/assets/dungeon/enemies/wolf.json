@@ -1,0 +1,188 @@
+{
+	"textures": [
+		{
+			"image": "wolf.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 256,
+				"h": 21
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "Wolf_Walk_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 12,
+						"w": 32,
+						"h": 19
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 32,
+						"h": 19
+					}
+				},
+				{
+					"filename": "Wolf_Walk_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 14,
+						"w": 32,
+						"h": 18
+					},
+					"frame": {
+						"x": 35,
+						"y": 1,
+						"w": 32,
+						"h": 18
+					}
+				},
+				{
+					"filename": "Wolf_Idle_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 14,
+						"w": 28,
+						"h": 18
+					},
+					"frame": {
+						"x": 69,
+						"y": 1,
+						"w": 28,
+						"h": 18
+					}
+				},
+				{
+					"filename": "Wolf_Idle_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 14,
+						"w": 27,
+						"h": 18
+					},
+					"frame": {
+						"x": 99,
+						"y": 1,
+						"w": 27,
+						"h": 18
+					}
+				},
+				{
+					"filename": "Wolf_Walk_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 15,
+						"w": 32,
+						"h": 17
+					},
+					"frame": {
+						"x": 128,
+						"y": 1,
+						"w": 32,
+						"h": 17
+					}
+				},
+				{
+					"filename": "Wolf_Idle_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 15,
+						"w": 29,
+						"h": 17
+					},
+					"frame": {
+						"x": 162,
+						"y": 1,
+						"w": 29,
+						"h": 17
+					}
+				},
+				{
+					"filename": "Wolf_Walk_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 16,
+						"w": 32,
+						"h": 16
+					},
+					"frame": {
+						"x": 193,
+						"y": 1,
+						"w": 32,
+						"h": 16
+					}
+				},
+				{
+					"filename": "Wolf_Idle_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 16,
+						"w": 28,
+						"h": 16
+					},
+					"frame": {
+						"x": 227,
+						"y": 1,
+						"w": 28,
+						"h": 16
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:1fab1cafba90d281c39dc709d4d2add1:2198bcd6e952d9fba99e767464953872:6aa8f2d37925a18e990d23a498f81618$"
+	}
+}

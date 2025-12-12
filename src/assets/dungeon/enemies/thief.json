@@ -1,0 +1,188 @@
+{
+	"textures": [
+		{
+			"image": "thief.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 14,
+				"h": 123
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "Thief_Walk_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 12,
+						"w": 14,
+						"h": 19
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 19
+					}
+				},
+				{
+					"filename": "Thief_Walk_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 13,
+						"w": 14,
+						"h": 18
+					},
+					"frame": {
+						"x": 0,
+						"y": 19,
+						"w": 14,
+						"h": 18
+					}
+				},
+				{
+					"filename": "Thief_Idle_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 16,
+						"w": 14,
+						"h": 16
+					},
+					"frame": {
+						"x": 0,
+						"y": 37,
+						"w": 14,
+						"h": 16
+					}
+				},
+				{
+					"filename": "Thief_Idle_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 10,
+						"y": 14,
+						"w": 12,
+						"h": 18
+					},
+					"frame": {
+						"x": 0,
+						"y": 53,
+						"w": 12,
+						"h": 18
+					}
+				},
+				{
+					"filename": "Thief_Walk_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 10,
+						"y": 14,
+						"w": 12,
+						"h": 18
+					},
+					"frame": {
+						"x": 0,
+						"y": 71,
+						"w": 12,
+						"h": 18
+					}
+				},
+				{
+					"filename": "Thief_Idle_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 10,
+						"y": 15,
+						"w": 12,
+						"h": 17
+					},
+					"frame": {
+						"x": 0,
+						"y": 89,
+						"w": 12,
+						"h": 17
+					}
+				},
+				{
+					"filename": "Thief_Idle_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 10,
+						"y": 15,
+						"w": 12,
+						"h": 17
+					},
+					"frame": {
+						"x": 0,
+						"y": 89,
+						"w": 12,
+						"h": 17
+					}
+				},
+				{
+					"filename": "Thief_Walk_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 10,
+						"y": 15,
+						"w": 12,
+						"h": 17
+					},
+					"frame": {
+						"x": 0,
+						"y": 106,
+						"w": 12,
+						"h": 17
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:af320e14f9aa636800e09579580b6789:706340cbf8c6ac1a935c9c9697b70806:2d8f2df48a08cd3365d2232f3ef8cc85$"
+	}
+}

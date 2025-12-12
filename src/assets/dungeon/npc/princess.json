@@ -1,0 +1,188 @@
+{
+	"textures": [
+		{
+			"image": "princess.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 18,
+				"h": 198
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "Princess_Idle_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 9,
+						"w": 18,
+						"h": 23
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 18,
+						"h": 23
+					}
+				},
+				{
+					"filename": "Princess_Walk_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 5,
+						"w": 17,
+						"h": 27
+					},
+					"frame": {
+						"x": 0,
+						"y": 23,
+						"w": 17,
+						"h": 27
+					}
+				},
+				{
+					"filename": "Princess_Walk_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 6,
+						"w": 17,
+						"h": 26
+					},
+					"frame": {
+						"x": 0,
+						"y": 50,
+						"w": 17,
+						"h": 26
+					}
+				},
+				{
+					"filename": "Princess_Idle_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 7,
+						"w": 17,
+						"h": 25
+					},
+					"frame": {
+						"x": 0,
+						"y": 76,
+						"w": 17,
+						"h": 25
+					}
+				},
+				{
+					"filename": "Princess_Walk_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 7,
+						"w": 17,
+						"h": 25
+					},
+					"frame": {
+						"x": 0,
+						"y": 101,
+						"w": 17,
+						"h": 25
+					}
+				},
+				{
+					"filename": "Princess_Idle_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 8,
+						"w": 17,
+						"h": 24
+					},
+					"frame": {
+						"x": 0,
+						"y": 126,
+						"w": 17,
+						"h": 24
+					}
+				},
+				{
+					"filename": "Princess_Idle_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 8,
+						"w": 17,
+						"h": 24
+					},
+					"frame": {
+						"x": 0,
+						"y": 150,
+						"w": 17,
+						"h": 24
+					}
+				},
+				{
+					"filename": "Princess_Walk_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 8,
+						"w": 17,
+						"h": 24
+					},
+					"frame": {
+						"x": 0,
+						"y": 174,
+						"w": 17,
+						"h": 24
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:5c59c7510589fd54e9259c6ec1365f15:3b54ab9946ba2105271755bd59182a13:07d7d58cdc98aed583b82591395b98c5$"
+	}
+}

@@ -1,0 +1,104 @@
+{
+	"textures": [
+		{
+			"image": "wizard_forest.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 24,
+				"h": 112
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "Wizard_Idle + Walk_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 5,
+						"w": 22,
+						"h": 27
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 22,
+						"h": 27
+					}
+				},
+				{
+					"filename": "Wizard_Idle + Walk_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 5,
+						"w": 22,
+						"h": 27
+					},
+					"frame": {
+						"x": 1,
+						"y": 30,
+						"w": 22,
+						"h": 27
+					}
+				},
+				{
+					"filename": "Wizard_Idle + Walk_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 7,
+						"w": 22,
+						"h": 25
+					},
+					"frame": {
+						"x": 1,
+						"y": 59,
+						"w": 22,
+						"h": 25
+					}
+				},
+				{
+					"filename": "Wizard_Idle + Walk_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 7,
+						"w": 22,
+						"h": 25
+					},
+					"frame": {
+						"x": 1,
+						"y": 86,
+						"w": 22,
+						"h": 25
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:54f946b60fee9e43463615ef884cfc3b:e5cf5be516143d63c896313f09f5c351:3cfa5a17b4429d05d90108c03ae7f3fc$"
+	}
+}

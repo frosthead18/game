@@ -1,0 +1,188 @@
+{
+	"textures": [
+		{
+			"image": "gnoll_overseer.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 29,
+				"h": 238
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "GnollOverseer_Walk_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 1,
+						"w": 27,
+						"h": 30
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 27,
+						"h": 30
+					}
+				},
+				{
+					"filename": "GnollOverseer_Walk_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 3,
+						"w": 27,
+						"h": 29
+					},
+					"frame": {
+						"x": 1,
+						"y": 33,
+						"w": 27,
+						"h": 29
+					}
+				},
+				{
+					"filename": "GnollOverseer_Idle_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 4,
+						"w": 27,
+						"h": 28
+					},
+					"frame": {
+						"x": 1,
+						"y": 64,
+						"w": 27,
+						"h": 28
+					}
+				},
+				{
+					"filename": "GnollOverseer_Idle_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 4,
+						"w": 27,
+						"h": 28
+					},
+					"frame": {
+						"x": 1,
+						"y": 94,
+						"w": 27,
+						"h": 28
+					}
+				},
+				{
+					"filename": "GnollOverseer_Walk_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 4,
+						"w": 27,
+						"h": 28
+					},
+					"frame": {
+						"x": 1,
+						"y": 124,
+						"w": 27,
+						"h": 28
+					}
+				},
+				{
+					"filename": "GnollOverseer_Walk_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 5,
+						"w": 27,
+						"h": 27
+					},
+					"frame": {
+						"x": 1,
+						"y": 154,
+						"w": 27,
+						"h": 27
+					}
+				},
+				{
+					"filename": "GnollOverseer_Idle_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 6,
+						"w": 27,
+						"h": 26
+					},
+					"frame": {
+						"x": 1,
+						"y": 183,
+						"w": 27,
+						"h": 26
+					}
+				},
+				{
+					"filename": "GnollOverseer_Idle_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 6,
+						"w": 27,
+						"h": 26
+					},
+					"frame": {
+						"x": 1,
+						"y": 211,
+						"w": 27,
+						"h": 26
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:bbdcd3f05fbad74bb94e5bb8ad10c3bb:94f885841b84ffe526efe71a7059a1f0:ac9c51970ddf29b00688c82ddb109e04$"
+	}
+}

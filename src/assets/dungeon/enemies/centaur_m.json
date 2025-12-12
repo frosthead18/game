@@ -1,0 +1,188 @@
+{
+	"textures": [
+		{
+			"image": "centaur_m.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 211,
+				"h": 25
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "Centaur_M_Walk_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 9,
+						"w": 26,
+						"h": 23
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 26,
+						"h": 23
+					}
+				},
+				{
+					"filename": "Centaur_M_Walk_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 8,
+						"w": 25,
+						"h": 23
+					},
+					"frame": {
+						"x": 29,
+						"y": 1,
+						"w": 25,
+						"h": 23
+					}
+				},
+				{
+					"filename": "Centaur_M_Walk_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 10,
+						"w": 26,
+						"h": 22
+					},
+					"frame": {
+						"x": 56,
+						"y": 1,
+						"w": 26,
+						"h": 22
+					}
+				},
+				{
+					"filename": "Centaur_M_Walk_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 10,
+						"w": 26,
+						"h": 22
+					},
+					"frame": {
+						"x": 84,
+						"y": 1,
+						"w": 26,
+						"h": 22
+					}
+				},
+				{
+					"filename": "Centaur_M_Idle_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 10,
+						"w": 23,
+						"h": 22
+					},
+					"frame": {
+						"x": 112,
+						"y": 1,
+						"w": 23,
+						"h": 22
+					}
+				},
+				{
+					"filename": "Centaur_M_Idle_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 11,
+						"w": 23,
+						"h": 21
+					},
+					"frame": {
+						"x": 137,
+						"y": 1,
+						"w": 23,
+						"h": 21
+					}
+				},
+				{
+					"filename": "Centaur_M_Idle_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 11,
+						"w": 23,
+						"h": 21
+					},
+					"frame": {
+						"x": 162,
+						"y": 1,
+						"w": 23,
+						"h": 21
+					}
+				},
+				{
+					"filename": "Centaur_M_Idle_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 12,
+						"w": 23,
+						"h": 20
+					},
+					"frame": {
+						"x": 187,
+						"y": 1,
+						"w": 23,
+						"h": 20
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:95cb2acbf999788bf40372eaeaa22447:80b0151f61aff7a1c9d5c022f5682ee9:cf8881df00930503c2b38cb9b55b209a$"
+	}
+}

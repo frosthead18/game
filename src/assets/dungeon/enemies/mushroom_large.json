@@ -1,0 +1,188 @@
+{
+	"textures": [
+		{
+			"image": "mushroom_large.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 50,
+				"h": 120
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "LargeMushroom_Walk_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 2,
+						"w": 24,
+						"h": 30
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 24,
+						"h": 30
+					}
+				},
+				{
+					"filename": "LargeMushroom_Walk_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 2,
+						"w": 22,
+						"h": 29
+					},
+					"frame": {
+						"x": 27,
+						"y": 1,
+						"w": 22,
+						"h": 29
+					}
+				},
+				{
+					"filename": "LargeMushroom_Idle_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 4,
+						"w": 22,
+						"h": 28
+					},
+					"frame": {
+						"x": 27,
+						"y": 32,
+						"w": 22,
+						"h": 28
+					}
+				},
+				{
+					"filename": "LargeMushroom_Idle_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 6,
+						"w": 24,
+						"h": 26
+					},
+					"frame": {
+						"x": 1,
+						"y": 33,
+						"w": 24,
+						"h": 26
+					}
+				},
+				{
+					"filename": "LargeMushroom_Idle_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 4,
+						"w": 22,
+						"h": 28
+					},
+					"frame": {
+						"x": 1,
+						"y": 61,
+						"w": 22,
+						"h": 28
+					}
+				},
+				{
+					"filename": "LargeMushroom_Walk_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 4,
+						"w": 22,
+						"h": 28
+					},
+					"frame": {
+						"x": 1,
+						"y": 91,
+						"w": 22,
+						"h": 28
+					}
+				},
+				{
+					"filename": "LargeMushroom_Idle_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 5,
+						"w": 22,
+						"h": 27
+					},
+					"frame": {
+						"x": 25,
+						"y": 62,
+						"w": 22,
+						"h": 27
+					}
+				},
+				{
+					"filename": "LargeMushroom_Walk_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 5,
+						"w": 22,
+						"h": 27
+					},
+					"frame": {
+						"x": 25,
+						"y": 91,
+						"w": 22,
+						"h": 27
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:38c0ad4d394e1d4c3d94d5c6587b9fed:cdf072e19d904416ba2057508c7a257e:24ce7a661a60743e632fbfcc943aecd4$"
+	}
+}

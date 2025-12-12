@@ -68,8 +68,8 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
    * Initialize the enemy after it's been added to the scene
    */
   public init(): void {
-    // Check if texture is loaded
     const texture = this.scene.textures.get(this._enemyType);
+
     if (!texture || texture.key === '__MISSING') {
       console.error(`[BaseEnemy] Texture '${this._enemyType}' not found!`);
       return;
@@ -183,13 +183,11 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
     const animationType = this._config.animationType;
     const animKey = animationType === 'simple' ? `${this._enemyType}_anim` : `${this._enemyType}_run`;
     
-    // Check if animation exists in scene's animation manager (not sprite's component)
     if (!this.scene.anims.exists(animKey)) {
       console.error(`[BaseEnemy] Animation '${animKey}' does not exist in scene for ${this._enemyType}!`);
       return;
     }
     
-    // Play the animation
     this.anims.play(animKey, true);
   }
 }
