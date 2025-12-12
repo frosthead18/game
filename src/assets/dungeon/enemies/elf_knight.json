@@ -10,7 +10,7 @@
 			"scale": 1,
 			"frames": [
 				{
-					"filename": "elvenknight_walk_2.png",
+					"filename": "elvenknight_walk_1.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -31,7 +31,7 @@
 					}
 				},
 				{
-					"filename": "elvenknight_walk_3.png",
+					"filename": "elvenknight_walk_2.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -52,7 +52,7 @@
 					}
 				},
 				{
-					"filename": "elvenknight_walk_1.png",
+					"filename": "elvenknight_walk_0.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -73,7 +73,7 @@
 					}
 				},
 				{
-					"filename": "elvenknight_walk_4.png",
+					"filename": "elvenknight_walk_3.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -94,7 +94,7 @@
 					}
 				},
 				{
-					"filename": "elvenknight_idle_1.png",
+					"filename": "elvenknight_idle_0.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -115,28 +115,7 @@
 					}
 				},
 				{
-					"filename": "elvenknight_idle_2.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 32,
-						"h": 32
-					},
-					"spriteSourceSize": {
-						"x": 9,
-						"y": 12,
-						"w": 14,
-						"h": 20
-					},
-					"frame": {
-						"x": 89,
-						"y": 1,
-						"w": 14,
-						"h": 20
-					}
-				},
-				{
-					"filename": "elvenknight_idle_4.png",
+					"filename": "elvenknight_idle_1.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -158,6 +137,27 @@
 				},
 				{
 					"filename": "elvenknight_idle_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 12,
+						"w": 14,
+						"h": 20
+					},
+					"frame": {
+						"x": 89,
+						"y": 1,
+						"w": 14,
+						"h": 20
+					}
+				},
+				{
+					"filename": "elvenknight_idle_2.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {

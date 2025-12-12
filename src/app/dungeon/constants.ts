@@ -420,12 +420,6 @@ export const ANIMATION_CONFIG = {
     frameRate: 10,
     frameStart: 0,
     frameEnd: 3
-  },
-  // For new enemies with 1-4 frame numbering
-  enemyNew: {
-    frameRate: 10,
-    frameStart: 1,
-    frameEnd: 4
   }
 } as const;
 
@@ -735,7 +729,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     animFramePrefix: 'zombie_anim_f'
   },
 
-  // New enemies with lowercase naming convention (frames 1-4)
+  // New enemies with lowercase naming convention (0-based frames for consistency)
   [EnemyType.BANDIT]: {
     animationType: 'standard',
     baseSpeed: 55,
@@ -743,8 +737,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseHp: 2,
     idleFramePrefix: 'bandit_idle_',
     runFramePrefix: 'bandit_walk_',
-    frameStart: 1,
-    frameEnd: 4
+    frameStart: 0,
+    frameEnd: 3
   },
   [EnemyType.BEAR]: {
     animationType: 'standard',
@@ -754,8 +748,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     scale: 1.3,
     idleFramePrefix: 'bear_idle_',
     runFramePrefix: 'bear_walk_',
-    frameStart: 1,
-    frameEnd: 4
+    frameStart: 0,
+    frameEnd: 3
   },
   [EnemyType.CENTAUR_F]: {
     animationType: 'standard',
@@ -765,8 +759,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     scale: 1.1,
     idleFramePrefix: 'centaur_F_idle_',
     runFramePrefix: 'centaur_F_walk_',
-    frameStart: 1,
-    frameEnd: 4
+    frameStart: 0,
+    frameEnd: 3
   },
   [EnemyType.CENTAUR_M]: {
     animationType: 'standard',
@@ -776,8 +770,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     scale: 1.1,
     idleFramePrefix: 'centaur_M_idle_',
     runFramePrefix: 'centaur_M_walk_',
-    frameStart: 1,
-    frameEnd: 4
+    frameStart: 0,
+    frameEnd: 3
   },
   [EnemyType.ELF_FOREST_F]: {
     animationType: 'standard',
@@ -786,8 +780,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseHp: 2,
     idleFramePrefix: 'elf_F_idle_',
     runFramePrefix: 'elf_F_walk_',
-    frameStart: 1,
-    frameEnd: 4
+    frameStart: 0,
+    frameEnd: 3
   },
   [EnemyType.ELF_FOREST_M]: {
     animationType: 'standard',
@@ -796,8 +790,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseHp: 2,
     idleFramePrefix: 'elf_M_idle_',
     runFramePrefix: 'elf_M_walk_',
-    frameStart: 1,
-    frameEnd: 4
+    frameStart: 0,
+    frameEnd: 3
   },
   [EnemyType.ELF_KNIGHT]: {
     animationType: 'standard',
@@ -806,8 +800,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseHp: 4,
     idleFramePrefix: 'elvenknight_idle_',
     runFramePrefix: 'elvenknight_walk_',
-    frameStart: 1,
-    frameEnd: 4
+    frameStart: 0,
+    frameEnd: 3
   },
   [EnemyType.ENT]: {
     animationType: 'standard',
@@ -817,8 +811,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     scale: 1.4,
     idleFramePrefix: 'ent_idle_',
     runFramePrefix: 'ent_walk_',
-    frameStart: 1,
-    frameEnd: 4
+    frameStart: 0,
+    frameEnd: 3
   },
   [EnemyType.FAIRY]: {
     animationType: 'standard',
@@ -828,8 +822,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     scale: 0.8,
     idleFramePrefix: 'fairy_Idle + Walk_',
     runFramePrefix: 'fairy_Idle + Walk_',
-    frameStart: 1,
-    frameEnd: 4
+    frameStart: 0,
+    frameEnd: 3
   },
   [EnemyType.FOREST_GUARDIAN]: {
     animationType: 'standard',
@@ -839,8 +833,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     scale: 1.5,
     idleFramePrefix: 'forestguardian_idle_',
     runFramePrefix: 'forestguardian_walk_',
-    frameStart: 1,
-    frameEnd: 4
+    frameStart: 0,
+    frameEnd: 3
   },
   [EnemyType.GNOLL_BRUTE]: {
     animationType: 'standard',
@@ -850,8 +844,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     scale: 1.2,
     idleFramePrefix: 'gnollbrute_idle_',
     runFramePrefix: 'gnollbrute_walk_',
-    frameStart: 1,
-    frameEnd: 4
+    frameStart: 0,
+    frameEnd: 3
   },
   [EnemyType.GNOLL_OVERSEER]: {
     animationType: 'standard',
@@ -860,8 +854,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseHp: 3,
     idleFramePrefix: 'gnolloverseer_idle_',
     runFramePrefix: 'gnolloverseer_walk_',
-    frameStart: 1,
-    frameEnd: 4
+    frameStart: 0,
+    frameEnd: 3
   },
   [EnemyType.GNOLL_SCOUT]: {
     animationType: 'standard',
@@ -870,8 +864,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseHp: 2,
     idleFramePrefix: 'gnollscout_idle_',
     runFramePrefix: 'gnollscout_walk_',
-    frameStart: 1,
-    frameEnd: 4
+    frameStart: 0,
+    frameEnd: 3
   },
   [EnemyType.GNOLL_SHAMAN]: {
     animationType: 'standard',
@@ -880,8 +874,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseHp: 3,
     idleFramePrefix: 'gnollshaman_idle_',
     runFramePrefix: 'gnollshaman_walk_',
-    frameStart: 1,
-    frameEnd: 4
+    frameStart: 0,
+    frameEnd: 3
   },
   [EnemyType.GOLEM]: {
     animationType: 'standard',
@@ -891,8 +885,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     scale: 1.5,
     idleFramePrefix: 'golem_idle_',
     runFramePrefix: 'golem_walk_',
-    frameStart: 1,
-    frameEnd: 6
+    frameStart: 0,
+    frameEnd: 5
   },
   [EnemyType.KNIGHT_ELITE]: {
     animationType: 'standard',
@@ -901,8 +895,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseHp: 5,
     idleFramePrefix: 'eliteknight_idle_',
     runFramePrefix: 'eliteknight_walk_',
-    frameStart: 1,
-    frameEnd: 4
+    frameStart: 0,
+    frameEnd: 3
   },
   [EnemyType.KNIGHT_HEAVY]: {
     animationType: 'standard',
@@ -912,8 +906,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     scale: 1.2,
     idleFramePrefix: 'heavyknight_idle_',
     runFramePrefix: 'heavyknight_walk_',
-    frameStart: 1,
-    frameEnd: 4
+    frameStart: 0,
+    frameEnd: 3
   },
   [EnemyType.KNIGHT_LARGE]: {
     animationType: 'standard',
@@ -923,8 +917,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     scale: 1.4,
     idleFramePrefix: 'largeknight_idle_',
     runFramePrefix: 'largeknight_walk_',
-    frameStart: 1,
-    frameEnd: 4
+    frameStart: 0,
+    frameEnd: 3
   },
   [EnemyType.KNIGHT_LARGE_ELITE]: {
     animationType: 'standard',
@@ -934,8 +928,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     scale: 1.4,
     idleFramePrefix: 'largeeliteknight_idle_',
     runFramePrefix: 'largeeliteknight_walk_',
-    frameStart: 1,
-    frameEnd: 4
+    frameStart: 0,
+    frameEnd: 3
   },
   [EnemyType.MUSHROOM_LARGE]: {
     animationType: 'standard',
@@ -945,8 +939,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     scale: 1.2,
     idleFramePrefix: 'largemushroom_idle_',
     runFramePrefix: 'largemushroom_walk_',
-    frameStart: 1,
-    frameEnd: 4
+    frameStart: 0,
+    frameEnd: 3
   },
   [EnemyType.MUSHROOM_NORMAL]: {
     animationType: 'standard',
@@ -955,8 +949,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseHp: 3,
     idleFramePrefix: 'normalmushroom_idle_',
     runFramePrefix: 'normalmushroom_walk_',
-    frameStart: 1,
-    frameEnd: 4
+    frameStart: 0,
+    frameEnd: 3
   },
   [EnemyType.RANGER]: {
     animationType: 'standard',
@@ -965,8 +959,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseHp: 3,
     idleFramePrefix: 'ranger_idle_',
     runFramePrefix: 'ranger_walk_',
-    frameStart: 1,
-    frameEnd: 4
+    frameStart: 0,
+    frameEnd: 3
   },
   [EnemyType.THIEF]: {
     animationType: 'standard',
@@ -975,8 +969,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseHp: 2,
     idleFramePrefix: 'thief_idle_',
     runFramePrefix: 'thief_walk_',
-    frameStart: 1,
-    frameEnd: 4
+    frameStart: 0,
+    frameEnd: 3
   },
   [EnemyType.TROLL_FOREST]: {
     animationType: 'standard',
@@ -986,8 +980,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     scale: 1.3,
     idleFramePrefix: 'troll_idle_',
     runFramePrefix: 'troll_walk_',
-    frameStart: 1,
-    frameEnd: 4
+    frameStart: 0,
+    frameEnd: 3
   },
   [EnemyType.WIZARD_FOREST]: {
     animationType: 'standard',
@@ -996,8 +990,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseHp: 3,
     idleFramePrefix: 'wizard_Idle + Walk_',
     runFramePrefix: 'wizard_Idle + Walk_',
-    frameStart: 1,
-    frameEnd: 4
+    frameStart: 0,
+    frameEnd: 3
   },
   [EnemyType.WOLF]: {
     animationType: 'standard',
@@ -1006,8 +1000,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseHp: 2,
     idleFramePrefix: 'wolf_idle_',
     runFramePrefix: 'wolf_walk_',
-    frameStart: 1,
-    frameEnd: 4
+    frameStart: 0,
+    frameEnd: 3
   }
 } as const;
 

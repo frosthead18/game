@@ -10,7 +10,7 @@
 			"scale": 1,
 			"frames": [
 				{
-					"filename": "centaur_F_walk_3.png",
+					"filename": "centaur_F_walk_2.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -31,7 +31,7 @@
 					}
 				},
 				{
-					"filename": "centaur_F_walk_2.png",
+					"filename": "centaur_F_walk_1.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -52,7 +52,7 @@
 					}
 				},
 				{
-					"filename": "centaur_F_walk_1.png",
+					"filename": "centaur_F_walk_0.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -73,7 +73,7 @@
 					}
 				},
 				{
-					"filename": "centaur_F_walk_4.png",
+					"filename": "centaur_F_walk_3.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -94,7 +94,7 @@
 					}
 				},
 				{
-					"filename": "centaur_F_idle_1.png",
+					"filename": "centaur_F_idle_0.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -115,7 +115,7 @@
 					}
 				},
 				{
-					"filename": "centaur_F_idle_2.png",
+					"filename": "centaur_F_idle_1.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -136,7 +136,7 @@
 					}
 				},
 				{
-					"filename": "centaur_F_idle_4.png",
+					"filename": "centaur_F_idle_3.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -157,7 +157,7 @@
 					}
 				},
 				{
-					"filename": "centaur_F_idle_3.png",
+					"filename": "centaur_F_idle_2.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
