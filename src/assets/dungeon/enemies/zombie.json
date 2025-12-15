@@ -10,7 +10,7 @@
 			"scale": 1,
 			"frames": [
 				{
-					"filename": "zombie_anim_f1.png",
+					"filename": "zombie_anim_f0.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -31,7 +31,7 @@
 					}
 				},
 				{
-					"filename": "zombie_anim_f2.png",
+					"filename": "zombie_anim_f1.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -52,7 +52,7 @@
 					}
 				},
 				{
-					"filename": "zombie_anim_f3.png",
+					"filename": "zombie_anim_f2.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -73,7 +73,7 @@
 					}
 				},
 				{
-					"filename": "zombie_anim_f10.png",
+					"filename": "zombie_anim_f3.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
