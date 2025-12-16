@@ -32,6 +32,7 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
   private _config: EnemyConfig;
   private _animationStarted = false;
   private _isAggressive = false;
+  private _isReturningToSpawn = false;
   private _aggroRadius: number;
   private _leashRadius: number;
   private _spawnPosition: Phaser.Math.Vector2;
@@ -112,7 +113,10 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
     }
 
     // Update movement based on aggro state
-    if (this._isStationary && !this._isAggressive) {
+    if (this._isReturningToSpawn) {
+      // Returning to spawn position
+      this.updateReturnToSpawn();
+    } else if (this._isStationary && !this._isAggressive) {
       // Stationary and not aggressive - don't move
       this.setVelocity(0, 0);
     } else if (this._isAggressive) {
@@ -285,14 +289,14 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
     if (faune.health !== undefined && faune.health <= 0) {
       if (this._isAggressive) {
         this._isAggressive = false;
-        this.setVelocity(0, 0);
         
-        // If originally stationary, return to spawn
+        // If originally stationary, start returning to spawn
         if (this._isStationary) {
           this.destroyMovementTimer();
-          this.x = this._spawnPosition.x;
-          this.y = this._spawnPosition.y;
-          this.playIdleAnimation();
+          this._isReturningToSpawn = true;
+          this.playRunAnimation();
+        } else {
+          this.setVelocity(0, 0);
         }
       }
       return;
@@ -324,13 +328,11 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
     else if (this._isAggressive && distanceFromSpawn > this._leashRadius) {
       this._isAggressive = false;
       
-      // If originally stationary, stop moving and return to spawn
+      // If originally stationary, start returning to spawn
       if (this._isStationary) {
         this.destroyMovementTimer();
-        this.setVelocity(0, 0);
-        this.x = this._spawnPosition.x;
-        this.y = this._spawnPosition.y;
-        this.playIdleAnimation();
+        this._isReturningToSpawn = true;
+        this.playRunAnimation();
       }
     }
   }
@@ -343,6 +345,38 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
     // Calculate direction to player
     const dx = this._faune.x - this.x;
     const dy = this._faune.y - this.y;
+    
+    // Normalize and scale by speed
+    const direction = new Phaser.Math.Vector2(dx, dy).normalize();
+    this.setVelocity(direction.x * this._speed, direction.y * this._speed);
+    
+    // Update facing direction
+    if (dx < 0) {
+      this.setFlipX(true);
+    } else if (dx > 0) {
+      this.setFlipX(false);
+    }
+  }
+
+  private updateReturnToSpawn(): void {
+    const distanceToSpawn = Phaser.Math.Distance.Between(
+      this.x, this.y,
+      this._spawnPosition.x, this._spawnPosition.y
+    );
+
+    // If close enough to spawn, stop and become idle
+    if (distanceToSpawn < 5) {
+      this._isReturningToSpawn = false;
+      this.x = this._spawnPosition.x;
+      this.y = this._spawnPosition.y;
+      this.setVelocity(0, 0);
+      this.playIdleAnimation();
+      return;
+    }
+
+    // Calculate direction to spawn
+    const dx = this._spawnPosition.x - this.x;
+    const dy = this._spawnPosition.y - this.y;
     
     // Normalize and scale by speed
     const direction = new Phaser.Math.Vector2(dx, dy).normalize();
