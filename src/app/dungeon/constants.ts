@@ -372,7 +372,15 @@ export const GAME_CONFIG = {
     bodyHeightRatio: 0.8,
     maxHealth: 3,
     knockbackSpeed: 200,
-    damageTimeDelay: 250
+    damageTimeDelay: 250,
+    // Leveling system
+    level: 1,
+    xp: 0,
+    baseMaxHealth: 3,
+    healthPerLevel: 1,
+    baseDamage: 1,
+    damagePerLevel: 0.5,
+    xpForLevel: (level: number) => Math.floor(100 * Math.pow(1.5, level - 1))
   },
   lizard: {
     startX: 256,
@@ -432,6 +440,7 @@ export interface EnemyConfig {
   baseSpeed: number;
   baseDamage: number;
   baseHp: number;
+  baseXp: number;
   scale?: number;
   idleFramePrefix?: string;
   runFramePrefix?: string;
@@ -439,6 +448,9 @@ export interface EnemyConfig {
   animFramePrefix?: string;
   frameStart?: number;  // Custom frame start (defaults to ANIMATION_CONFIG.enemy.frameStart)
   frameEnd?: number;    // Custom frame end (defaults to ANIMATION_CONFIG.enemy.frameEnd)
+  isStationary?: boolean;  // Enemy remains still until provoked
+  aggroRadius?: number;    // Distance at which enemy becomes aggressive (0 = never aggressive)
+  leashRadius?: number;    // Distance from spawn where enemy returns to passive (defaults to aggroRadius * 2)
 }
 
 // Enemy configurations
@@ -449,6 +461,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 45,
     baseDamage: 2,
     baseHp: 2,
+    baseXp: 40,
+    aggroRadius: 200,
     idleFramePrefix: 'angel_idle_anim_f',
     runFramePrefix: 'angel_run_anim_f'
   },
@@ -457,6 +471,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 40,
     baseDamage: 3,
     baseHp: 3,
+    baseXp: 60,
+    aggroRadius: 280,
     scale: 1.2,
     idleFramePrefix: 'big_demon_idle_anim_f',
     runFramePrefix: 'big_demon_run_anim_f'
@@ -466,6 +482,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 35,
     baseDamage: 3,
     baseHp: 4,
+    baseXp: 70,
+    aggroRadius: 220,
     scale: 1.2,
     idleFramePrefix: 'big_zombie_idle_anim_f',
     runFramePrefix: 'big_zombie_run_anim_f'
@@ -475,6 +493,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 55,
     baseDamage: 2,
     baseHp: 2,
+    baseXp: 40,
+    aggroRadius: 260,
     idleFramePrefix: 'chort_idle_anim_f',
     runFramePrefix: 'chort_run_anim_f'
   },
@@ -483,6 +503,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 50,
     baseDamage: 1,
     baseHp: 2,
+    baseXp: 30,
+    aggroRadius: 180,
     idleFramePrefix: 'doc_idle_anim_f',
     runFramePrefix: 'doc_run_anim_f'
   },
@@ -491,6 +513,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 60,
     baseDamage: 1,
     baseHp: 1,
+    baseXp: 20,
+    aggroRadius: 200,
     idleFramePrefix: 'goblin_idle_anim_f',
     runFramePrefix: 'goblin_run_anim_f'
   },
@@ -499,6 +523,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 65,
     baseDamage: 1,
     baseHp: 1,
+    baseXp: 20,
+    aggroRadius: 200,
     idleFramePrefix: 'imp_idle_anim_f',
     runFramePrefix: 'imp_run_anim_f'
   },
@@ -507,6 +533,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 50,
     baseDamage: 2,
     baseHp: 2,
+    baseXp: 40,
+    aggroRadius: 220,
     idleFramePrefix: 'masked_orc_idle_anim_f',
     runFramePrefix: 'masked_orc_run_anim_f'
   },
@@ -515,6 +543,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 40,
     baseDamage: 3,
     baseHp: 4,
+    baseXp: 70,
+    aggroRadius: 280,
     scale: 1.3,
     idleFramePrefix: 'ogre_idle_anim_f',
     runFramePrefix: 'ogre_run_anim_f'
@@ -524,6 +554,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 45,
     baseDamage: 2,
     baseHp: 2,
+    baseXp: 40,
+    aggroRadius: 220,
     idleFramePrefix: 'orc_shaman_idle_anim_f',
     runFramePrefix: 'orc_shaman_run_anim_f'
   },
@@ -532,6 +564,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 50,
     baseDamage: 2,
     baseHp: 3,
+    baseXp: 50,
+    aggroRadius: 220,
     idleFramePrefix: 'pumpkin_dude_idle_anim_f',
     runFramePrefix: 'pumpkin_dude_run_anim_f'
   },
@@ -540,6 +574,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 50,
     baseDamage: 2,
     baseHp: 3,
+    baseXp: 50,
+    aggroRadius: 220,
     idleFramePrefix: 'orc_warrior_idle_anim_f',
     runFramePrefix: 'orc_warrior_run_anim_f'
   },
@@ -548,6 +584,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 55,
     baseDamage: 2,
     baseHp: 2,
+    baseXp: 40,
+    aggroRadius: 200,
     idleFramePrefix: 'pumpkin_dude_idle_anim_f',
     runFramePrefix: 'pumpkin_dude_run_anim_f'
   },
@@ -556,6 +594,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 55,
     baseDamage: 1,
     baseHp: 1,
+    baseXp: 20,
+    aggroRadius: 200,
     idleFramePrefix: 'skelet_idle_anim_f',
     runFramePrefix: 'skelet_run_anim_f'
   },
@@ -564,6 +604,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 45,
     baseDamage: 1,
     baseHp: 1,
+    baseXp: 20,
+    aggroRadius: 180,
     scale: 0.8,
     idleFramePrefix: 'tiny_zombie_idle_anim_f',
     runFramePrefix: 'tiny_zombie_run_anim_f'
@@ -573,6 +615,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 50,
     baseDamage: 2,
     baseHp: 2,
+    baseXp: 40,
+    aggroRadius: 200,
     idleFramePrefix: 'wogol_idle_anim_f',
     runFramePrefix: 'wogol_run_anim_f'
   },
@@ -583,6 +627,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 45,
     baseDamage: 2,
     baseHp: 3,
+    baseXp: 50,
+    aggroRadius: 210,
     hitFramePrefix: 'dwarf_f_hit_anim_f',
     idleFramePrefix: 'dwarf_f_idle_anim_f',
     runFramePrefix: 'dwarf_f_run_anim_f'
@@ -592,6 +638,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 45,
     baseDamage: 2,
     baseHp: 3,
+    baseXp: 50,
+    aggroRadius: 210,
     hitFramePrefix: 'dwarf_m_hit_anim_f',
     idleFramePrefix: 'dwarf_m_idle_anim_f',
     runFramePrefix: 'dwarf_m_run_anim_f'
@@ -601,6 +649,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 60,
     baseDamage: 1,
     baseHp: 2,
+    baseXp: 30,
+    aggroRadius: 200,
     hitFramePrefix: 'elf_f_hit_anim_f',
     idleFramePrefix: 'elf_f_idle_anim_f',
     runFramePrefix: 'elf_f_run_anim_f'
@@ -610,6 +660,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 60,
     baseDamage: 1,
     baseHp: 2,
+    baseXp: 30,
+    aggroRadius: 200,
     hitFramePrefix: 'elf_m_hit_anim_f',
     idleFramePrefix: 'elf_m_idle_anim_f',
     runFramePrefix: 'elf_m_run_anim_f'
@@ -619,6 +671,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 40,
     baseDamage: 3,
     baseHp: 4,
+    baseXp: 70,
+    aggroRadius: 270,
     hitFramePrefix: 'knight_f_hit_anim_f',
     idleFramePrefix: 'knight_f_idle_anim_f',
     runFramePrefix: 'knight_f_run_anim_f'
@@ -628,6 +682,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 40,
     baseDamage: 3,
     baseHp: 4,
+    baseXp: 70,
+    aggroRadius: 270,
     hitFramePrefix: 'knight_m_hit_anim_f',
     idleFramePrefix: 'knight_m_idle_anim_f',
     runFramePrefix: 'knight_m_run_anim_f'
@@ -637,6 +693,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 50,
     baseDamage: 1,
     baseHp: 1,
+    baseXp: 20,
+    aggroRadius: 190,
     idleFramePrefix: 'lizard_m_idle_anim_f',
     runFramePrefix: 'lizard_m_run_anim_f'
   },
@@ -645,6 +703,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 50,
     baseDamage: 1,
     baseHp: 2,
+    baseXp: 30,
+    aggroRadius: 190,
     hitFramePrefix: 'lizard_f_hit_anim_f',
     idleFramePrefix: 'lizard_f_idle_anim_f',
     runFramePrefix: 'lizard_f_run_anim_f'
@@ -654,6 +714,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 50,
     baseDamage: 1,
     baseHp: 2,
+    baseXp: 30,
+    aggroRadius: 190,
     hitFramePrefix: 'lizard_m_hit_anim_f',
     idleFramePrefix: 'lizard_m_idle_anim_f',
     runFramePrefix: 'lizard_m_run_anim_f'
@@ -663,6 +725,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 45,
     baseDamage: 2,
     baseHp: 2,
+    baseXp: 40,
+    aggroRadius: 230,
     hitFramePrefix: 'wizzard_f_hit_anim_f',
     idleFramePrefix: 'wizzard_f_idle_anim_f',
     runFramePrefix: 'wizzard_f_run_anim_f'
@@ -672,6 +736,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 45,
     baseDamage: 2,
     baseHp: 2,
+    baseXp: 40,
+    aggroRadius: 230,
     hitFramePrefix: 'wizzard_m_hit_anim_f',
     idleFramePrefix: 'wizzard_m_idle_anim_f',
     runFramePrefix: 'wizzard_m_run_anim_f'
@@ -683,6 +749,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 30,
     baseDamage: 2,
     baseHp: 3,
+    baseXp: 50,
+    aggroRadius: 200,
     animFramePrefix: 'ice_zombie_anim_f'
   },
   [EnemyType.MUDDY]: {
@@ -690,6 +758,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 25,
     baseDamage: 1,
     baseHp: 2,
+    baseXp: 30,
+    aggroRadius: 140,
     animFramePrefix: 'muddy_anim_f'
   },
   [EnemyType.NECROMANCER]: {
@@ -697,6 +767,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 40,
     baseDamage: 2,
     baseHp: 3,
+    baseXp: 50,
+    aggroRadius: 240,
     animFramePrefix: 'necromancer_anim_f'
   },
   [EnemyType.SLUG]: {
@@ -704,6 +776,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 20,
     baseDamage: 1,
     baseHp: 2,
+    baseXp: 30,
+    aggroRadius: 120,
     animFramePrefix: 'slug_anim_f'
   },
   [EnemyType.SWAMPY]: {
@@ -711,6 +785,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 25,
     baseDamage: 1,
     baseHp: 2,
+    baseXp: 30,
+    aggroRadius: 140,
     animFramePrefix: 'swampy_anim_f'
   },
   [EnemyType.TINY_SLUG]: {
@@ -718,6 +794,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 30,
     baseDamage: 1,
     baseHp: 1,
+    baseXp: 20,
+    aggroRadius: 110,
     scale: 0.7,
     animFramePrefix: 'tiny_slug_anim_f'
   },
@@ -726,6 +804,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 35,
     baseDamage: 2,
     baseHp: 2,
+    baseXp: 40,
+    aggroRadius: 200,
     animFramePrefix: 'zombie_anim_f'
   },
 
@@ -735,6 +815,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 55,
     baseDamage: 2,
     baseHp: 2,
+    baseXp: 40,
+    aggroRadius: 210,
     idleFramePrefix: 'bandit_idle_',
     runFramePrefix: 'bandit_walk_',
     frameStart: 0,
@@ -745,6 +827,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 40,
     baseDamage: 3,
     baseHp: 5,
+    baseXp: 80,
+    aggroRadius: 270,
     scale: 1.3,
     idleFramePrefix: 'bear_idle_',
     runFramePrefix: 'bear_walk_',
@@ -756,6 +840,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 60,
     baseDamage: 2,
     baseHp: 3,
+    baseXp: 50,
+    aggroRadius: 220,
     scale: 1.1,
     idleFramePrefix: 'centaur_F_idle_',
     runFramePrefix: 'centaur_F_walk_',
@@ -767,6 +853,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 60,
     baseDamage: 2,
     baseHp: 3,
+    baseXp: 50,
+    aggroRadius: 220,
     scale: 1.1,
     idleFramePrefix: 'centaur_M_idle_',
     runFramePrefix: 'centaur_M_walk_',
@@ -778,6 +866,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 65,
     baseDamage: 1,
     baseHp: 2,
+    baseXp: 30,
+    aggroRadius: 200,
     idleFramePrefix: 'elf_F_idle_',
     runFramePrefix: 'elf_F_walk_',
     frameStart: 0,
@@ -788,6 +878,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 65,
     baseDamage: 1,
     baseHp: 2,
+    baseXp: 30,
+    aggroRadius: 200,
     idleFramePrefix: 'elf_M_idle_',
     runFramePrefix: 'elf_M_walk_',
     frameStart: 0,
@@ -798,6 +890,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 50,
     baseDamage: 3,
     baseHp: 4,
+    baseXp: 70,
+    aggroRadius: 270,
     idleFramePrefix: 'elvenknight_idle_',
     runFramePrefix: 'elvenknight_walk_',
     frameStart: 0,
@@ -808,6 +902,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 30,
     baseDamage: 3,
     baseHp: 6,
+    baseXp: 90,
+    aggroRadius: 250,
     scale: 1.4,
     idleFramePrefix: 'ent_idle_',
     runFramePrefix: 'ent_walk_',
@@ -819,6 +915,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 70,
     baseDamage: 1,
     baseHp: 1,
+    baseXp: 20,
+    aggroRadius: 180,
     scale: 0.8,
     idleFramePrefix: 'fairy_Idle + Walk_',
     runFramePrefix: 'fairy_Idle + Walk_',
@@ -830,6 +928,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 35,
     baseDamage: 4,
     baseHp: 7,
+    baseXp: 110,
+    aggroRadius: 290,
     scale: 1.5,
     idleFramePrefix: 'forestguardian_idle_',
     runFramePrefix: 'forestguardian_walk_',
@@ -841,6 +941,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 45,
     baseDamage: 3,
     baseHp: 4,
+    baseXp: 70,
+    aggroRadius: 250,
     scale: 1.2,
     idleFramePrefix: 'gnollbrute_idle_',
     runFramePrefix: 'gnollbrute_walk_',
@@ -852,6 +954,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 50,
     baseDamage: 2,
     baseHp: 3,
+    baseXp: 50,
+    aggroRadius: 220,
     idleFramePrefix: 'gnolloverseer_idle_',
     runFramePrefix: 'gnolloverseer_walk_',
     frameStart: 0,
@@ -862,6 +966,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 60,
     baseDamage: 2,
     baseHp: 2,
+    baseXp: 40,
+    aggroRadius: 210,
     idleFramePrefix: 'gnollscout_idle_',
     runFramePrefix: 'gnollscout_walk_',
     frameStart: 0,
@@ -872,6 +978,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 45,
     baseDamage: 2,
     baseHp: 3,
+    baseXp: 50,
+    aggroRadius: 230,
     idleFramePrefix: 'gnollshaman_idle_',
     runFramePrefix: 'gnollshaman_walk_',
     frameStart: 0,
@@ -882,6 +990,9 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 25,
     baseDamage: 4,
     baseHp: 8,
+    baseXp: 120,
+    aggroRadius: 240,
+    isStationary: true,
     scale: 1.5,
     idleFramePrefix: 'golem_idle_',
     runFramePrefix: 'golem_walk_',
@@ -893,6 +1004,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 45,
     baseDamage: 4,
     baseHp: 5,
+    baseXp: 90,
+    aggroRadius: 280,
     idleFramePrefix: 'eliteknight_idle_',
     runFramePrefix: 'eliteknight_walk_',
     frameStart: 0,
@@ -903,6 +1016,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 35,
     baseDamage: 4,
     baseHp: 6,
+    baseXp: 100,
+    aggroRadius: 270,
     scale: 1.2,
     idleFramePrefix: 'heavyknight_idle_',
     runFramePrefix: 'heavyknight_walk_',
@@ -914,6 +1029,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 30,
     baseDamage: 5,
     baseHp: 7,
+    baseXp: 120,
+    aggroRadius: 280,
     scale: 1.4,
     idleFramePrefix: 'largeknight_idle_',
     runFramePrefix: 'largeknight_walk_',
@@ -925,6 +1042,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 35,
     baseDamage: 5,
     baseHp: 8,
+    baseXp: 130,
+    aggroRadius: 290,
     scale: 1.4,
     idleFramePrefix: 'largeeliteknight_idle_',
     runFramePrefix: 'largeeliteknight_walk_',
@@ -936,6 +1055,9 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 20,
     baseDamage: 2,
     baseHp: 4,
+    baseXp: 60,
+    aggroRadius: 160,
+    isStationary: true,
     scale: 1.2,
     idleFramePrefix: 'largemushroom_idle_',
     runFramePrefix: 'largemushroom_walk_',
@@ -947,6 +1069,9 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 25,
     baseDamage: 1,
     baseHp: 3,
+    baseXp: 40,
+    aggroRadius: 150,
+    isStationary: true,
     idleFramePrefix: 'normalmushroom_idle_',
     runFramePrefix: 'normalmushroom_walk_',
     frameStart: 0,
@@ -957,6 +1082,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 60,
     baseDamage: 2,
     baseHp: 3,
+    baseXp: 50,
+    aggroRadius: 240,
     idleFramePrefix: 'ranger_idle_',
     runFramePrefix: 'ranger_walk_',
     frameStart: 0,
@@ -967,6 +1094,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 70,
     baseDamage: 2,
     baseHp: 2,
+    baseXp: 40,
+    aggroRadius: 220,
     idleFramePrefix: 'thief_idle_',
     runFramePrefix: 'thief_walk_',
     frameStart: 0,
@@ -977,6 +1106,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 35,
     baseDamage: 4,
     baseHp: 6,
+    baseXp: 100,
+    aggroRadius: 270,
     scale: 1.3,
     idleFramePrefix: 'troll_idle_',
     runFramePrefix: 'troll_walk_',
@@ -988,6 +1119,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 45,
     baseDamage: 3,
     baseHp: 3,
+    baseXp: 60,
+    aggroRadius: 250,
     idleFramePrefix: 'wizard_Idle + Walk_',
     runFramePrefix: 'wizard_Idle + Walk_',
     frameStart: 0,
@@ -998,6 +1131,8 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     baseSpeed: 70,
     baseDamage: 2,
     baseHp: 2,
+    baseXp: 40,
+    aggroRadius: 230,
     idleFramePrefix: 'wolf_idle_',
     runFramePrefix: 'wolf_walk_',
     frameStart: 0,

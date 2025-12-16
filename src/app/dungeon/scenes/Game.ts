@@ -14,10 +14,11 @@ import {debugDraw} from "../utils/debug";
 
 export class Game extends Phaser.Scene {
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
-  private faune!: Faune;
+  public faune!: Faune;
   private enemies!: Phaser.Physics.Arcade.Group;
   private knives!: Phaser.Physics.Arcade.Group;
   private chests!: Phaser.Physics.Arcade.StaticGroup;
+  private corpses!: Phaser.GameObjects.Group;
   private playerEnemiesCollider?: Phaser.Physics.Arcade.Collider;
   private isOverlappingChest = false;
   private tilemap!: Phaser.Tilemaps.Tilemap;
@@ -39,6 +40,7 @@ export class Game extends Phaser.Scene {
     this.createAnimations();
     this.createPlayer();
     this.createChests();
+    this.createCorpses();
     this.createEnemies();
     this.createKnives();
     this.setupCollisions(wallsLayer);
@@ -96,6 +98,10 @@ export class Game extends Phaser.Scene {
     this.chests.get(616, 284, ASSET_KEYS.treasure);
   }
 
+  private createCorpses(): void {
+    this.corpses = this.add.group();
+  }
+
   private createEnemies(): void {
     this.enemies = this.physics.add.group({
       classType: BaseEnemy,
@@ -137,6 +143,9 @@ export class Game extends Phaser.Scene {
         
         // Create enemy using factory
         const enemy = EnemyFactory.createEnemy(this, position.x, position.y, enemyType);
+        
+        // Pass Faune reference for aggro system
+        enemy.setFaune(this.faune);
         
         // Add to group
         this.enemies.add(enemy);
@@ -254,6 +263,11 @@ export class Game extends Phaser.Scene {
   ): void {
     const enemy = object2 as BaseEnemy;
 
+    // Only apply damage if enemy is aggressive
+    if (!enemy.isAggressive) {
+      return;
+    }
+
     const dx = this.faune.x - enemy.x;
     const dy = this.faune.y - enemy.y;
 
@@ -292,8 +306,39 @@ export class Game extends Phaser.Scene {
     // Apply damage to enemy and only destroy if health reaches 0
     const isAlive = enemy.takeDamage(GAME_CONFIG.knife.damage);
     if (!isAlive) {
+      // Award XP to player
+      const xpReward = enemy.getXpReward();
+      this.faune.gainXp(xpReward);
+      
+      // Create corpse sprite before destroying enemy
+      this.createCorpse(enemy);
+      
+      // Destroy enemy
       enemy.destroy();
     }
+  }
+
+  private createCorpse(enemy: BaseEnemy): void {
+    // Create corpse sprite at enemy position
+    const corpse = this.add.sprite(
+      enemy.x,
+      enemy.y,
+      enemy.texture.key,
+      enemy.frame.name
+    );
+    
+    // Copy enemy properties
+    corpse.setScale(enemy.scaleX, enemy.scaleY);
+    corpse.setFlipX(enemy.flipX);
+    
+    // Apply gray tint to indicate death
+    corpse.setTint(0x888888);
+    
+    // Set depth below living entities
+    corpse.setDepth(0);
+    
+    // Add to corpses group
+    this.corpses.add(corpse);
   }
 
   private handleKnifeWallCollision(

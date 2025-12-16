@@ -22,7 +22,7 @@ const getRandomDirection = (exclude: Directions): Directions => {
 
 export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
   private direction: Directions = Directions.LEFT;
-  private moveEvent: Phaser.Time.TimerEvent;
+  private moveEvent?: Phaser.Time.TimerEvent;
   private _level: number;
   private _health!: number;
   private _maxHealth!: number;
@@ -31,6 +31,12 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
   private _enemyType: EnemyType;
   private _config: EnemyConfig;
   private _animationStarted = false;
+  private _isAggressive = false;
+  private _aggroRadius: number;
+  private _leashRadius: number;
+  private _spawnPosition: Phaser.Math.Vector2;
+  private _isStationary: boolean;
+  private _faune?: Phaser.Physics.Arcade.Sprite;
 
   constructor(scene: Phaser.Scene, x: number, y: number, enemyType: EnemyType, frame?: string | number, level?: number) {
     super(scene, x, y, enemyType, frame);
@@ -53,15 +59,21 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
     // Calculate stats based on level
     this.calculateStats();
 
+    // Initialize aggro/leash properties
+    this._aggroRadius = this._config.aggroRadius ?? 0;
+    this._leashRadius = this._config.leashRadius ?? (this._aggroRadius * 2);
+    this._spawnPosition = new Phaser.Math.Vector2(x, y);
+    this._isStationary = this._config.isStationary ?? false;
+
     scene.physics.world.on(Phaser.Physics.Arcade.Events.TILE_COLLIDE, this.handleTileCollision, this);
 
-    this.moveEvent = scene.time.addEvent({
-      delay: GAME_CONFIG.lizard.directionChangeDelay,
-      loop: true,
-      callback: () => {
-        this.direction = getRandomDirection(this.direction);
+    // Only create movement timer if not stationary or has aggro radius
+    if (!this._isStationary || this._aggroRadius > 0) {
+      // If stationary with aggro, we'll create the timer when aggressive
+      if (!this._isStationary) {
+        this.createMovementTimer();
       }
-    });
+    }
   }
 
   /**
@@ -87,14 +99,35 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
     // Start animation on first update if not already started
     if (!this._animationStarted) {
       this._animationStarted = true;
-      this.playRunAnimation();
+      if (this._isStationary && !this._isAggressive) {
+        this.playIdleAnimation();
+      } else {
+        this.playRunAnimation();
+      }
     }
 
-    this.updateMovement();
+    // Update aggro state if we have a faune reference and aggro radius
+    if (this._faune && this._aggroRadius > 0) {
+      this.updateAggroState();
+    }
+
+    // Update movement based on aggro state
+    if (this._isStationary && !this._isAggressive) {
+      // Stationary and not aggressive - don't move
+      this.setVelocity(0, 0);
+    } else if (this._isAggressive) {
+      // Aggressive - chase player
+      this.updateAggressiveMovement();
+    } else {
+      // Normal wandering behavior
+      this.updateMovement();
+    }
   }
 
   override destroy(fromScene?: boolean): void {
-    this.moveEvent.destroy();
+    if (this.moveEvent) {
+      this.moveEvent.destroy();
+    }
     super.destroy(fromScene);
   }
 
@@ -116,6 +149,14 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
 
   get enemyType(): EnemyType {
     return this._enemyType;
+  }
+
+  get isAggressive(): boolean {
+    return this._isAggressive;
+  }
+
+  public setFaune(faune: Phaser.Physics.Arcade.Sprite): void {
+    this._faune = faune;
   }
 
   protected calculateStats(): void {
@@ -189,6 +230,113 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
     }
     
     this.anims.play(animKey, true);
+  }
+
+  protected playIdleAnimation(): void {
+    const animationType = this._config.animationType;
+    
+    // Simple animations only have one animation, so use that
+    if (animationType === 'simple') {
+      const animKey = `${this._enemyType}_anim`;
+      if (this.scene.anims.exists(animKey)) {
+        this.anims.play(animKey, true);
+      }
+      return;
+    }
+    
+    // Standard and advanced have idle animations
+    const animKey = `${this._enemyType}_idle`;
+    if (this.scene.anims.exists(animKey)) {
+      this.anims.play(animKey, true);
+    }
+  }
+
+  private createMovementTimer(): void {
+    if (this.moveEvent) {
+      return; // Already exists
+    }
+    
+    this.moveEvent = this.scene.time.addEvent({
+      delay: GAME_CONFIG.lizard.directionChangeDelay,
+      loop: true,
+      callback: () => {
+        this.direction = getRandomDirection(this.direction);
+      }
+    });
+  }
+
+  private destroyMovementTimer(): void {
+    if (this.moveEvent) {
+      this.moveEvent.destroy();
+      this.moveEvent = undefined;
+    }
+  }
+
+  private updateAggroState(): void {
+    if (!this._faune) {
+      return;
+    }
+
+    const distanceToPlayer = Phaser.Math.Distance.Between(
+      this.x, this.y,
+      this._faune.x, this._faune.y
+    );
+
+    const distanceFromSpawn = Phaser.Math.Distance.Between(
+      this.x, this.y,
+      this._spawnPosition.x, this._spawnPosition.y
+    );
+
+    // Check if should become aggressive
+    if (!this._isAggressive && distanceToPlayer <= this._aggroRadius) {
+      this._isAggressive = true;
+      
+      // If was stationary, start moving now
+      if (this._isStationary) {
+        this.createMovementTimer();
+      }
+      
+      // Switch to run animation
+      this.playRunAnimation();
+    }
+    // Check if should return to passive (leash)
+    else if (this._isAggressive && distanceFromSpawn > this._leashRadius) {
+      this._isAggressive = false;
+      
+      // If originally stationary, stop moving and return to spawn
+      if (this._isStationary) {
+        this.destroyMovementTimer();
+        this.setVelocity(0, 0);
+        this.x = this._spawnPosition.x;
+        this.y = this._spawnPosition.y;
+        this.playIdleAnimation();
+      }
+    }
+  }
+
+  private updateAggressiveMovement(): void {
+    if (!this._faune) {
+      return;
+    }
+
+    // Calculate direction to player
+    const dx = this._faune.x - this.x;
+    const dy = this._faune.y - this.y;
+    
+    // Normalize and scale by speed
+    const direction = new Phaser.Math.Vector2(dx, dy).normalize();
+    this.setVelocity(direction.x * this._speed, direction.y * this._speed);
+    
+    // Update facing direction
+    if (dx < 0) {
+      this.setFlipX(true);
+    } else if (dx > 0) {
+      this.setFlipX(false);
+    }
+  }
+
+  public getXpReward(): number {
+    return this._config.baseXp * this._level;
   }
 }
 

@@ -22,13 +22,24 @@ export class Faune extends Phaser.Physics.Arcade.Sprite {
   private cursors?: Phaser.Types.Input.Keyboard.CursorKeys;
   private healthState = HealthState.IDLE;
   private damageTime = 0;
-  private _health = GAME_CONFIG.player.maxHealth;
+  private _health: number;
+  private _maxHealth: number;
   private _coins = 0;
+  private _level: number;
+  private _xp: number;
+  private _damage: number;
   private knives?: Phaser.Physics.Arcade.Group;
   private activeChest?: Chest;
 
   constructor(scene: Phaser.Scene, x: number, y: number, texture: string, frame?: string | number) {
     super(scene, x, y, texture, frame);
+    
+    // Initialize leveling stats
+    this._level = GAME_CONFIG.player.level;
+    this._xp = GAME_CONFIG.player.xp;
+    this._maxHealth = GAME_CONFIG.player.baseMaxHealth;
+    this._health = this._maxHealth;
+    this._damage = GAME_CONFIG.player.baseDamage;
   }
 
   setCursors(cursors: Phaser.Types.Input.Keyboard.CursorKeys): void {
@@ -51,8 +62,24 @@ export class Faune extends Phaser.Physics.Arcade.Sprite {
     return this._health;
   }
 
+  get maxHealth(): number {
+    return this._maxHealth;
+  }
+
   get coins(): number {
     return this._coins;
+  }
+
+  get level(): number {
+    return this._level;
+  }
+
+  get xp(): number {
+    return this._xp;
+  }
+
+  get damage(): number {
+    return this._damage;
   }
 
   override preUpdate(time: number, delta: number) {
@@ -220,6 +247,45 @@ export class Faune extends Phaser.Physics.Arcade.Sprite {
       this.setVelocity(dir.x, dir.y);
       this.setTint(0xff0000);
     }
+  }
+
+  public gainXp(amount: number): void {
+    this._xp += amount;
+    console.log(`[Faune] Gained ${amount} XP, total: ${this._xp}`);
+    
+    // Emit XP changed event
+    sceneEvents.emit(EVENTS.PLAYER_XP_CHANGED, this._xp, this.getXpForNextLevel());
+    
+    // Check for level up
+    while (this._xp >= this.getXpForNextLevel()) {
+      this.levelUp();
+    }
+  }
+
+  private levelUp(): void {
+    // Deduct XP for level up
+    this._xp -= this.getXpForNextLevel();
+    this._level++;
+    
+    // Recalculate stats
+    this._maxHealth = GAME_CONFIG.player.baseMaxHealth + 
+                      (this._level - 1) * GAME_CONFIG.player.healthPerLevel;
+    this._damage = GAME_CONFIG.player.baseDamage + 
+                   (this._level - 1) * GAME_CONFIG.player.damagePerLevel;
+    
+    // Heal to full
+    this._health = this._maxHealth;
+    
+    console.log(`[Faune] LEVEL UP! Now level ${this._level}`);
+    console.log(`[Faune] New stats - HP: ${this._maxHealth}, Damage: ${this._damage}`);
+    
+    // Emit level up event
+    sceneEvents.emit(EVENTS.PLAYER_LEVEL_UP, this._level, this._maxHealth, this._damage);
+    sceneEvents.emit(EVENTS.PLAYER_HEALTH_CHANGED, this._health);
+  }
+
+  private getXpForNextLevel(): number {
+    return GAME_CONFIG.player.xpForLevel(this._level + 1);
   }
 }
 
