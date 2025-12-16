@@ -263,8 +263,8 @@ export class Game extends Phaser.Scene {
   ): void {
     const enemy = object2 as BaseEnemy;
 
-    // Only apply damage if enemy is aggressive
-    if (!enemy.isAggressive) {
+    // Only apply damage if enemy is aggressive and alive
+    if (!enemy.isAggressive || enemy.health <= 0) {
       return;
     }
 

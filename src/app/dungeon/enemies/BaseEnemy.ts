@@ -184,6 +184,9 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
 
     // Return false if dead, true if still alive
     if (this._health <= 0) {
+      // Stop all movement and aggression when dead
+      this._isAggressive = false;
+      this.setVelocity(0, 0);
       return false;
     }
 
@@ -274,6 +277,24 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
 
   private updateAggroState(): void {
     if (!this._faune) {
+      return;
+    }
+
+    // Check if Faune is dead - if so, become passive
+    const faune = this._faune as any;
+    if (faune.health !== undefined && faune.health <= 0) {
+      if (this._isAggressive) {
+        this._isAggressive = false;
+        this.setVelocity(0, 0);
+        
+        // If originally stationary, return to spawn
+        if (this._isStationary) {
+          this.destroyMovementTimer();
+          this.x = this._spawnPosition.x;
+          this.y = this._spawnPosition.y;
+          this.playIdleAnimation();
+        }
+      }
       return;
     }
 
