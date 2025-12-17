@@ -443,6 +443,132 @@ export const ANIMATION_CONFIG = {
 // Animation types
 export type AnimationType = 'standard' | 'advanced' | 'simple';
 
+// Character types enum
+export enum CharacterType {
+  FAUNE = 'faune',
+  SWORDSMAN = 'swordsman'
+}
+
+// Character configuration interface
+export interface CharacterConfig {
+  // Base stats
+  baseMaxHealth: number;
+  baseDamage: number;
+  baseSpeed: number;
+  maxEnergy: number;
+  
+  // Stat progression per level
+  healthPerLevel: number;
+  damagePerLevel: number;
+  
+  // Energy/Stamina
+  sprintCostPerFrame: number;
+  sprintSpeedMultiplier: number;
+  energyRegenRate: number;
+  energyRegenDelay: number;
+  
+  // Physics
+  bodyWidthRatio: number;
+  bodyHeightRatio: number;
+  knockbackSpeed: number;
+  damageTimeDelay: number;
+  
+  // Animation config
+  idleDownFrame: string;
+  idleUpFrame: string;
+  idleSideFrame: string;
+  runFrameStart: number;
+  runFrameEnd: number;
+  frameRate: number;
+  
+  // Leveling
+  xpForLevel: (level: number) => number;
+  
+  // Weapon system
+  knifeCost: number;
+  maxKnifeCount: number;
+}
+
+// Character configurations
+export const CHARACTER_CONFIGS: Record<CharacterType, CharacterConfig> = {
+  [CharacterType.FAUNE]: {
+    // Base stats
+    baseMaxHealth: 3,
+    baseDamage: 1,
+    baseSpeed: 100,
+    maxEnergy: 100,
+    
+    // Stat progression per level
+    healthPerLevel: 1,
+    damagePerLevel: 0.5,
+    
+    // Energy/Stamina
+    sprintCostPerFrame: 0.5,
+    sprintSpeedMultiplier: 1.5,
+    energyRegenRate: 5,
+    energyRegenDelay: 2000,
+    
+    // Physics
+    bodyWidthRatio: 0.5,
+    bodyHeightRatio: 0.8,
+    knockbackSpeed: 200,
+    damageTimeDelay: 250,
+    
+    // Animation config
+    idleDownFrame: 'walk-down-3.png',
+    idleUpFrame: 'walk-up-3.png',
+    idleSideFrame: 'walk-side-3.png',
+    runFrameStart: 1,
+    runFrameEnd: 8,
+    frameRate: 15,
+    
+    // Leveling
+    xpForLevel: (level: number) => Math.floor(100 * Math.pow(1.5, level - 1)),
+    
+    // Weapon system
+    knifeCost: 15,
+    maxKnifeCount: 5
+  },
+  [CharacterType.SWORDSMAN]: {
+    // Base stats (higher HP, less energy)
+    baseMaxHealth: 5,
+    baseDamage: 1.5,
+    baseSpeed: 90,
+    maxEnergy: 60,
+    
+    // Stat progression per level (higher HP growth)
+    healthPerLevel: 2,
+    damagePerLevel: 0.7,
+    
+    // Energy/Stamina
+    sprintCostPerFrame: 0.7,
+    sprintSpeedMultiplier: 1.3,
+    energyRegenRate: 3,
+    energyRegenDelay: 2500,
+    
+    // Physics
+    bodyWidthRatio: 0.5,
+    bodyHeightRatio: 0.8,
+    knockbackSpeed: 180,
+    damageTimeDelay: 300,
+    
+    // Animation config (placeholder - will be updated when assets are added)
+    idleDownFrame: 'idle-down-0.png',
+    idleUpFrame: 'idle-up-0.png',
+    idleSideFrame: 'idle-side-0.png',
+    runFrameStart: 0,
+    runFrameEnd: 7,
+    frameRate: 12,
+    
+    // Leveling
+    xpForLevel: (level: number) => Math.floor(100 * Math.pow(1.5, level - 1)),
+    
+    // Weapon system
+    knifeCost: 20,
+    maxKnifeCount: 3
+  }
+};
+
 // Enemy configuration interface
 export interface EnemyConfig {
   animationType: AnimationType;

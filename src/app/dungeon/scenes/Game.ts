@@ -1,14 +1,14 @@
 import TilemapLayer = Phaser.Tilemaps.TilemapLayer;
 import ArcadeColliderType = Phaser.Types.Physics.Arcade.ArcadeColliderType;
 import {createAllEnemyAnimations} from "../enemies/enemy-animations";
-import {createFauneAnimations} from "../characters/faune/faune-animations";
+import {createAllCharacterAnimations} from "../characters/character-animations";
 import {createChestAnimations} from "../items/chest-animations";
 import {BaseEnemy} from "../enemies/BaseEnemy";
 import {EnemyFactory} from "../enemies/EnemyFactory";
-import '../characters/faune/Faune'
+import {CharacterFactory} from "../characters/CharacterFactory";
 import {Faune} from "../characters/faune/Faune";
 import {Chest} from "../items/Chest";
-import {ASSET_KEYS, GAME_CONFIG, SCENE_KEYS, EnemyType} from "../constants";
+import {ASSET_KEYS, GAME_CONFIG, SCENE_KEYS, EnemyType, CharacterType} from "../constants";
 import {sceneEvents, EVENTS} from "../events/EventsCenter";
 import {debugDraw} from "../utils/debug";
 
@@ -78,13 +78,19 @@ export class Game extends Phaser.Scene {
   }
 
   private createAnimations(): void {
-    createFauneAnimations(this.anims);
+    createAllCharacterAnimations(this.anims);
     createAllEnemyAnimations(this.anims);
     createChestAnimations(this.anims);
   }
 
   private createPlayer(): void {
-    this.faune = this.add.faune(128, 128, ASSET_KEYS.faune);
+    this.faune = CharacterFactory.createCharacter(
+      this,
+      GAME_CONFIG.player.startX,
+      GAME_CONFIG.player.startY,
+      CharacterType.FAUNE
+    ) as Faune;
+    
     this.faune.setCursors(this.cursors);
   }
 

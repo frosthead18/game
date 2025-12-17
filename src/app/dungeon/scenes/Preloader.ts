@@ -1,4 +1,4 @@
-import {ASSET_KEYS, ASSET_PATHS, SCENE_KEYS, EnemyType} from "../constants";
+import {ASSET_KEYS, ASSET_PATHS, SCENE_KEYS, EnemyType, CharacterType} from "../constants";
 
 export class Preloader extends Phaser.Scene {
   constructor() {
@@ -24,11 +24,19 @@ export class Preloader extends Phaser.Scene {
   }
 
   private loadCharacters(): void {
-    this.load.atlas(
-      ASSET_KEYS.faune,
-      ASSET_PATHS.characters.faune.image,
-      ASSET_PATHS.characters.faune.atlas
-    );
+    // Load all character types
+    Object.values(CharacterType).forEach(characterType => {
+      const characterPath = ASSET_PATHS.characters[characterType as keyof typeof ASSET_PATHS.characters];
+      if (characterPath) {
+        this.load.atlas(
+          characterType,
+          characterPath.image,
+          characterPath.atlas
+        );
+      } else {
+        console.warn(`[Preloader] No asset path found for character type: ${characterType}`);
+      }
+    });
   }
 
   private loadEnemies(): void {
