@@ -32,5 +32,7 @@ export const EVENTS = {
   PLAYER_XP_CHANGED: 'player-xp-changed',
   PLAYER_LEVEL_UP: 'player-level-up',
   ENEMY_DIED: 'enemy-died',
+  PLAYER_KNIFE_COUNT_CHANGED: 'player-knife-count-changed',
+  PLAYER_ENERGY_CHANGED: 'player-energy-changed',
 } as const;
 

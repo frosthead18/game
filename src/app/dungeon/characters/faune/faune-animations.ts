@@ -67,6 +67,12 @@ export const createFauneAnimations = (anims: Phaser.Animations.AnimationManager)
   // Faint/death animation
   anims.create({
     key: FauneMovement.faintDown,
-    frames: [{key: ASSET_KEYS.faune, frame: 'faint-1.png'}]
+    frames: anims.generateFrameNames(ASSET_KEYS.faune, {
+      start: 1,
+      end: 4,
+      prefix: 'faint-',
+      suffix: '.png'
+    }),
+    frameRate: 10
   });
 };

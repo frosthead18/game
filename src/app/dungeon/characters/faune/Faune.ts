@@ -20,6 +20,8 @@ export enum HealthState {
 export class Faune extends Phaser.Physics.Arcade.Sprite {
   private lastDirection: FauneMovement = FauneMovement.idleDown;
   private cursors?: Phaser.Types.Input.Keyboard.CursorKeys;
+  private keyF?: Phaser.Input.Keyboard.Key;
+  private keyE?: Phaser.Input.Keyboard.Key;
   private healthState = HealthState.IDLE;
   private damageTime = 0;
   private _health: number;
@@ -30,6 +32,10 @@ export class Faune extends Phaser.Physics.Arcade.Sprite {
   private _damage: number;
   private knives?: Phaser.Physics.Arcade.Group;
   private activeChest?: Chest;
+  private _energy: number;
+  private _maxEnergy: number;
+  private _lastEnergyUseTime: number = 0;
+  private _knifeCount: number;
 
   constructor(scene: Phaser.Scene, x: number, y: number, texture: string, frame?: string | number) {
     super(scene, x, y, texture, frame);
@@ -40,10 +46,23 @@ export class Faune extends Phaser.Physics.Arcade.Sprite {
     this._maxHealth = GAME_CONFIG.player.baseMaxHealth;
     this._health = this._maxHealth;
     this._damage = GAME_CONFIG.player.baseDamage;
+    
+    // Initialize energy system
+    this._maxEnergy = GAME_CONFIG.player.maxEnergy;
+    this._energy = this._maxEnergy;
+    
+    // Initialize knife inventory
+    this._knifeCount = GAME_CONFIG.knife.maxCount;
   }
 
   setCursors(cursors: Phaser.Types.Input.Keyboard.CursorKeys): void {
     this.cursors = cursors;
+    
+    // Set up additional keys
+    if (this.scene.input.keyboard) {
+      this.keyF = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
+      this.keyE = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+    }
   }
 
   setKnives(knives: Phaser.Physics.Arcade.Group): void {
@@ -82,12 +101,27 @@ export class Faune extends Phaser.Physics.Arcade.Sprite {
     return this._damage;
   }
 
+  get energy(): number {
+    return this._energy;
+  }
+
+  get maxEnergy(): number {
+    return this._maxEnergy;
+  }
+
+  get knifeCount(): number {
+    return this._knifeCount;
+  }
+
   override preUpdate(time: number, delta: number) {
     super.preUpdate(time, delta);
 
     if (!this.cursors) {
       return;
     }
+
+    // Handle energy regeneration
+    this.handleEnergyRegeneration(time, delta);
 
     switch (this.healthState) {
       case HealthState.IDLE:
@@ -115,16 +149,16 @@ export class Faune extends Phaser.Physics.Arcade.Sprite {
     let moveX = 0;
     let moveY = 0;
 
-    // Handle space bar for chest opening
-    if (Phaser.Input.Keyboard.JustDown(this.cursors.space!)) {
+    // Handle E key for chest opening
+    if (this.keyE && Phaser.Input.Keyboard.JustDown(this.keyE)) {
       if (this.activeChest) {
-        console.log('[Faune] Space pressed, attempting to open chest');
+        console.log('[Faune] E pressed, attempting to open chest');
         const coins = this.activeChest.open();
         console.log(`[Faune] Chest opened, received ${coins} coins`);
         this._coins += coins;
         sceneEvents.emit(EVENTS.PLAYER_COINS_CHANGED, this._coins);
       } else {
-        console.log('[Faune] Space pressed but no active chest');
+        console.log('[Faune] E pressed but no active chest');
       }
       return;
     }
@@ -148,6 +182,15 @@ export class Faune extends Phaser.Physics.Arcade.Sprite {
       this.lastDirection = FauneMovement.runDown;
     }
 
+    // Check if sprinting
+    const isSprinting = this.cursors.shift?.isDown && (moveX !== 0 || moveY !== 0) && this._energy > 0;
+    let speed = GAME_CONFIG.player.speed;
+
+    if (isSprinting) {
+      speed *= GAME_CONFIG.player.sprintSpeedMultiplier;
+      this.consumeEnergy(GAME_CONFIG.player.sprintCostPerFrame);
+    }
+
     // Update animation
     if (moveX !== 0 || moveY !== 0) {
       this.anims.play(this.lastDirection, true);
@@ -155,10 +198,10 @@ export class Faune extends Phaser.Physics.Arcade.Sprite {
       this.playIdleAnimation();
     }
 
-    this.setVelocity(moveX * GAME_CONFIG.player.speed, moveY * GAME_CONFIG.player.speed);
+    this.setVelocity(moveX * speed, moveY * speed);
 
-    // Handle knife throwing
-    if (Phaser.Input.Keyboard.JustDown(this.cursors.shift!)) {
+    // Handle knife throwing with F key
+    if (this.keyF && Phaser.Input.Keyboard.JustDown(this.keyF)) {
       this.throwKnife();
     }
   }
@@ -183,10 +226,27 @@ export class Faune extends Phaser.Physics.Arcade.Sprite {
       return;
     }
 
+    // Check if we have knives available
+    if (this._knifeCount <= 0) {
+      console.log('[Faune] No knives available');
+      return;
+    }
+
+    // Check if we have enough energy
+    if (this._energy < GAME_CONFIG.player.knifeCost) {
+      console.log('[Faune] Not enough energy to throw knife');
+      return;
+    }
+
     const knife = this.knives.get(this.x, this.y, 'knife') as Phaser.Physics.Arcade.Image;
     if (!knife) {
       return;
     }
+
+    // Consume knife and energy
+    this._knifeCount--;
+    sceneEvents.emit(EVENTS.PLAYER_KNIFE_COUNT_CHANGED, this._knifeCount);
+    this.consumeEnergy(GAME_CONFIG.player.knifeCost);
 
     // Determine throw direction based on player's facing direction
     const parts = this.anims.currentAnim?.key.split('-');
@@ -217,6 +277,9 @@ export class Faune extends Phaser.Physics.Arcade.Sprite {
     knife.setVisible(true);
     knife.setRotation(angle);
     knife.setVelocity(vec.x * GAME_CONFIG.knife.speed, vec.y * GAME_CONFIG.knife.speed);
+    
+    // Add rotation to the knife
+    knife.setAngularVelocity(GAME_CONFIG.knife.rotationSpeed);
   }
 
   public handleDamage(dir: Phaser.Math.Vector2): void {
@@ -286,6 +349,24 @@ export class Faune extends Phaser.Physics.Arcade.Sprite {
 
   private getXpForNextLevel(): number {
     return GAME_CONFIG.player.xpForLevel(this._level + 1);
+  }
+
+  private consumeEnergy(amount: number): void {
+    this._energy = Math.max(0, this._energy - amount);
+    this._lastEnergyUseTime = this.scene.time.now;
+    sceneEvents.emit(EVENTS.PLAYER_ENERGY_CHANGED, this._energy, this._maxEnergy);
+  }
+
+  private handleEnergyRegeneration(time: number, delta: number): void {
+    // Only regenerate if we haven't used energy recently
+    const timeSinceLastUse = time - this._lastEnergyUseTime;
+    
+    if (timeSinceLastUse >= GAME_CONFIG.player.energyRegenDelay && this._energy < this._maxEnergy) {
+      // Regenerate energy based on time delta
+      const regenAmount = (GAME_CONFIG.player.energyRegenRate * delta) / 1000;
+      this._energy = Math.min(this._maxEnergy, this._energy + regenAmount);
+      sceneEvents.emit(EVENTS.PLAYER_ENERGY_CHANGED, this._energy, this._maxEnergy);
+    }
   }
 }
 

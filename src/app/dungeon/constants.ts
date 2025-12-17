@@ -380,7 +380,14 @@ export const GAME_CONFIG = {
     healthPerLevel: 1,
     baseDamage: 1,
     damagePerLevel: 0.5,
-    xpForLevel: (level: number) => Math.floor(100 * Math.pow(1.5, level - 1))
+    xpForLevel: (level: number) => Math.floor(100 * Math.pow(1.5, level - 1)),
+    // Energy/Stamina system
+    maxEnergy: 100,
+    sprintCostPerFrame: 0.5,
+    knifeCost: 15,
+    energyRegenRate: 5,
+    energyRegenDelay: 2000,
+    sprintSpeedMultiplier: 1.5
   },
   lizard: {
     startX: 256,
@@ -401,7 +408,9 @@ export const GAME_CONFIG = {
   },
   knife: {
     speed: 300,
-    damage: 1
+    damage: 1,
+    maxCount: 5,
+    rotationSpeed: 400
   },
   chest: {
     coinsValue: 50
