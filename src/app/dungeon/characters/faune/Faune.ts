@@ -19,7 +19,11 @@ export enum HealthState {
 
 export class Faune extends Phaser.Physics.Arcade.Sprite {
   private lastDirection: FauneMovement = FauneMovement.idleDown;
-  private cursors?: Phaser.Types.Input.Keyboard.CursorKeys;
+  private keyW?: Phaser.Input.Keyboard.Key;
+  private keyA?: Phaser.Input.Keyboard.Key;
+  private keyS?: Phaser.Input.Keyboard.Key;
+  private keyD?: Phaser.Input.Keyboard.Key;
+  private keyShift?: Phaser.Input.Keyboard.Key;
   private keyF?: Phaser.Input.Keyboard.Key;
   private keyE?: Phaser.Input.Keyboard.Key;
   private healthState = HealthState.IDLE;
@@ -56,10 +60,13 @@ export class Faune extends Phaser.Physics.Arcade.Sprite {
   }
 
   setCursors(cursors: Phaser.Types.Input.Keyboard.CursorKeys): void {
-    this.cursors = cursors;
-    
-    // Set up additional keys
+    // Set up WASD and other keys
     if (this.scene.input.keyboard) {
+      this.keyW = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+      this.keyA = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+      this.keyS = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+      this.keyD = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+      this.keyShift = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);
       this.keyF = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
       this.keyE = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
     }
@@ -116,10 +123,6 @@ export class Faune extends Phaser.Physics.Arcade.Sprite {
   override preUpdate(time: number, delta: number) {
     super.preUpdate(time, delta);
 
-    if (!this.cursors) {
-      return;
-    }
-
     // Handle energy regeneration
     this.handleEnergyRegeneration(time, delta);
 
@@ -142,10 +145,6 @@ export class Faune extends Phaser.Physics.Arcade.Sprite {
   }
 
   private handleMovement(): void {
-    if (!this.cursors) {
-      return;
-    }
-
     let moveX = 0;
     let moveY = 0;
 
@@ -163,27 +162,27 @@ export class Faune extends Phaser.Physics.Arcade.Sprite {
       return;
     }
 
-    // Handle movement
-    if (this.cursors.left?.isDown) {
+    // Handle WASD movement
+    if (this.keyA?.isDown) {
       moveX = -1;
       this.setFlipX(true);
       this.lastDirection = FauneMovement.runSide;
-    } else if (this.cursors.right?.isDown) {
+    } else if (this.keyD?.isDown) {
       moveX = 1;
       this.setFlipX(false);
       this.lastDirection = FauneMovement.runSide;
     }
 
-    if (this.cursors.up?.isDown) {
+    if (this.keyW?.isDown) {
       moveY = -1;
       this.lastDirection = FauneMovement.runUp;
-    } else if (this.cursors.down?.isDown) {
+    } else if (this.keyS?.isDown) {
       moveY = 1;
       this.lastDirection = FauneMovement.runDown;
     }
 
     // Check if sprinting
-    const isSprinting = this.cursors.shift?.isDown && (moveX !== 0 || moveY !== 0) && this._energy > 0;
+    const isSprinting = this.keyShift?.isDown && (moveX !== 0 || moveY !== 0) && this._energy > 0;
     let speed = GAME_CONFIG.player.speed;
 
     if (isSprinting) {
