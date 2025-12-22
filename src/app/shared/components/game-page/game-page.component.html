@@ -1,7 +1,12 @@
 <div class="w-screen h-screen overflow-hidden">
   <!-- Preview Page -->
-  <div *ngIf="viewState === 'preview'" class="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-black">
-    <div class="max-w-2xl mx-auto px-8 text-center">
+  <div *ngIf="viewState === 'preview'" 
+       class="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-black bg-cover bg-center bg-no-repeat relative"
+       style="background-image: url('assets/images/frosthead.png');">
+    <!-- Dark overlay for better text readability -->
+    <div class="absolute inset-0 bg-black/60"></div>
+    
+    <div class="max-w-2xl mx-auto px-8 text-center relative z-10">
       <h1 class="text-5xl font-bold mb-6 text-white">{{ config.gameTitle }}</h1>
       
       <p class="text-lg text-gray-300 mb-8">
