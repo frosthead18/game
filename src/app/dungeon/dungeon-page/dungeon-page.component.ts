@@ -43,19 +43,14 @@ export class DungeonPageComponent implements OnDestroy {
     };
   }
 
-  @HostListener('document:keydown.escape', ['$event'])
-  onEscapePressed(event: KeyboardEvent): void {
-    if (this.viewState === 'playing' && !this.isDialogOpen) {
-      event.preventDefault();
-      this.showExitConfirmation();
-    }
-  }
-
   @HostListener('document:fullscreenchange')
   onFullscreenChange(): void {
-    // If user exits fullscreen via browser UI (F11, etc.)
-    if (!document.fullscreenElement && this.viewState === 'playing') {
-      this.cleanupGame();
+    // If user exits fullscreen (ESC key or browser UI) while playing
+    if (!document.fullscreenElement && this.viewState === 'playing' && !this.isDialogOpen) {
+      // Pause the game immediately
+      this.pauseGame();
+      // Show exit confirmation dialog
+      this.showExitConfirmation();
     }
   }
 
@@ -108,23 +103,48 @@ export class DungeonPageComponent implements OnDestroy {
 
     this.isDialogOpen = true;
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(async result => {
       this.isDialogOpen = false;
       if (result === true) {
-        this.exitFullscreen();
+        // User chose to exit - cleanup and return to preview
+        this.cleanupGame();
+      } else {
+        // User chose to continue - re-enter fullscreen and resume
+        const container = document.getElementById('dungeonGameContainer');
+        if (container) {
+          try {
+            await container.requestFullscreen();
+            this.resumeGame();
+          } catch (error) {
+            console.error('Failed to re-enter fullscreen:', error);
+            // If can't re-enter fullscreen, just resume the game
+            this.resumeGame();
+          }
+        } else {
+          // Container not found, just resume
+          this.resumeGame();
+        }
       }
     });
   }
 
-  private async exitFullscreen(): Promise<void> {
-    try {
-      if (document.fullscreenElement) {
-        await document.exitFullscreen();
-      }
-    } catch (error) {
-      console.error('Failed to exit fullscreen:', error);
-    } finally {
-      this.cleanupGame();
+  private pauseGame(): void {
+    if (this.phaserGame) {
+      this.phaserGame.scene.scenes.forEach(scene => {
+        if (scene.scene.isActive()) {
+          scene.scene.pause();
+        }
+      });
+    }
+  }
+
+  private resumeGame(): void {
+    if (this.phaserGame) {
+      this.phaserGame.scene.scenes.forEach(scene => {
+        if (scene.scene.isPaused()) {
+          scene.scene.resume();
+        }
+      });
     }
   }
 
