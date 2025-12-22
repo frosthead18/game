@@ -1,12 +1,12 @@
-import {EnemyType, ANIMATION_CONFIG, ENEMY_CONFIGS} from "../constants";
+import {NPCType, ANIMATION_CONFIG, NPC_CONFIGS} from "../constants";
 
 /**
- * Creates animations for a specific enemy type based on its configuration
+ * Creates animations for a specific NPC type based on its configuration
  */
-export const createEnemyAnimations = (anims: Phaser.Animations.AnimationManager, enemyType: EnemyType): void => {
-  const config = ENEMY_CONFIGS[enemyType];
-  const animConfig = ANIMATION_CONFIG.enemy;
-  
+export const createNPCAnimations = (anims: Phaser.Animations.AnimationManager, npcType: NPCType): void => {
+  const config = NPC_CONFIGS[npcType];
+  const animConfig = ANIMATION_CONFIG.npc;
+
   // Use custom frame range if specified, otherwise use default
   const frameConfig = {
     frameStart: config.frameStart ?? animConfig.frameStart,
@@ -17,14 +17,14 @@ export const createEnemyAnimations = (anims: Phaser.Animations.AnimationManager,
   switch (config.animationType) {
     case 'standard':
       // Standard enemies have idle and run animations
-      createStandardAnimations(anims, enemyType, config.idleFramePrefix!, config.runFramePrefix!, frameConfig);
+      createStandardAnimations(anims, npcType, config.idleFramePrefix!, config.runFramePrefix!, frameConfig);
       break;
 
     case 'advanced':
       // Advanced enemies have hit, idle, and run animations
       createAdvancedAnimations(
         anims,
-        enemyType,
+        npcType,
         config.hitFramePrefix!,
         config.idleFramePrefix!,
         config.runFramePrefix!,
@@ -34,17 +34,17 @@ export const createEnemyAnimations = (anims: Phaser.Animations.AnimationManager,
 
     case 'simple':
       // Simple enemies have a single animation
-      createSimpleAnimation(anims, enemyType, config.animFramePrefix!, frameConfig);
+      createSimpleAnimation(anims, npcType, config.animFramePrefix!, frameConfig);
       break;
   }
 };
 
 /**
- * Creates all enemy animations for preloading
+ * Creates all NPC animations for preloading
  */
-export const createAllEnemyAnimations = (anims: Phaser.Animations.AnimationManager): void => {
-  Object.values(EnemyType).forEach(enemyType => {
-    createEnemyAnimations(anims, enemyType);
+export const createAllNPCAnimations = (anims: Phaser.Animations.AnimationManager): void => {
+  Object.values(NPCType).forEach(npcType => {
+    createNPCAnimations(anims, npcType);
   });
 };
 
@@ -53,36 +53,36 @@ export const createAllEnemyAnimations = (anims: Phaser.Animations.AnimationManag
  */
 function createStandardAnimations(
   anims: Phaser.Animations.AnimationManager,
-  enemyType: EnemyType,
+  npcType: NPCType,
   idlePrefix: string,
   runPrefix: string,
   frameConfig: { frameStart: number; frameEnd: number; frameRate: number }
 ): void {
   // Idle animation
-  const idleFrames = anims.generateFrameNames(enemyType, {
+  const idleFrames = anims.generateFrameNames(npcType, {
     start: frameConfig.frameStart,
     end: frameConfig.frameEnd,
     prefix: idlePrefix,
     suffix: '.png'
   });
-  
+
   anims.create({
-    key: `${enemyType}_idle`,
+    key: `${npcType}_idle`,
     frames: idleFrames,
     repeat: ANIMATION_CONFIG.repeatInfinite,
     frameRate: frameConfig.frameRate
   });
 
   // Run animation
-  const runFrames = anims.generateFrameNames(enemyType, {
+  const runFrames = anims.generateFrameNames(npcType, {
     start: frameConfig.frameStart,
     end: frameConfig.frameEnd,
     prefix: runPrefix,
     suffix: '.png'
   });
-  
+
   anims.create({
-    key: `${enemyType}_run`,
+    key: `${npcType}_run`,
     frames: runFrames,
     repeat: ANIMATION_CONFIG.repeatInfinite,
     frameRate: frameConfig.frameRate
@@ -94,7 +94,7 @@ function createStandardAnimations(
  */
 function createAdvancedAnimations(
   anims: Phaser.Animations.AnimationManager,
-  enemyType: EnemyType,
+  npcType: NPCType,
   hitPrefix: string,
   idlePrefix: string,
   runPrefix: string,
@@ -102,8 +102,8 @@ function createAdvancedAnimations(
 ): void {
   // Hit animation (single frame)
   anims.create({
-    key: `${enemyType}_hit`,
-    frames: anims.generateFrameNames(enemyType, {
+    key: `${npcType}_hit`,
+    frames: anims.generateFrameNames(npcType, {
       start: 0,
       end: 0,
       prefix: hitPrefix,
@@ -115,8 +115,8 @@ function createAdvancedAnimations(
 
   // Idle animation
   anims.create({
-    key: `${enemyType}_idle`,
-    frames: anims.generateFrameNames(enemyType, {
+    key: `${npcType}_idle`,
+    frames: anims.generateFrameNames(npcType, {
       start: frameConfig.frameStart,
       end: frameConfig.frameEnd,
       prefix: idlePrefix,
@@ -128,8 +128,8 @@ function createAdvancedAnimations(
 
   // Run animation
   anims.create({
-    key: `${enemyType}_run`,
-    frames: anims.generateFrameNames(enemyType, {
+    key: `${npcType}_run`,
+    frames: anims.generateFrameNames(npcType, {
       start: frameConfig.frameStart,
       end: frameConfig.frameEnd,
       prefix: runPrefix,
@@ -145,18 +145,18 @@ function createAdvancedAnimations(
  */
 function createSimpleAnimation(
   anims: Phaser.Animations.AnimationManager,
-  enemyType: EnemyType,
+  npcType: NPCType,
   animPrefix: string,
   frameConfig: { frameStart: number; frameEnd: number; frameRate: number }
 ): void {
-  const animFrames = anims.generateFrameNames(enemyType, {
+  const animFrames = anims.generateFrameNames(npcType, {
     start: frameConfig.frameStart,
     end: frameConfig.frameEnd,
     prefix: animPrefix,
     suffix: '.png'
   });
   anims.create({
-    key: `${enemyType}_anim`,
+    key: `${npcType}_anim`,
     frames: animFrames,
     repeat: ANIMATION_CONFIG.repeatInfinite,
     frameRate: frameConfig.frameRate

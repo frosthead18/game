@@ -10,7 +10,7 @@ export const SCENE_KEYS = {
 } as const;
 
 // Enemy types enum
-export enum EnemyType {
+export enum NPCType {
   ANGEL = 'angel',
   BANDIT = 'bandit',
   BEAR = 'bear',
@@ -84,7 +84,7 @@ export const ASSET_KEYS = {
   uiHeart: 'ui-heart',
   // Enemy keys
   ...Object.fromEntries(
-    Object.values(EnemyType).map(type => [type, type])
+    Object.values(NPCType).map(type => [type, type])
   )
 } as const;
 
@@ -433,7 +433,7 @@ export const ANIMATION_CONFIG = {
     frameStart: 0,
     frameEnd: 3
   },
-  enemy: {
+  npc: {
     frameRate: 10,
     frameStart: 0,
     frameEnd: 3
@@ -456,23 +456,23 @@ export interface CharacterConfig {
   baseDamage: number;
   baseSpeed: number;
   maxEnergy: number;
-  
+
   // Stat progression per level
   healthPerLevel: number;
   damagePerLevel: number;
-  
+
   // Energy/Stamina
   sprintCostPerFrame: number;
   sprintSpeedMultiplier: number;
   energyRegenRate: number;
   energyRegenDelay: number;
-  
+
   // Physics
   bodyWidthRatio: number;
   bodyHeightRatio: number;
   knockbackSpeed: number;
   damageTimeDelay: number;
-  
+
   // Animation config
   idleDownFrame: string;
   idleUpFrame: string;
@@ -480,10 +480,10 @@ export interface CharacterConfig {
   runFrameStart: number;
   runFrameEnd: number;
   frameRate: number;
-  
+
   // Leveling
   xpForLevel: (level: number) => number;
-  
+
   // Weapon system
   knifeCost: number;
   maxKnifeCount: number;
@@ -497,23 +497,23 @@ export const CHARACTER_CONFIGS: Record<CharacterType, CharacterConfig> = {
     baseDamage: 1,
     baseSpeed: 100,
     maxEnergy: 100,
-    
+
     // Stat progression per level
     healthPerLevel: 1,
     damagePerLevel: 0.5,
-    
+
     // Energy/Stamina
     sprintCostPerFrame: 0.5,
     sprintSpeedMultiplier: 1.5,
     energyRegenRate: 5,
     energyRegenDelay: 2000,
-    
+
     // Physics
     bodyWidthRatio: 0.5,
     bodyHeightRatio: 0.8,
     knockbackSpeed: 200,
     damageTimeDelay: 250,
-    
+
     // Animation config
     idleDownFrame: 'walk-down-3.png',
     idleUpFrame: 'walk-up-3.png',
@@ -521,10 +521,10 @@ export const CHARACTER_CONFIGS: Record<CharacterType, CharacterConfig> = {
     runFrameStart: 1,
     runFrameEnd: 8,
     frameRate: 15,
-    
+
     // Leveling
     xpForLevel: (level: number) => Math.floor(100 * Math.pow(1.5, level - 1)),
-    
+
     // Weapon system
     knifeCost: 15,
     maxKnifeCount: 5
@@ -535,23 +535,23 @@ export const CHARACTER_CONFIGS: Record<CharacterType, CharacterConfig> = {
     baseDamage: 1.5,
     baseSpeed: 90,
     maxEnergy: 60,
-    
+
     // Stat progression per level (higher HP growth)
     healthPerLevel: 2,
     damagePerLevel: 0.7,
-    
+
     // Energy/Stamina
     sprintCostPerFrame: 0.7,
     sprintSpeedMultiplier: 1.3,
     energyRegenRate: 3,
     energyRegenDelay: 2500,
-    
+
     // Physics
     bodyWidthRatio: 0.5,
     bodyHeightRatio: 0.8,
     knockbackSpeed: 180,
     damageTimeDelay: 300,
-    
+
     // Animation config (placeholder - will be updated when assets are added)
     idleDownFrame: 'idle-down-0.png',
     idleUpFrame: 'idle-up-0.png',
@@ -559,10 +559,10 @@ export const CHARACTER_CONFIGS: Record<CharacterType, CharacterConfig> = {
     runFrameStart: 0,
     runFrameEnd: 7,
     frameRate: 12,
-    
+
     // Leveling
     xpForLevel: (level: number) => Math.floor(100 * Math.pow(1.5, level - 1)),
-    
+
     // Weapon system
     knifeCost: 20,
     maxKnifeCount: 3
@@ -570,7 +570,7 @@ export const CHARACTER_CONFIGS: Record<CharacterType, CharacterConfig> = {
 };
 
 // Enemy configuration interface
-export interface EnemyConfig {
+export interface NPCConfig {
   animationType: AnimationType;
   baseSpeed: number;
   baseDamage: number;
@@ -589,9 +589,9 @@ export interface EnemyConfig {
 }
 
 // Enemy configurations
-export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
+export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
   // Standard enemies (idle + run)
-  [EnemyType.ANGEL]: {
+  [NPCType.ANGEL]: {
     animationType: 'standard',
     baseSpeed: 45,
     baseDamage: 2,
@@ -601,7 +601,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     idleFramePrefix: 'angel_idle_anim_f',
     runFramePrefix: 'angel_run_anim_f'
   },
-  [EnemyType.BIG_DEMON]: {
+  [NPCType.BIG_DEMON]: {
     animationType: 'standard',
     baseSpeed: 40,
     baseDamage: 3,
@@ -612,7 +612,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     idleFramePrefix: 'big_demon_idle_anim_f',
     runFramePrefix: 'big_demon_run_anim_f'
   },
-  [EnemyType.BIG_ZOMBIE]: {
+  [NPCType.BIG_ZOMBIE]: {
     animationType: 'standard',
     baseSpeed: 35,
     baseDamage: 3,
@@ -623,7 +623,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     idleFramePrefix: 'big_zombie_idle_anim_f',
     runFramePrefix: 'big_zombie_run_anim_f'
   },
-  [EnemyType.CHORT]: {
+  [NPCType.CHORT]: {
     animationType: 'standard',
     baseSpeed: 55,
     baseDamage: 2,
@@ -633,7 +633,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     idleFramePrefix: 'chort_idle_anim_f',
     runFramePrefix: 'chort_run_anim_f'
   },
-  [EnemyType.DOC]: {
+  [NPCType.DOC]: {
     animationType: 'standard',
     baseSpeed: 50,
     baseDamage: 1,
@@ -643,7 +643,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     idleFramePrefix: 'doc_idle_anim_f',
     runFramePrefix: 'doc_run_anim_f'
   },
-  [EnemyType.GOBLIN]: {
+  [NPCType.GOBLIN]: {
     animationType: 'standard',
     baseSpeed: 60,
     baseDamage: 1,
@@ -653,7 +653,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     idleFramePrefix: 'goblin_idle_anim_f',
     runFramePrefix: 'goblin_run_anim_f'
   },
-  [EnemyType.IMP]: {
+  [NPCType.IMP]: {
     animationType: 'standard',
     baseSpeed: 65,
     baseDamage: 1,
@@ -663,7 +663,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     idleFramePrefix: 'imp_idle_anim_f',
     runFramePrefix: 'imp_run_anim_f'
   },
-  [EnemyType.MASKED_ORC]: {
+  [NPCType.MASKED_ORC]: {
     animationType: 'standard',
     baseSpeed: 50,
     baseDamage: 2,
@@ -673,7 +673,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     idleFramePrefix: 'masked_orc_idle_anim_f',
     runFramePrefix: 'masked_orc_run_anim_f'
   },
-  [EnemyType.OGRE]: {
+  [NPCType.OGRE]: {
     animationType: 'standard',
     baseSpeed: 40,
     baseDamage: 3,
@@ -684,7 +684,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     idleFramePrefix: 'ogre_idle_anim_f',
     runFramePrefix: 'ogre_run_anim_f'
   },
-  [EnemyType.ORC_SHAMAN]: {
+  [NPCType.ORC_SHAMAN]: {
     animationType: 'standard',
     baseSpeed: 45,
     baseDamage: 2,
@@ -694,7 +694,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     idleFramePrefix: 'orc_shaman_idle_anim_f',
     runFramePrefix: 'orc_shaman_run_anim_f'
   },
-  [EnemyType.ORC_WARRIOR]: {
+  [NPCType.ORC_WARRIOR]: {
     animationType: 'standard',
     baseSpeed: 50,
     baseDamage: 2,
@@ -704,7 +704,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     idleFramePrefix: 'pumpkin_dude_idle_anim_f',
     runFramePrefix: 'pumpkin_dude_run_anim_f'
   },
-  [EnemyType.ORK_WARRIOR]: {
+  [NPCType.ORK_WARRIOR]: {
     animationType: 'standard',
     baseSpeed: 50,
     baseDamage: 2,
@@ -714,7 +714,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     idleFramePrefix: 'orc_warrior_idle_anim_f',
     runFramePrefix: 'orc_warrior_run_anim_f'
   },
-  [EnemyType.PUMPKIN]: {
+  [NPCType.PUMPKIN]: {
     animationType: 'standard',
     baseSpeed: 55,
     baseDamage: 2,
@@ -724,7 +724,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     idleFramePrefix: 'pumpkin_dude_idle_anim_f',
     runFramePrefix: 'pumpkin_dude_run_anim_f'
   },
-  [EnemyType.SKELET]: {
+  [NPCType.SKELET]: {
     animationType: 'standard',
     baseSpeed: 55,
     baseDamage: 1,
@@ -734,7 +734,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     idleFramePrefix: 'skelet_idle_anim_f',
     runFramePrefix: 'skelet_run_anim_f'
   },
-  [EnemyType.TINY_ZOMBIE]: {
+  [NPCType.TINY_ZOMBIE]: {
     animationType: 'standard',
     baseSpeed: 45,
     baseDamage: 1,
@@ -745,7 +745,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     idleFramePrefix: 'tiny_zombie_idle_anim_f',
     runFramePrefix: 'tiny_zombie_run_anim_f'
   },
-  [EnemyType.WOGOL]: {
+  [NPCType.WOGOL]: {
     animationType: 'standard',
     baseSpeed: 50,
     baseDamage: 2,
@@ -757,7 +757,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
   },
 
   // Advanced enemies (hit + idle + run)
-  [EnemyType.DWARF_F]: {
+  [NPCType.DWARF_F]: {
     animationType: 'advanced',
     baseSpeed: 45,
     baseDamage: 2,
@@ -768,7 +768,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     idleFramePrefix: 'dwarf_f_idle_anim_f',
     runFramePrefix: 'dwarf_f_run_anim_f'
   },
-  [EnemyType.DWARF_M]: {
+  [NPCType.DWARF_M]: {
     animationType: 'advanced',
     baseSpeed: 45,
     baseDamage: 2,
@@ -779,7 +779,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     idleFramePrefix: 'dwarf_m_idle_anim_f',
     runFramePrefix: 'dwarf_m_run_anim_f'
   },
-  [EnemyType.ELF_F]: {
+  [NPCType.ELF_F]: {
     animationType: 'advanced',
     baseSpeed: 60,
     baseDamage: 1,
@@ -790,7 +790,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     idleFramePrefix: 'elf_f_idle_anim_f',
     runFramePrefix: 'elf_f_run_anim_f'
   },
-  [EnemyType.ELF_M]: {
+  [NPCType.ELF_M]: {
     animationType: 'advanced',
     baseSpeed: 60,
     baseDamage: 1,
@@ -801,7 +801,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     idleFramePrefix: 'elf_m_idle_anim_f',
     runFramePrefix: 'elf_m_run_anim_f'
   },
-  [EnemyType.KNIGHT_F]: {
+  [NPCType.KNIGHT_F]: {
     animationType: 'advanced',
     baseSpeed: 40,
     baseDamage: 3,
@@ -812,7 +812,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     idleFramePrefix: 'knight_f_idle_anim_f',
     runFramePrefix: 'knight_f_run_anim_f'
   },
-  [EnemyType.KNIGHT_M]: {
+  [NPCType.KNIGHT_M]: {
     animationType: 'advanced',
     baseSpeed: 40,
     baseDamage: 3,
@@ -823,7 +823,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     idleFramePrefix: 'knight_m_idle_anim_f',
     runFramePrefix: 'knight_m_run_anim_f'
   },
-  [EnemyType.LIZARD]: {
+  [NPCType.LIZARD]: {
     animationType: 'standard',
     baseSpeed: 50,
     baseDamage: 1,
@@ -833,7 +833,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     idleFramePrefix: 'lizard_m_idle_anim_f',
     runFramePrefix: 'lizard_m_run_anim_f'
   },
-  [EnemyType.LIZARD_F]: {
+  [NPCType.LIZARD_F]: {
     animationType: 'advanced',
     baseSpeed: 50,
     baseDamage: 1,
@@ -844,7 +844,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     idleFramePrefix: 'lizard_f_idle_anim_f',
     runFramePrefix: 'lizard_f_run_anim_f'
   },
-  [EnemyType.LIZARD_M]: {
+  [NPCType.LIZARD_M]: {
     animationType: 'advanced',
     baseSpeed: 50,
     baseDamage: 1,
@@ -855,7 +855,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     idleFramePrefix: 'lizard_m_idle_anim_f',
     runFramePrefix: 'lizard_m_run_anim_f'
   },
-  [EnemyType.WIZZARD_F]: {
+  [NPCType.WIZZARD_F]: {
     animationType: 'advanced',
     baseSpeed: 45,
     baseDamage: 2,
@@ -866,7 +866,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     idleFramePrefix: 'wizzard_f_idle_anim_f',
     runFramePrefix: 'wizzard_f_run_anim_f'
   },
-  [EnemyType.WIZZARD_M]: {
+  [NPCType.WIZZARD_M]: {
     animationType: 'advanced',
     baseSpeed: 45,
     baseDamage: 2,
@@ -879,7 +879,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
   },
 
   // Simple enemies (single animation)
-  [EnemyType.ICE_ZOMBIE]: {
+  [NPCType.ICE_ZOMBIE]: {
     animationType: 'simple',
     baseSpeed: 30,
     baseDamage: 2,
@@ -888,7 +888,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     aggroRadius: 200,
     animFramePrefix: 'ice_zombie_anim_f'
   },
-  [EnemyType.MUDDY]: {
+  [NPCType.MUDDY]: {
     animationType: 'simple',
     baseSpeed: 25,
     baseDamage: 1,
@@ -897,7 +897,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     aggroRadius: 140,
     animFramePrefix: 'muddy_anim_f'
   },
-  [EnemyType.NECROMANCER]: {
+  [NPCType.NECROMANCER]: {
     animationType: 'simple',
     baseSpeed: 40,
     baseDamage: 2,
@@ -906,7 +906,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     aggroRadius: 240,
     animFramePrefix: 'necromancer_anim_f'
   },
-  [EnemyType.SLUG]: {
+  [NPCType.SLUG]: {
     animationType: 'simple',
     baseSpeed: 20,
     baseDamage: 1,
@@ -915,7 +915,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     aggroRadius: 120,
     animFramePrefix: 'slug_anim_f'
   },
-  [EnemyType.SWAMPY]: {
+  [NPCType.SWAMPY]: {
     animationType: 'simple',
     baseSpeed: 25,
     baseDamage: 1,
@@ -924,7 +924,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     aggroRadius: 140,
     animFramePrefix: 'swampy_anim_f'
   },
-  [EnemyType.TINY_SLUG]: {
+  [NPCType.TINY_SLUG]: {
     animationType: 'simple',
     baseSpeed: 30,
     baseDamage: 1,
@@ -934,7 +934,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     scale: 0.7,
     animFramePrefix: 'tiny_slug_anim_f'
   },
-  [EnemyType.ZOMBIE]: {
+  [NPCType.ZOMBIE]: {
     animationType: 'simple',
     baseSpeed: 35,
     baseDamage: 2,
@@ -945,7 +945,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
   },
 
   // New enemies with lowercase naming convention (0-based frames for consistency)
-  [EnemyType.BANDIT]: {
+  [NPCType.BANDIT]: {
     animationType: 'standard',
     baseSpeed: 55,
     baseDamage: 2,
@@ -957,7 +957,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     frameStart: 0,
     frameEnd: 3
   },
-  [EnemyType.BEAR]: {
+  [NPCType.BEAR]: {
     animationType: 'standard',
     baseSpeed: 40,
     baseDamage: 3,
@@ -970,7 +970,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     frameStart: 0,
     frameEnd: 3
   },
-  [EnemyType.CENTAUR_F]: {
+  [NPCType.CENTAUR_F]: {
     animationType: 'standard',
     baseSpeed: 60,
     baseDamage: 2,
@@ -983,7 +983,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     frameStart: 0,
     frameEnd: 3
   },
-  [EnemyType.CENTAUR_M]: {
+  [NPCType.CENTAUR_M]: {
     animationType: 'standard',
     baseSpeed: 60,
     baseDamage: 2,
@@ -996,7 +996,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     frameStart: 0,
     frameEnd: 3
   },
-  [EnemyType.ELF_FOREST_F]: {
+  [NPCType.ELF_FOREST_F]: {
     animationType: 'standard',
     baseSpeed: 65,
     baseDamage: 1,
@@ -1008,7 +1008,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     frameStart: 0,
     frameEnd: 3
   },
-  [EnemyType.ELF_FOREST_M]: {
+  [NPCType.ELF_FOREST_M]: {
     animationType: 'standard',
     baseSpeed: 65,
     baseDamage: 1,
@@ -1020,7 +1020,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     frameStart: 0,
     frameEnd: 3
   },
-  [EnemyType.ELF_KNIGHT]: {
+  [NPCType.ELF_KNIGHT]: {
     animationType: 'standard',
     baseSpeed: 50,
     baseDamage: 3,
@@ -1032,7 +1032,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     frameStart: 0,
     frameEnd: 3
   },
-  [EnemyType.ENT]: {
+  [NPCType.ENT]: {
     animationType: 'standard',
     baseSpeed: 30,
     baseDamage: 3,
@@ -1045,7 +1045,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     frameStart: 0,
     frameEnd: 3
   },
-  [EnemyType.FAIRY]: {
+  [NPCType.FAIRY]: {
     animationType: 'standard',
     baseSpeed: 70,
     baseDamage: 1,
@@ -1058,7 +1058,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     frameStart: 0,
     frameEnd: 3
   },
-  [EnemyType.FOREST_GUARDIAN]: {
+  [NPCType.FOREST_GUARDIAN]: {
     animationType: 'standard',
     baseSpeed: 35,
     baseDamage: 4,
@@ -1071,7 +1071,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     frameStart: 0,
     frameEnd: 3
   },
-  [EnemyType.GNOLL_BRUTE]: {
+  [NPCType.GNOLL_BRUTE]: {
     animationType: 'standard',
     baseSpeed: 45,
     baseDamage: 3,
@@ -1084,7 +1084,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     frameStart: 0,
     frameEnd: 3
   },
-  [EnemyType.GNOLL_OVERSEER]: {
+  [NPCType.GNOLL_OVERSEER]: {
     animationType: 'standard',
     baseSpeed: 50,
     baseDamage: 2,
@@ -1096,7 +1096,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     frameStart: 0,
     frameEnd: 3
   },
-  [EnemyType.GNOLL_SCOUT]: {
+  [NPCType.GNOLL_SCOUT]: {
     animationType: 'standard',
     baseSpeed: 60,
     baseDamage: 2,
@@ -1108,7 +1108,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     frameStart: 0,
     frameEnd: 3
   },
-  [EnemyType.GNOLL_SHAMAN]: {
+  [NPCType.GNOLL_SHAMAN]: {
     animationType: 'standard',
     baseSpeed: 45,
     baseDamage: 2,
@@ -1120,7 +1120,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     frameStart: 0,
     frameEnd: 3
   },
-  [EnemyType.GOLEM]: {
+  [NPCType.GOLEM]: {
     animationType: 'standard',
     baseSpeed: 25,
     baseDamage: 4,
@@ -1134,7 +1134,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     frameStart: 0,
     frameEnd: 5
   },
-  [EnemyType.KNIGHT_ELITE]: {
+  [NPCType.KNIGHT_ELITE]: {
     animationType: 'standard',
     baseSpeed: 45,
     baseDamage: 4,
@@ -1146,7 +1146,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     frameStart: 0,
     frameEnd: 3
   },
-  [EnemyType.KNIGHT_HEAVY]: {
+  [NPCType.KNIGHT_HEAVY]: {
     animationType: 'standard',
     baseSpeed: 35,
     baseDamage: 4,
@@ -1159,7 +1159,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     frameStart: 0,
     frameEnd: 3
   },
-  [EnemyType.KNIGHT_LARGE]: {
+  [NPCType.KNIGHT_LARGE]: {
     animationType: 'standard',
     baseSpeed: 30,
     baseDamage: 5,
@@ -1172,7 +1172,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     frameStart: 0,
     frameEnd: 3
   },
-  [EnemyType.KNIGHT_LARGE_ELITE]: {
+  [NPCType.KNIGHT_LARGE_ELITE]: {
     animationType: 'standard',
     baseSpeed: 35,
     baseDamage: 5,
@@ -1185,7 +1185,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     frameStart: 0,
     frameEnd: 3
   },
-  [EnemyType.MUSHROOM_LARGE]: {
+  [NPCType.MUSHROOM_LARGE]: {
     animationType: 'standard',
     baseSpeed: 20,
     baseDamage: 2,
@@ -1199,7 +1199,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     frameStart: 0,
     frameEnd: 3
   },
-  [EnemyType.MUSHROOM_NORMAL]: {
+  [NPCType.MUSHROOM_NORMAL]: {
     animationType: 'standard',
     baseSpeed: 25,
     baseDamage: 1,
@@ -1212,7 +1212,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     frameStart: 0,
     frameEnd: 3
   },
-  [EnemyType.RANGER]: {
+  [NPCType.RANGER]: {
     animationType: 'standard',
     baseSpeed: 60,
     baseDamage: 2,
@@ -1224,7 +1224,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     frameStart: 0,
     frameEnd: 3
   },
-  [EnemyType.THIEF]: {
+  [NPCType.THIEF]: {
     animationType: 'standard',
     baseSpeed: 70,
     baseDamage: 2,
@@ -1236,7 +1236,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     frameStart: 0,
     frameEnd: 3
   },
-  [EnemyType.TROLL_FOREST]: {
+  [NPCType.TROLL_FOREST]: {
     animationType: 'standard',
     baseSpeed: 35,
     baseDamage: 4,
@@ -1249,7 +1249,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     frameStart: 0,
     frameEnd: 3
   },
-  [EnemyType.WIZARD_FOREST]: {
+  [NPCType.WIZARD_FOREST]: {
     animationType: 'standard',
     baseSpeed: 45,
     baseDamage: 3,
@@ -1261,7 +1261,7 @@ export const ENEMY_CONFIGS: Record<EnemyType, EnemyConfig> = {
     frameStart: 0,
     frameEnd: 3
   },
-  [EnemyType.WOLF]: {
+  [NPCType.WOLF]: {
     animationType: 'standard',
     baseSpeed: 70,
     baseDamage: 2,

@@ -1,4 +1,4 @@
-import {EnemyType, GAME_CONFIG, ENEMY_CONFIGS, EnemyConfig} from "../constants";
+import {NPCType, GAME_CONFIG, NPC_CONFIGS, NPCConfig} from "../constants";
 
 export enum Directions {
   UP,
@@ -20,7 +20,7 @@ const getRandomDirection = (exclude: Directions): Directions => {
   return newDirection;
 };
 
-export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
+export class BaseNPC extends Phaser.Physics.Arcade.Sprite {
   private direction: Directions = Directions.LEFT;
   private moveEvent?: Phaser.Time.TimerEvent;
   private _level: number;
@@ -28,8 +28,8 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
   private _maxHealth!: number;
   private _damage!: number;
   private _speed!: number;
-  private _enemyType: EnemyType;
-  private _config: EnemyConfig;
+  private _npcType: NPCType;
+  private _config: NPCConfig;
   private _animationStarted = false;
   private _isAggressive = false;
   private _isReturningToSpawn = false;
@@ -39,11 +39,11 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
   private _isStationary: boolean;
   private _faune?: Phaser.Physics.Arcade.Sprite;
 
-  constructor(scene: Phaser.Scene, x: number, y: number, enemyType: EnemyType, frame?: string | number, level?: number) {
-    super(scene, x, y, enemyType, frame);
+  constructor(scene: Phaser.Scene, x: number, y: number, npcType: NPCType, frame?: string | number, level?: number) {
+    super(scene, x, y, npcType, frame);
 
-    this._enemyType = enemyType;
-    this._config = ENEMY_CONFIGS[enemyType];
+    this._npcType = npcType;
+    this._config = NPC_CONFIGS[npcType];
 
     // Clamp level between min and max
     this._level = Phaser.Math.Clamp(
@@ -78,16 +78,16 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
   }
 
   /**
-   * Initialize the enemy after it's been added to the scene
+   * Initialize the NPC after it's been added to the scene
    */
   public init(): void {
-    const texture = this.scene.textures.get(this._enemyType);
+    const texture = this.scene.textures.get(this._npcType);
 
     if (!texture || texture.key === '__MISSING') {
-      console.error(`[BaseEnemy] Texture '${this._enemyType}' not found!`);
+      console.error(`[BaseNPC] Texture '${this._npcType}' not found!`);
       return;
     }
-    
+
     if (!this._animationStarted) {
       this._animationStarted = true;
       this.playRunAnimation();
@@ -151,8 +151,8 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
     return this._damage;
   }
 
-  get enemyType(): EnemyType {
-    return this._enemyType;
+  get npcType(): NPCType {
+    return this._npcType;
   }
 
   get isAggressive(): boolean {
@@ -165,14 +165,14 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
 
   protected calculateStats(): void {
     const config = this._config;
-    
+
     // HP = baseHp * level * hpScaleFactor, rounded up (minimum 1)
     this._maxHealth = Math.ceil(config.baseHp * this._level * GAME_CONFIG.lizard.hpScaleFactor);
     this._health = this._maxHealth;
-    
+
     // Damage = baseDamage * level
     this._damage = config.baseDamage * this._level;
-    
+
     // Speed = baseSpeed * (1 + (level - 1) * speedScaleFactor)
     this._speed = config.baseSpeed * (1 + (this._level - 1) * GAME_CONFIG.lizard.speedScaleFactor);
   }
@@ -229,30 +229,30 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
 
   protected playRunAnimation(): void {
     const animationType = this._config.animationType;
-    const animKey = animationType === 'simple' ? `${this._enemyType}_anim` : `${this._enemyType}_run`;
-    
+    const animKey = animationType === 'simple' ? `${this._npcType}_anim` : `${this._npcType}_run`;
+
     if (!this.scene.anims.exists(animKey)) {
-      console.error(`[BaseEnemy] Animation '${animKey}' does not exist in scene for ${this._enemyType}!`);
+      console.error(`[BaseNPC] Animation '${animKey}' does not exist in scene for ${this._npcType}!`);
       return;
     }
-    
+
     this.anims.play(animKey, true);
   }
 
   protected playIdleAnimation(): void {
     const animationType = this._config.animationType;
-    
+
     // Simple animations only have one animation, so use that
     if (animationType === 'simple') {
-      const animKey = `${this._enemyType}_anim`;
+      const animKey = `${this._npcType}_anim`;
       if (this.scene.anims.exists(animKey)) {
         this.anims.play(animKey, true);
       }
       return;
     }
-    
+
     // Standard and advanced have idle animations
-    const animKey = `${this._enemyType}_idle`;
+    const animKey = `${this._npcType}_idle`;
     if (this.scene.anims.exists(animKey)) {
       this.anims.play(animKey, true);
     }
@@ -262,7 +262,7 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
     if (this.moveEvent) {
       return; // Already exists
     }
-    
+
     this.moveEvent = this.scene.time.addEvent({
       delay: GAME_CONFIG.lizard.directionChangeDelay,
       loop: true,
@@ -289,7 +289,7 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
     if (faune.health !== undefined && faune.health <= 0) {
       if (this._isAggressive) {
         this._isAggressive = false;
-        
+
         // If originally stationary, start returning to spawn
         if (this._isStationary) {
           this.destroyMovementTimer();
@@ -315,19 +315,19 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
     // Check if should become aggressive
     if (!this._isAggressive && distanceToPlayer <= this._aggroRadius) {
       this._isAggressive = true;
-      
+
       // If was stationary, start moving now
       if (this._isStationary) {
         this.createMovementTimer();
       }
-      
+
       // Switch to run animation
       this.playRunAnimation();
     }
     // Check if should return to passive (leash)
     else if (this._isAggressive && distanceFromSpawn > this._leashRadius) {
       this._isAggressive = false;
-      
+
       // If originally stationary, start returning to spawn
       if (this._isStationary) {
         this.destroyMovementTimer();
@@ -345,11 +345,11 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
     // Calculate direction to player
     const dx = this._faune.x - this.x;
     const dy = this._faune.y - this.y;
-    
+
     // Normalize and scale by speed
     const direction = new Phaser.Math.Vector2(dx, dy).normalize();
     this.setVelocity(direction.x * this._speed, direction.y * this._speed);
-    
+
     // Update facing direction
     if (dx < 0) {
       this.setFlipX(true);
@@ -377,11 +377,11 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
     // Calculate direction to spawn
     const dx = this._spawnPosition.x - this.x;
     const dy = this._spawnPosition.y - this.y;
-    
+
     // Normalize and scale by speed
     const direction = new Phaser.Math.Vector2(dx, dy).normalize();
     this.setVelocity(direction.x * this._speed, direction.y * this._speed);
-    
+
     // Update facing direction
     if (dx < 0) {
       this.setFlipX(true);

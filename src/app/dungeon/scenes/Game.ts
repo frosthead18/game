@@ -1,14 +1,14 @@
 import TilemapLayer = Phaser.Tilemaps.TilemapLayer;
 import ArcadeColliderType = Phaser.Types.Physics.Arcade.ArcadeColliderType;
-import {createAllEnemyAnimations} from "../enemies/enemy-animations";
+import {createAllNPCAnimations} from "../npc/npc-animations";
 import {createAllCharacterAnimations} from "../characters/character-animations";
 import {createChestAnimations} from "../items/chest-animations";
-import {BaseEnemy} from "../enemies/BaseEnemy";
-import {EnemyFactory} from "../enemies/EnemyFactory";
+import {BaseNPC} from "../npc/BaseNPC";
+import {NPCFactory} from "../npc/NPCFactory";
 import {CharacterFactory} from "../characters/CharacterFactory";
 import {Faune} from "../characters/faune/Faune";
 import {Chest} from "../items/Chest";
-import {ASSET_KEYS, GAME_CONFIG, SCENE_KEYS, EnemyType, CharacterType} from "../constants";
+import {ASSET_KEYS, GAME_CONFIG, SCENE_KEYS, NPCType, CharacterType} from "../constants";
 import {sceneEvents, EVENTS} from "../events/EventsCenter";
 import {debugDraw} from "../utils/debug";
 
@@ -79,7 +79,7 @@ export class Game extends Phaser.Scene {
 
   private createAnimations(): void {
     createAllCharacterAnimations(this.anims);
-    createAllEnemyAnimations(this.anims);
+    createAllNPCAnimations(this.anims);
     createChestAnimations(this.anims);
   }
 
@@ -90,7 +90,7 @@ export class Game extends Phaser.Scene {
       GAME_CONFIG.player.startY,
       CharacterType.FAUNE
     ) as Faune;
-    
+
     this.faune.setCursors(this.cursors);
   }
 
@@ -110,9 +110,9 @@ export class Game extends Phaser.Scene {
 
   private createEnemies(): void {
     this.enemies = this.physics.add.group({
-      classType: BaseEnemy,
+      classType: BaseNPC,
       createCallback: (gameObject: Phaser.GameObjects.GameObject) => {
-        const enemy = gameObject as BaseEnemy;
+        const enemy = gameObject as BaseNPC;
         if (enemy.body) {
           enemy.body.onCollide = true;
         }
@@ -121,38 +121,38 @@ export class Game extends Phaser.Scene {
 
     // Define enemy type weights for varied spawning
     // Higher numbers = more common
-    const enemyWeights: Partial<Record<EnemyType, number>> = {
-      [EnemyType.GOBLIN]: 5,
-      [EnemyType.IMP]: 5,
-      [EnemyType.SKELET]: 4,
-      [EnemyType.ZOMBIE]: 4,
-      [EnemyType.SLUG]: 3,
-      [EnemyType.LIZARD_M]: 3,
-      [EnemyType.MASKED_ORC]: 2,
-      [EnemyType.CHORT]: 2,
-      [EnemyType.OGRE]: 1,
-      [EnemyType.KNIGHT_M]: 1,
-      [EnemyType.KNIGHT_F]: 1
+    const enemyWeights: Partial<Record<NPCType, number>> = {
+      [NPCType.GOBLIN]: 5,
+      [NPCType.IMP]: 5,
+      [NPCType.SKELET]: 4,
+      [NPCType.ZOMBIE]: 4,
+      [NPCType.SLUG]: 3,
+      [NPCType.LIZARD_M]: 3,
+      [NPCType.MASKED_ORC]: 2,
+      [NPCType.CHORT]: 2,
+      [NPCType.OGRE]: 1,
+      [NPCType.KNIGHT_M]: 1,
+      [NPCType.KNIGHT_F]: 1
     };
 
     // Spawn multiple enemies at random positions
     const spawnPositions: { x: number; y: number }[] = [];
-    
+
     for (let i = 0; i < GAME_CONFIG.lizard.spawnCount; i++) {
       const position = this.getRandomSpawnPosition(spawnPositions);
-      
+
       if (position) {
         spawnPositions.push(position);
-        
+
         // Get a random enemy type based on weights
-        const enemyType = EnemyFactory.getWeightedRandomEnemyType(enemyWeights);
-        
+        const enemyType = NPCFactory.getWeightedRandomNPCType(enemyWeights);
+
         // Create enemy using factory
-        const enemy = EnemyFactory.createEnemy(this, position.x, position.y, enemyType);
-        
+        const enemy = NPCFactory.createNPC(this, position.x, position.y, enemyType);
+
         // Pass Faune reference for aggro system
         enemy.setFaune(this.faune);
-        
+
         // Add to group
         this.enemies.add(enemy);
         enemy.setActive(true);
@@ -166,11 +166,11 @@ export class Game extends Phaser.Scene {
   private getRandomSpawnPosition(existingPositions: { x: number; y: number }[]): { x: number; y: number } | null {
     const config = GAME_CONFIG.lizard;
     const margin = config.spawnAreaMargin;
-    
+
     // Use actual tilemap dimensions in pixels
     const mapWidth = this.tilemap.widthInPixels;
     const mapHeight = this.tilemap.heightInPixels;
-    
+
     const minX = margin;
     const maxX = mapWidth - margin;
     const minY = margin;
@@ -267,7 +267,7 @@ export class Game extends Phaser.Scene {
     object1: Phaser.Types.Physics.Arcade.GameObjectWithBody | Phaser.Physics.Arcade.Body | Phaser.Physics.Arcade.StaticBody | Phaser.Tilemaps.Tile,
     object2: Phaser.Types.Physics.Arcade.GameObjectWithBody | Phaser.Physics.Arcade.Body | Phaser.Physics.Arcade.StaticBody | Phaser.Tilemaps.Tile
   ): void {
-    const enemy = object2 as BaseEnemy;
+    const enemy = object2 as BaseNPC;
 
     // Only apply damage if enemy is aggressive and alive
     if (!enemy.isAggressive || enemy.health <= 0) {
@@ -304,7 +304,7 @@ export class Game extends Phaser.Scene {
     object2: Phaser.Types.Physics.Arcade.GameObjectWithBody | Phaser.Physics.Arcade.Body | Phaser.Physics.Arcade.StaticBody | Phaser.Tilemaps.Tile
   ): void {
     const knife = object1 as Phaser.Physics.Arcade.Image;
-    const enemy = object2 as BaseEnemy;
+    const enemy = object2 as BaseNPC;
 
     // Always destroy the knife on hit
     knife.destroy();
@@ -315,16 +315,16 @@ export class Game extends Phaser.Scene {
       // Award XP to player
       const xpReward = enemy.getXpReward();
       this.faune.gainXp(xpReward);
-      
+
       // Create corpse sprite before destroying enemy
       this.createCorpse(enemy);
-      
+
       // Destroy enemy
       enemy.destroy();
     }
   }
 
-  private createCorpse(enemy: BaseEnemy): void {
+  private createCorpse(enemy: BaseNPC): void {
     // Create corpse sprite at enemy position
     const corpse = this.add.sprite(
       enemy.x,
@@ -332,17 +332,17 @@ export class Game extends Phaser.Scene {
       enemy.texture.key,
       enemy.frame.name
     );
-    
+
     // Copy enemy properties
     corpse.setScale(enemy.scaleX, enemy.scaleY);
     corpse.setFlipX(enemy.flipX);
-    
+
     // Apply gray tint to indicate death
     corpse.setTint(0x888888);
-    
+
     // Set depth below living entities
     corpse.setDepth(0);
-    
+
     // Add to corpses group
     this.corpses.add(corpse);
   }

@@ -1,4 +1,4 @@
-import {ASSET_KEYS, ASSET_PATHS, SCENE_KEYS, EnemyType, CharacterType} from "../constants";
+import {ASSET_KEYS, ASSET_PATHS, SCENE_KEYS, NPCType, CharacterType} from "../constants";
 
 export class Preloader extends Phaser.Scene {
   constructor() {
@@ -40,8 +40,8 @@ export class Preloader extends Phaser.Scene {
   }
 
   private loadEnemies(): void {
-    // Load all enemy types
-    Object.values(EnemyType).forEach(enemyType => {
+    // Load all NPC as enemy types
+    Object.values(NPCType).forEach(enemyType => {
       const enemyPath = ASSET_PATHS.enemies[enemyType as keyof typeof ASSET_PATHS.enemies];
       if (enemyPath) {
         this.load.atlas(
