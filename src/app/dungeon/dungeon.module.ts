@@ -1,21 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DungeonPageComponent } from './dungeon-page/dungeon-page.component';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
-import { FullscreenConfirmDialogComponent } from './dialogs/fullscreen-confirm-dialog.component';
-import { ExitConfirmDialogComponent } from './dialogs/exit-confirm-dialog.component';
+import { GamePageModule } from '../shared/components/game-page/game-page.module';
 
 @NgModule({
   declarations: [
-    DungeonPageComponent,
-    FullscreenConfirmDialogComponent,
-    ExitConfirmDialogComponent
+    DungeonPageComponent
   ],
   imports: [
     CommonModule,
-    MatDialogModule,
-    MatButtonModule
+    GamePageModule
   ]
 })
 export class DungeonModule { }
