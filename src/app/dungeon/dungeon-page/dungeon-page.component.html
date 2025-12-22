@@ -1,5 +1,43 @@
-<div id="dungeonGameContainer" class="w-full h-full flex items-center justify-center bg-black">
-  <!-- Canvas will be injected here by Phaser -->
+<div class="w-screen h-screen overflow-hidden">
+  <!-- Preview Page -->
+  <div *ngIf="viewState === 'preview'" class="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-black">
+    <div class="max-w-2xl mx-auto px-8 text-center">
+      <h1 class="text-5xl font-bold mb-6 text-white">Dungeon Explorer</h1>
+      
+      <p class="text-lg text-gray-300 mb-8">
+        Embark on an epic adventure through mysterious dungeons filled with treasures, enemies, and secrets waiting to be discovered.
+      </p>
+
+      <div class="mb-10 text-left bg-gray-800/50 rounded-lg p-6">
+        <h2 class="text-2xl font-semibold mb-4 text-white">Features</h2>
+        <ul class="space-y-3 text-gray-300">
+          <li class="flex items-start">
+            <span class="text-green-400 mr-3">✓</span>
+            <span>Explore handcrafted dungeon levels with unique challenges</span>
+          </li>
+          <li class="flex items-start">
+            <span class="text-green-400 mr-3">✓</span>
+            <span>Battle dangerous enemies and collect powerful items</span>
+          </li>
+          <li class="flex items-start">
+            <span class="text-green-400 mr-3">✓</span>
+            <span>Smooth character controls and responsive gameplay</span>
+          </li>
+          <li class="flex items-start">
+            <span class="text-green-400 mr-3">✓</span>
+            <span>Immersive fullscreen experience</span>
+          </li>
+        </ul>
+      </div>
+
+      <button mat-raised-button color="primary" class="!text-lg !px-12 !py-6" (click)="onPlayClicked()">
+        Play Game
+      </button>
+    </div>
+  </div>
+
+  <!-- Game Container -->
+  <div *ngIf="viewState === 'playing'" id="dungeonGameContainer" class="w-full h-full bg-black">
+    <!-- Canvas will be injected here by Phaser -->
+  </div>
 </div>
-
-

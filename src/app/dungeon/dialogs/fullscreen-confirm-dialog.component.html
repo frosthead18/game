@@ -1,0 +1,14 @@
+<div class="p-6">
+  <h2 class="text-xl font-bold mb-4">Enter Fullscreen Mode</h2>
+  <p class="mb-4">
+    The game will enter fullscreen mode for the best experience.
+  </p>
+  <p class="mb-6 text-sm text-gray-400">
+    Press <kbd class="px-2 py-1 bg-gray-700 rounded">ESC</kbd> at any time to exit the game.
+  </p>
+  <div class="flex justify-end gap-3">
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="onStart()">Start</button>
+  </div>
+</div>
+
