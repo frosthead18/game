@@ -74,6 +74,11 @@
    <properties>
     <property name="collides" type="bool" value="true"/>
    </properties>
+   <animation>
+    <frame tileid="14" duration="100"/>
+    <frame tileid="15" duration="100"/>
+    <frame tileid="16" duration="100"/>
+   </animation>
   </tile>
   <tile id="15">
    <properties>
@@ -119,6 +124,11 @@
    <properties>
     <property name="collides" value=""/>
    </properties>
+   <animation>
+    <frame tileid="24" duration="100"/>
+    <frame tileid="25" duration="100"/>
+    <frame tileid="26" duration="100"/>
+   </animation>
   </tile>
   <tile id="25">
    <properties>
@@ -164,6 +174,11 @@
    <properties>
     <property name="collides" type="bool" value="true"/>
    </properties>
+   <animation>
+    <frame tileid="34" duration="100"/>
+    <frame tileid="35" duration="100"/>
+    <frame tileid="36" duration="100"/>
+   </animation>
   </tile>
   <tile id="35">
    <properties>
@@ -209,6 +224,11 @@
    <properties>
     <property name="collides" value=""/>
    </properties>
+   <animation>
+    <frame tileid="44" duration="100"/>
+    <frame tileid="45" duration="100"/>
+    <frame tileid="46" duration="100"/>
+   </animation>
   </tile>
   <tile id="45">
    <properties>
@@ -702,6 +722,11 @@
    <properties>
     <property name="collides" type="bool" value="true"/>
    </properties>
+   <animation>
+    <frame tileid="13" duration="100"/>
+    <frame tileid="14" duration="100"/>
+    <frame tileid="15" duration="100"/>
+   </animation>
   </tile>
   <tile id="14">
    <properties>
@@ -748,6 +773,13 @@
     <property name="collides" type="bool" value="true"/>
    </properties>
   </tile>
+  <tile id="23">
+   <animation>
+    <frame tileid="23" duration="100"/>
+    <frame tileid="24" duration="100"/>
+    <frame tileid="25" duration="100"/>
+   </animation>
+  </tile>
   <tile id="30">
    <properties>
     <property name="collides" type="bool" value="true"/>
@@ -767,6 +799,11 @@
    <properties>
     <property name="collides" type="bool" value="true"/>
    </properties>
+   <animation>
+    <frame tileid="33" duration="100"/>
+    <frame tileid="34" duration="100"/>
+    <frame tileid="35" duration="100"/>
+   </animation>
   </tile>
   <tile id="34">
    <properties>
@@ -782,6 +819,13 @@
    <properties>
     <property name="collides" type="bool" value="true"/>
    </properties>
+  </tile>
+  <tile id="43">
+   <animation>
+    <frame tileid="43" duration="100"/>
+    <frame tileid="44" duration="100"/>
+    <frame tileid="45" duration="100"/>
+   </animation>
   </tile>
   <tile id="53">
    <properties>
@@ -802,6 +846,11 @@
    <properties>
     <property name="collides" type="bool" value="true"/>
    </properties>
+   <animation>
+    <frame tileid="66" duration="1000"/>
+    <frame tileid="67" duration="100"/>
+    <frame tileid="68" duration="100"/>
+   </animation>
   </tile>
   <tile id="67">
    <properties>
@@ -907,13 +956,6 @@
    <properties>
     <property name="collides" type="bool" value="true"/>
    </properties>
-  </tile>
-  <tile id="103">
-   <animation>
-    <frame tileid="66" duration="100"/>
-    <frame tileid="67" duration="100"/>
-    <frame tileid="68" duration="100"/>
-   </animation>
   </tile>
  </tileset>
  <layer id="2" name="Ground" width="100" height="100">
