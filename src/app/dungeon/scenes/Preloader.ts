@@ -20,6 +20,7 @@ export class Preloader extends Phaser.Scene {
 
   private loadTilemap(): void {
     this.load.image(ASSET_KEYS.tiles, ASSET_PATHS.tiles.image);
+    this.load.image(ASSET_KEYS.desertTiles, ASSET_PATHS.tiles.desertImage);
     this.load.tilemapTiledJSON(ASSET_KEYS.dungeon, ASSET_PATHS.tiles.json);
   }
 

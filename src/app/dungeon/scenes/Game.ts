@@ -59,14 +59,16 @@ export class Game extends Phaser.Scene {
   private createMap(): TilemapLayer | null {
     this.tilemap = this.make.tilemap({key: ASSET_KEYS.dungeon});
     const tileSet = this.tilemap.addTilesetImage(ASSET_KEYS.dungeon, ASSET_KEYS.tiles);
+    const desertTileSet = this.tilemap.addTilesetImage('dessert_dungeon', ASSET_KEYS.desertTiles);
 
-    if (!tileSet) {
+    if (!tileSet || !desertTileSet) {
       console.error('Failed to load tileset');
       return null;
     }
 
-    this.tilemap.createLayer('Ground', tileSet, 0, 0);
-    this.wallsLayer = this.tilemap.createLayer('Walls', tileSet, 0, 0);
+    const tileSets = [tileSet, desertTileSet];
+    this.tilemap.createLayer('Ground', tileSets, 0, 0);
+    this.wallsLayer = this.tilemap.createLayer('Walls', tileSets, 0, 0);
     this.wallsLayer?.setCollisionByProperty({collides: true});
 
     // Uncomment to debug collision layout

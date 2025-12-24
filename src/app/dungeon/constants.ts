@@ -76,13 +76,14 @@ export enum NPCType {
 // Asset keys
 export const ASSET_KEYS = {
   tiles: 'tiles',
+  desertTiles: 'desert-tiles',
   dungeon: 'dungeon',
   faune: 'faune',
   lizard: 'lizard',
   treasure: 'treasure',
   knife: 'knife',
   uiHeart: 'ui-heart',
-  // Enemy keys
+  // NPC keys
   ...Object.fromEntries(
     Object.values(NPCType).map(type => [type, type])
   )
@@ -92,6 +93,7 @@ export const ASSET_KEYS = {
 export const ASSET_PATHS = {
   tiles: {
     image: 'assets/dungeon/tiles/dungeon_tiles.png',
+    desertImage: 'assets/dungeon/tiles/omnibo_dessert_dungeon.png',
     json: 'assets/dungeon/tiles/dungeon-01.json'
   },
   characters: {
