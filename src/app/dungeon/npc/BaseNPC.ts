@@ -1,4 +1,5 @@
-import {NPCType, GAME_CONFIG, NPC_CONFIGS, NPCConfig} from "../constants";
+import {NPCType, GAME_CONFIG, NPC_CONFIGS, NPCConfig, CombatStats, DamageResult} from "../constants";
+import {DamageCalculator} from "../utils/damage-calculator";
 
 export enum Directions {
   UP,
@@ -27,6 +28,8 @@ export class BaseNPC extends Phaser.Physics.Arcade.Sprite {
   private _health!: number;
   private _maxHealth!: number;
   private _damage!: number;
+  private _defense: number = 0;
+  private _damagePerLevel!: number;
   private _speed!: number;
   private _npcType: NPCType;
   private _config: NPCConfig;
@@ -151,6 +154,14 @@ export class BaseNPC extends Phaser.Physics.Arcade.Sprite {
     return this._damage;
   }
 
+  get defense(): number {
+    return this._defense;
+  }
+
+  get damageVariation(): number {
+    return this._config.damageVariation ?? 0.2;
+  }
+
   get npcType(): NPCType {
     return this._npcType;
   }
@@ -170,11 +181,21 @@ export class BaseNPC extends Phaser.Physics.Arcade.Sprite {
     this._maxHealth = Math.ceil(config.baseHp * this._level * GAME_CONFIG.lizard.hpScaleFactor);
     this._health = this._maxHealth;
 
-    // Damage = baseDamage * level
-    this._damage = config.baseDamage * this._level;
+    // Enhanced damage calculation
+    this._damagePerLevel = config.damagePerLevel ?? (config.baseDamage * 0.2);
+    this._damage = DamageCalculator.getScaledDamage(
+      config.baseDamage,
+      this._level,
+      this._damagePerLevel
+    );
+
+    // Defense (if configured)
+    this._defense = config.defense ?? 0;
 
     // Speed = baseSpeed * (1 + (level - 1) * speedScaleFactor)
     this._speed = config.baseSpeed * (1 + (this._level - 1) * GAME_CONFIG.lizard.speedScaleFactor);
+    
+    console.log(`[BaseNPC] ${this._npcType} L${this._level} - HP: ${this._maxHealth}, Damage: ${this._damage}, Defense: ${this._defense}`);
   }
 
   public takeDamage(amount: number): boolean {
@@ -392,6 +413,29 @@ export class BaseNPC extends Phaser.Physics.Arcade.Sprite {
 
   public getXpReward(): number {
     return this._config.baseXp * this._level;
+  }
+
+  /**
+   * Get combat stats for damage calculations
+   */
+  public getCombatStats(): CombatStats {
+    return {
+      damage: this._damage,
+      defense: this._defense,
+      level: this._level,
+      critChance: this._config.criticalChance
+    };
+  }
+
+  /**
+   * Calculate damage this NPC would deal to a target
+   */
+  public calculateAttackDamage(targetStats?: CombatStats): DamageResult {
+    return DamageCalculator.calculateDamage(
+      this.getCombatStats(),
+      targetStats,
+      this.damageVariation
+    );
   }
 }
 

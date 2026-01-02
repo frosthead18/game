@@ -7,7 +7,9 @@ import {SCENE_KEYS, GAME_CONFIG} from '../constants';
  * Runs in parallel with the main Game scene
  */
 export class GameUI extends Phaser.Scene {
-  private hearts!: Phaser.GameObjects.Group;
+  private hpBarBackground!: Phaser.GameObjects.Graphics;
+  private hpBarFill!: Phaser.GameObjects.Graphics;
+  private hpText!: Phaser.GameObjects.Text;
   private levelText!: Phaser.GameObjects.Text;
   private xpBarBackground!: Phaser.GameObjects.Graphics;
   private xpBarFill!: Phaser.GameObjects.Graphics;
@@ -54,23 +56,35 @@ export class GameUI extends Phaser.Scene {
       this.knifeCountText.text = count.toString();
     });
 
-    // Create hearts for health display
-    this.hearts = this.add.group({
-      classType: Phaser.GameObjects.Image
-    });
+    // === NEW HP BAR SYSTEM ===
+    // Create HP bar background
+    this.hpBarBackground = this.add.graphics();
+    this.hpBarBackground.fillStyle(0x000000, 0.5);
+    this.hpBarBackground.fillRect(10, 40, 150, 20);
+    
+    // Add border to HP bar
+    this.hpBarBackground.lineStyle(2, 0x000000, 1);
+    this.hpBarBackground.strokeRect(10, 40, 150, 20);
 
-    this.hearts.createMultiple({
-      key: 'ui-heart-full',
-      setXY: {
-        x: 10,
-        y: 40,
-        stepX: 20
-      },
-      quantity: GAME_CONFIG.player.maxHealth
-    });
+    // Create HP bar fill
+    this.hpBarFill = this.add.graphics();
+
+    // Create HP text (centered on bar)
+    this.hpText = this.add.text(85, 50, '3 / 3', {
+      fontSize: '14px',
+      color: '#ffffff',
+      fontStyle: 'bold',
+      stroke: '#000000',
+      strokeThickness: 3
+    }).setOrigin(0.5, 0.5);
 
     // Listen for health changes
     sceneEvents.on(EVENTS.PLAYER_HEALTH_CHANGED, this.handleHealthChanged, this);
+
+    // Initialize HP bar with starting health
+    const startingHealth = GAME_CONFIG.player.baseMaxHealth;
+    this.updateHpBar(startingHealth, startingHealth);
+    // === END HP BAR SYSTEM ===
 
     // Create level display
     this.levelText = this.add.text(10, 70, 'Level 1', {
@@ -137,18 +151,60 @@ export class GameUI extends Phaser.Scene {
     });
   }
 
-  private handleHealthChanged(health: number): void {
-    const hearts = this.hearts.getChildren() as Phaser.GameObjects.Image[];
+  // === UPDATED: Replace heart-based system with HP bar ===
+  private handleHealthChanged(health: number, maxHealth?: number): void {
+    // If maxHealth is not provided, try to get it from the stored value or use default
+    const currentMaxHealth = maxHealth || this._currentMaxHealth;
+    this.updateHpBar(health, currentMaxHealth);
+  }
 
-    for (let i = 0; i < hearts.length; i++) {
-      const heart = hearts[i];
-      if (i < health) {
-        heart.setTexture('ui-heart-full');
-      } else {
-        heart.setTexture('ui-heart-empty');
-      }
+  private updateHpBar(currentHp: number, maxHp: number): void {
+    // Clear previous fill
+    this.hpBarFill.clear();
+
+    // Calculate fill percentage
+    const percentage = Math.max(0, Math.min(currentHp / maxHp, 1));
+    const barWidth = 150;
+    const fillWidth = barWidth * percentage;
+
+    // Choose color based on HP percentage
+    let color = 0xff0000; // Red
+    if (percentage > 0.6) {
+      color = 0x00ff00; // Green when above 60%
+    } else if (percentage > 0.3) {
+      color = 0xffff00; // Yellow when between 30-60%
+    }
+
+    // Draw new fill with gradient effect
+    this.hpBarFill.fillStyle(color, 0.9);
+    this.hpBarFill.fillRect(10, 40, fillWidth, 20);
+    
+    // Add shine effect (lighter color on top half)
+    this.hpBarFill.fillStyle(color, 0.3);
+    this.hpBarFill.fillRect(10, 40, fillWidth, 10);
+
+    // Update text
+    this.hpText.setText(`${Math.floor(currentHp)} / ${maxHp}`);
+    
+    // Pulse effect when taking damage
+    if (percentage < 0.3) {
+      this.tweens.add({
+        targets: this.hpBarFill,
+        alpha: { from: 1, to: 0.7 },
+        duration: 300,
+        yoyo: true,
+        repeat: 0
+      });
     }
   }
+
+  // Helper to get current max health (stores last known value)
+  private _currentMaxHealth: number = GAME_CONFIG.player.baseMaxHealth;
+  
+  private getCurrentMaxHealth(): number {
+    return this._currentMaxHealth;
+  }
+  // === END HP BAR UPDATES ===
 
   private handleXpChanged(currentXp: number, xpNeeded: number): void {
     this.updateXpBar(currentXp, xpNeeded);
@@ -176,8 +232,9 @@ export class GameUI extends Phaser.Scene {
       repeat: 3
     });
 
-    // Update hearts for new max health
-    this.updateMaxHealth(maxHealth);
+    // Update stored max health and refresh HP bar
+    this._currentMaxHealth = maxHealth;
+    // Health will be updated via PLAYER_HEALTH_CHANGED event
   }
 
   private updateXpBar(currentXp: number, xpNeeded: number): void {
@@ -197,21 +254,6 @@ export class GameUI extends Phaser.Scene {
     this.xpText.setText(`${currentXp} / ${xpNeeded}`);
   }
 
-  private updateMaxHealth(maxHealth: number): void {
-    // Clear existing hearts
-    this.hearts.clear(true, true);
-
-    // Create new hearts based on new max health
-    this.hearts.createMultiple({
-      key: 'ui-heart-full',
-      setXY: {
-        x: 10,
-        y: 40,
-        stepX: 20
-      },
-      quantity: maxHealth
-    });
-  }
 
   private handleEnergyChanged(currentEnergy: number, maxEnergy: number): void {
     this.updateEnergyBar(currentEnergy, maxEnergy);

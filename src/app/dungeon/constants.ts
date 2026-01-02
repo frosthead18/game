@@ -73,6 +73,22 @@ export enum NPCType {
   ZOMBIE = 'zombie'
 }
 
+// Combat system interfaces
+export interface DamageResult {
+  totalDamage: number;
+  baseDamage: number;
+  isCritical: boolean;
+  damageVariation: number;
+  levelBonus: number;
+}
+
+export interface CombatStats {
+  damage: number;
+  defense: number;
+  level: number;
+  critChance?: number;
+}
+
 // Asset keys
 export const ASSET_KEYS = {
   tiles: 'tiles',
@@ -366,6 +382,23 @@ export const ASSET_PATHS = {
 
 // Game configuration
 export const GAME_CONFIG = {
+  combat: {
+    // Damage variation (percentage)
+    minDamageMultiplier: 0.8,   // Minimum 80% of base damage
+    maxDamageMultiplier: 1.2,   // Maximum 120% of base damage
+    
+    // Critical hit system
+    criticalChance: 0.15,        // 15% chance for critical hit
+    criticalMultiplier: 2.0,     // Critical hits do 2x damage
+    
+    // Armor/Defense system
+    playerBaseDefense: 0,        // Reduces incoming damage
+    defensePerLevel: 0.5,        // Defense gained per level
+    
+    // Level scaling
+    levelDifferenceBonus: 0.1,   // 10% damage bonus per level difference
+    maxLevelBonus: 0.5,          // Maximum 50% bonus from level difference
+  },
   player: {
     startX: 128,
     startY: 128,
@@ -380,8 +413,9 @@ export const GAME_CONFIG = {
     xp: 0,
     baseMaxHealth: 3,
     healthPerLevel: 1,
-    baseDamage: 1,
-    damagePerLevel: 0.5,
+    baseDamage: 2,               // Increased from 1
+    damagePerLevel: 1,           // Increased from 0.5
+    minDamage: 1,                // Minimum damage that can be dealt
     xpForLevel: (level: number) => Math.floor(100 * Math.pow(1.5, level - 1)),
     // Energy/Stamina system
     maxEnergy: 100,
@@ -588,6 +622,12 @@ export interface NPCConfig {
   isStationary?: boolean;  // Enemy remains still until provoked
   aggroRadius?: number;    // Distance at which enemy becomes aggressive (0 = never aggressive)
   leashRadius?: number;    // Distance from spawn where enemy returns to passive (defaults to aggroRadius * 2)
+  
+  // Enhanced damage properties
+  damageVariation?: number;     // Custom damage range (0-1, default uses global)
+  criticalChance?: number;      // Custom crit chance (default uses global)
+  defense?: number;             // Damage reduction
+  damagePerLevel?: number;      // How much damage increases per level (default: baseDamage * 0.2)
 }
 
 // Enemy configurations
@@ -600,6 +640,9 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 2,
     baseXp: 40,
     aggroRadius: 200,
+    damageVariation: 0.2,
+    criticalChance: 0.15,
+    defense: 1,
     idleFramePrefix: 'angel_idle_anim_f',
     runFramePrefix: 'angel_run_anim_f'
   },
@@ -611,6 +654,10 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseXp: 60,
     aggroRadius: 280,
     scale: 1.2,
+    damageVariation: 0.15,
+    criticalChance: 0.25,
+    defense: 2,
+    damagePerLevel: 1.5,
     idleFramePrefix: 'big_demon_idle_anim_f',
     runFramePrefix: 'big_demon_run_anim_f'
   },
@@ -622,6 +669,10 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseXp: 70,
     aggroRadius: 220,
     scale: 1.2,
+    damageVariation: 0.15,
+    criticalChance: 0.25,
+    defense: 2,
+    damagePerLevel: 1.5,
     idleFramePrefix: 'big_zombie_idle_anim_f',
     runFramePrefix: 'big_zombie_run_anim_f'
   },
@@ -632,6 +683,9 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 2,
     baseXp: 40,
     aggroRadius: 260,
+    damageVariation: 0.2,
+    criticalChance: 0.15,
+    defense: 1,
     idleFramePrefix: 'chort_idle_anim_f',
     runFramePrefix: 'chort_run_anim_f'
   },
@@ -642,6 +696,8 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 2,
     baseXp: 30,
     aggroRadius: 180,
+    damageVariation: 0.3,
+    criticalChance: 0.05,
     idleFramePrefix: 'doc_idle_anim_f',
     runFramePrefix: 'doc_run_anim_f'
   },
@@ -652,6 +708,8 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 1,
     baseXp: 20,
     aggroRadius: 200,
+    damageVariation: 0.3,
+    criticalChance: 0.05,
     idleFramePrefix: 'goblin_idle_anim_f',
     runFramePrefix: 'goblin_run_anim_f'
   },
@@ -662,6 +720,8 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 1,
     baseXp: 20,
     aggroRadius: 200,
+    damageVariation: 0.3,
+    criticalChance: 0.05,
     idleFramePrefix: 'imp_idle_anim_f',
     runFramePrefix: 'imp_run_anim_f'
   },
@@ -672,6 +732,9 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 2,
     baseXp: 40,
     aggroRadius: 220,
+    damageVariation: 0.2,
+    criticalChance: 0.15,
+    defense: 1,
     idleFramePrefix: 'masked_orc_idle_anim_f',
     runFramePrefix: 'masked_orc_run_anim_f'
   },
@@ -683,6 +746,10 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseXp: 70,
     aggroRadius: 280,
     scale: 1.3,
+    damageVariation: 0.15,
+    criticalChance: 0.25,
+    defense: 2,
+    damagePerLevel: 1.5,
     idleFramePrefix: 'ogre_idle_anim_f',
     runFramePrefix: 'ogre_run_anim_f'
   },
@@ -693,6 +760,9 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 2,
     baseXp: 40,
     aggroRadius: 220,
+    damageVariation: 0.2,
+    criticalChance: 0.15,
+    defense: 1,
     idleFramePrefix: 'orc_shaman_idle_anim_f',
     runFramePrefix: 'orc_shaman_run_anim_f'
   },
@@ -703,6 +773,9 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 3,
     baseXp: 50,
     aggroRadius: 220,
+    damageVariation: 0.2,
+    criticalChance: 0.15,
+    defense: 1,
     idleFramePrefix: 'pumpkin_dude_idle_anim_f',
     runFramePrefix: 'pumpkin_dude_run_anim_f'
   },
@@ -713,6 +786,9 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 3,
     baseXp: 50,
     aggroRadius: 220,
+    damageVariation: 0.2,
+    criticalChance: 0.15,
+    defense: 1,
     idleFramePrefix: 'orc_warrior_idle_anim_f',
     runFramePrefix: 'orc_warrior_run_anim_f'
   },
@@ -723,6 +799,9 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 2,
     baseXp: 40,
     aggroRadius: 200,
+    damageVariation: 0.2,
+    criticalChance: 0.15,
+    defense: 1,
     idleFramePrefix: 'pumpkin_dude_idle_anim_f',
     runFramePrefix: 'pumpkin_dude_run_anim_f'
   },
@@ -733,6 +812,8 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 1,
     baseXp: 20,
     aggroRadius: 200,
+    damageVariation: 0.3,
+    criticalChance: 0.05,
     idleFramePrefix: 'skelet_idle_anim_f',
     runFramePrefix: 'skelet_run_anim_f'
   },
@@ -744,6 +825,8 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseXp: 20,
     aggroRadius: 180,
     scale: 0.8,
+    damageVariation: 0.3,
+    criticalChance: 0.05,
     idleFramePrefix: 'tiny_zombie_idle_anim_f',
     runFramePrefix: 'tiny_zombie_run_anim_f'
   },
@@ -754,6 +837,9 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 2,
     baseXp: 40,
     aggroRadius: 200,
+    damageVariation: 0.2,
+    criticalChance: 0.15,
+    defense: 1,
     idleFramePrefix: 'wogol_idle_anim_f',
     runFramePrefix: 'wogol_run_anim_f'
   },
@@ -766,6 +852,9 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 3,
     baseXp: 50,
     aggroRadius: 210,
+    damageVariation: 0.2,
+    criticalChance: 0.15,
+    defense: 1,
     hitFramePrefix: 'dwarf_f_hit_anim_f',
     idleFramePrefix: 'dwarf_f_idle_anim_f',
     runFramePrefix: 'dwarf_f_run_anim_f'
@@ -777,6 +866,9 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 3,
     baseXp: 50,
     aggroRadius: 210,
+    damageVariation: 0.2,
+    criticalChance: 0.15,
+    defense: 1,
     hitFramePrefix: 'dwarf_m_hit_anim_f',
     idleFramePrefix: 'dwarf_m_idle_anim_f',
     runFramePrefix: 'dwarf_m_run_anim_f'
@@ -788,6 +880,8 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 2,
     baseXp: 30,
     aggroRadius: 200,
+    damageVariation: 0.3,
+    criticalChance: 0.05,
     hitFramePrefix: 'elf_f_hit_anim_f',
     idleFramePrefix: 'elf_f_idle_anim_f',
     runFramePrefix: 'elf_f_run_anim_f'
@@ -799,6 +893,8 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 2,
     baseXp: 30,
     aggroRadius: 200,
+    damageVariation: 0.3,
+    criticalChance: 0.05,
     hitFramePrefix: 'elf_m_hit_anim_f',
     idleFramePrefix: 'elf_m_idle_anim_f',
     runFramePrefix: 'elf_m_run_anim_f'
@@ -810,6 +906,10 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 4,
     baseXp: 70,
     aggroRadius: 270,
+    damageVariation: 0.15,
+    criticalChance: 0.25,
+    defense: 2,
+    damagePerLevel: 1.5,
     hitFramePrefix: 'knight_f_hit_anim_f',
     idleFramePrefix: 'knight_f_idle_anim_f',
     runFramePrefix: 'knight_f_run_anim_f'
@@ -821,6 +921,10 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 4,
     baseXp: 70,
     aggroRadius: 270,
+    damageVariation: 0.15,
+    criticalChance: 0.25,
+    defense: 2,
+    damagePerLevel: 1.5,
     hitFramePrefix: 'knight_m_hit_anim_f',
     idleFramePrefix: 'knight_m_idle_anim_f',
     runFramePrefix: 'knight_m_run_anim_f'
@@ -832,6 +936,8 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 1,
     baseXp: 20,
     aggroRadius: 190,
+    damageVariation: 0.3,
+    criticalChance: 0.05,
     idleFramePrefix: 'lizard_m_idle_anim_f',
     runFramePrefix: 'lizard_m_run_anim_f'
   },
@@ -842,6 +948,8 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 2,
     baseXp: 30,
     aggroRadius: 190,
+    damageVariation: 0.3,
+    criticalChance: 0.05,
     hitFramePrefix: 'lizard_f_hit_anim_f',
     idleFramePrefix: 'lizard_f_idle_anim_f',
     runFramePrefix: 'lizard_f_run_anim_f'
@@ -853,6 +961,8 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 2,
     baseXp: 30,
     aggroRadius: 190,
+    damageVariation: 0.3,
+    criticalChance: 0.05,
     hitFramePrefix: 'lizard_m_hit_anim_f',
     idleFramePrefix: 'lizard_m_idle_anim_f',
     runFramePrefix: 'lizard_m_run_anim_f'
@@ -864,6 +974,9 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 2,
     baseXp: 40,
     aggroRadius: 230,
+    damageVariation: 0.2,
+    criticalChance: 0.15,
+    defense: 1,
     hitFramePrefix: 'wizzard_f_hit_anim_f',
     idleFramePrefix: 'wizzard_f_idle_anim_f',
     runFramePrefix: 'wizzard_f_run_anim_f'
@@ -875,6 +988,9 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 2,
     baseXp: 40,
     aggroRadius: 230,
+    damageVariation: 0.2,
+    criticalChance: 0.15,
+    defense: 1,
     hitFramePrefix: 'wizzard_m_hit_anim_f',
     idleFramePrefix: 'wizzard_m_idle_anim_f',
     runFramePrefix: 'wizzard_m_run_anim_f'
@@ -888,6 +1004,9 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 3,
     baseXp: 50,
     aggroRadius: 200,
+    damageVariation: 0.2,
+    criticalChance: 0.15,
+    defense: 1,
     animFramePrefix: 'ice_zombie_anim_f'
   },
   [NPCType.MUDDY]: {
@@ -897,6 +1016,8 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 2,
     baseXp: 30,
     aggroRadius: 140,
+    damageVariation: 0.3,
+    criticalChance: 0.05,
     animFramePrefix: 'muddy_anim_f'
   },
   [NPCType.NECROMANCER]: {
@@ -906,6 +1027,9 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 3,
     baseXp: 50,
     aggroRadius: 240,
+    damageVariation: 0.2,
+    criticalChance: 0.15,
+    defense: 1,
     animFramePrefix: 'necromancer_anim_f'
   },
   [NPCType.SLUG]: {
@@ -915,6 +1039,8 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 2,
     baseXp: 30,
     aggroRadius: 120,
+    damageVariation: 0.3,
+    criticalChance: 0.05,
     animFramePrefix: 'slug_anim_f'
   },
   [NPCType.SWAMPY]: {
@@ -924,6 +1050,8 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 2,
     baseXp: 30,
     aggroRadius: 140,
+    damageVariation: 0.3,
+    criticalChance: 0.05,
     animFramePrefix: 'swampy_anim_f'
   },
   [NPCType.TINY_SLUG]: {
@@ -934,6 +1062,8 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseXp: 20,
     aggroRadius: 110,
     scale: 0.7,
+    damageVariation: 0.3,
+    criticalChance: 0.05,
     animFramePrefix: 'tiny_slug_anim_f'
   },
   [NPCType.ZOMBIE]: {
@@ -943,6 +1073,9 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 2,
     baseXp: 40,
     aggroRadius: 200,
+    damageVariation: 0.2,
+    criticalChance: 0.15,
+    defense: 1,
     animFramePrefix: 'zombie_anim_f'
   },
 
@@ -954,6 +1087,9 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 2,
     baseXp: 40,
     aggroRadius: 210,
+    damageVariation: 0.2,
+    criticalChance: 0.15,
+    defense: 1,
     idleFramePrefix: 'bandit_idle_',
     runFramePrefix: 'bandit_walk_',
     frameStart: 0,
@@ -967,6 +1103,10 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseXp: 80,
     aggroRadius: 270,
     scale: 1.3,
+    damageVariation: 0.15,
+    criticalChance: 0.25,
+    defense: 2,
+    damagePerLevel: 1.5,
     idleFramePrefix: 'bear_idle_',
     runFramePrefix: 'bear_walk_',
     frameStart: 0,
@@ -980,6 +1120,9 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseXp: 50,
     aggroRadius: 220,
     scale: 1.1,
+    damageVariation: 0.2,
+    criticalChance: 0.15,
+    defense: 1,
     idleFramePrefix: 'centaur_F_idle_',
     runFramePrefix: 'centaur_F_walk_',
     frameStart: 0,
@@ -993,6 +1136,9 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseXp: 50,
     aggroRadius: 220,
     scale: 1.1,
+    damageVariation: 0.2,
+    criticalChance: 0.15,
+    defense: 1,
     idleFramePrefix: 'centaur_M_idle_',
     runFramePrefix: 'centaur_M_walk_',
     frameStart: 0,
@@ -1005,6 +1151,8 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 2,
     baseXp: 30,
     aggroRadius: 200,
+    damageVariation: 0.3,
+    criticalChance: 0.05,
     idleFramePrefix: 'elf_F_idle_',
     runFramePrefix: 'elf_F_walk_',
     frameStart: 0,
@@ -1017,6 +1165,8 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 2,
     baseXp: 30,
     aggroRadius: 200,
+    damageVariation: 0.3,
+    criticalChance: 0.05,
     idleFramePrefix: 'elf_M_idle_',
     runFramePrefix: 'elf_M_walk_',
     frameStart: 0,
@@ -1029,6 +1179,10 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 4,
     baseXp: 70,
     aggroRadius: 270,
+    damageVariation: 0.15,
+    criticalChance: 0.25,
+    defense: 2,
+    damagePerLevel: 1.5,
     idleFramePrefix: 'elvenknight_idle_',
     runFramePrefix: 'elvenknight_walk_',
     frameStart: 0,
@@ -1042,6 +1196,10 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseXp: 90,
     aggroRadius: 250,
     scale: 1.4,
+    damageVariation: 0.1,
+    criticalChance: 0.3,
+    defense: 3,
+    damagePerLevel: 2,
     idleFramePrefix: 'ent_idle_',
     runFramePrefix: 'ent_walk_',
     frameStart: 0,
@@ -1055,6 +1213,8 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseXp: 20,
     aggroRadius: 180,
     scale: 0.8,
+    damageVariation: 0.3,
+    criticalChance: 0.05,
     idleFramePrefix: 'fairy_Idle + Walk_',
     runFramePrefix: 'fairy_Idle + Walk_',
     frameStart: 0,
@@ -1068,6 +1228,10 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseXp: 110,
     aggroRadius: 290,
     scale: 1.5,
+    damageVariation: 0.1,
+    criticalChance: 0.3,
+    defense: 4,
+    damagePerLevel: 2,
     idleFramePrefix: 'forestguardian_idle_',
     runFramePrefix: 'forestguardian_walk_',
     frameStart: 0,
@@ -1081,6 +1245,10 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseXp: 70,
     aggroRadius: 250,
     scale: 1.2,
+    damageVariation: 0.15,
+    criticalChance: 0.25,
+    defense: 2,
+    damagePerLevel: 1.5,
     idleFramePrefix: 'gnollbrute_idle_',
     runFramePrefix: 'gnollbrute_walk_',
     frameStart: 0,
@@ -1093,6 +1261,9 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 3,
     baseXp: 50,
     aggroRadius: 220,
+    damageVariation: 0.2,
+    criticalChance: 0.15,
+    defense: 1,
     idleFramePrefix: 'gnolloverseer_idle_',
     runFramePrefix: 'gnolloverseer_walk_',
     frameStart: 0,
@@ -1105,6 +1276,9 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 2,
     baseXp: 40,
     aggroRadius: 210,
+    damageVariation: 0.2,
+    criticalChance: 0.15,
+    defense: 1,
     idleFramePrefix: 'gnollscout_idle_',
     runFramePrefix: 'gnollscout_walk_',
     frameStart: 0,
@@ -1117,6 +1291,9 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 3,
     baseXp: 50,
     aggroRadius: 230,
+    damageVariation: 0.2,
+    criticalChance: 0.15,
+    defense: 1,
     idleFramePrefix: 'gnollshaman_idle_',
     runFramePrefix: 'gnollshaman_walk_',
     frameStart: 0,
@@ -1131,6 +1308,10 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     aggroRadius: 240,
     isStationary: true,
     scale: 1.5,
+    damageVariation: 0.1,
+    criticalChance: 0.3,
+    defense: 4,
+    damagePerLevel: 2,
     idleFramePrefix: 'golem_idle_',
     runFramePrefix: 'golem_walk_',
     frameStart: 0,
@@ -1143,6 +1324,10 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 5,
     baseXp: 90,
     aggroRadius: 280,
+    damageVariation: 0.15,
+    criticalChance: 0.25,
+    defense: 3,
+    damagePerLevel: 2,
     idleFramePrefix: 'eliteknight_idle_',
     runFramePrefix: 'eliteknight_walk_',
     frameStart: 0,
@@ -1156,6 +1341,10 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseXp: 100,
     aggroRadius: 270,
     scale: 1.2,
+    damageVariation: 0.15,
+    criticalChance: 0.25,
+    defense: 3,
+    damagePerLevel: 2,
     idleFramePrefix: 'heavyknight_idle_',
     runFramePrefix: 'heavyknight_walk_',
     frameStart: 0,
@@ -1169,6 +1358,10 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseXp: 120,
     aggroRadius: 280,
     scale: 1.4,
+    damageVariation: 0.1,
+    criticalChance: 0.3,
+    defense: 3,
+    damagePerLevel: 2,
     idleFramePrefix: 'largeknight_idle_',
     runFramePrefix: 'largeknight_walk_',
     frameStart: 0,
@@ -1182,6 +1375,10 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseXp: 130,
     aggroRadius: 290,
     scale: 1.4,
+    damageVariation: 0.1,
+    criticalChance: 0.3,
+    defense: 4,
+    damagePerLevel: 2,
     idleFramePrefix: 'largeeliteknight_idle_',
     runFramePrefix: 'largeeliteknight_walk_',
     frameStart: 0,
@@ -1196,6 +1393,9 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     aggroRadius: 160,
     isStationary: true,
     scale: 1.2,
+    damageVariation: 0.2,
+    criticalChance: 0.15,
+    defense: 1,
     idleFramePrefix: 'largemushroom_idle_',
     runFramePrefix: 'largemushroom_walk_',
     frameStart: 0,
@@ -1209,6 +1409,8 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseXp: 40,
     aggroRadius: 150,
     isStationary: true,
+    damageVariation: 0.3,
+    criticalChance: 0.05,
     idleFramePrefix: 'normalmushroom_idle_',
     runFramePrefix: 'normalmushroom_walk_',
     frameStart: 0,
@@ -1221,6 +1423,9 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 3,
     baseXp: 50,
     aggroRadius: 240,
+    damageVariation: 0.2,
+    criticalChance: 0.15,
+    defense: 1,
     idleFramePrefix: 'ranger_idle_',
     runFramePrefix: 'ranger_walk_',
     frameStart: 0,
@@ -1233,6 +1438,9 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 2,
     baseXp: 40,
     aggroRadius: 220,
+    damageVariation: 0.2,
+    criticalChance: 0.15,
+    defense: 1,
     idleFramePrefix: 'thief_idle_',
     runFramePrefix: 'thief_walk_',
     frameStart: 0,
@@ -1246,6 +1454,10 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseXp: 100,
     aggroRadius: 270,
     scale: 1.3,
+    damageVariation: 0.15,
+    criticalChance: 0.25,
+    defense: 3,
+    damagePerLevel: 2,
     idleFramePrefix: 'troll_idle_',
     runFramePrefix: 'troll_walk_',
     frameStart: 0,
@@ -1258,6 +1470,10 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 3,
     baseXp: 60,
     aggroRadius: 250,
+    damageVariation: 0.15,
+    criticalChance: 0.25,
+    defense: 2,
+    damagePerLevel: 1.5,
     idleFramePrefix: 'wizard_Idle + Walk_',
     runFramePrefix: 'wizard_Idle + Walk_',
     frameStart: 0,
@@ -1270,6 +1486,9 @@ export const NPC_CONFIGS: Record<NPCType, NPCConfig> = {
     baseHp: 2,
     baseXp: 40,
     aggroRadius: 230,
+    damageVariation: 0.2,
+    criticalChance: 0.15,
+    defense: 1,
     idleFramePrefix: 'wolf_idle_',
     runFramePrefix: 'wolf_walk_',
     frameStart: 0,

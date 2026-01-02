@@ -11,6 +11,7 @@ import {Chest} from "../items/Chest";
 import {ASSET_KEYS, GAME_CONFIG, SCENE_KEYS, NPCType, CharacterType} from "../constants";
 import {sceneEvents, EVENTS} from "../events/EventsCenter";
 import {debugDraw} from "../utils/debug";
+import {DamageCalculator} from "../utils/damage-calculator";
 
 export class Game extends Phaser.Scene {
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
@@ -281,9 +282,30 @@ export class Game extends Phaser.Scene {
 
     const dir = new Phaser.Math.Vector2(dx, dy).normalize().scale(GAME_CONFIG.player.knockbackSpeed);
 
-    this.faune.handleDamage(dir);
+    // Calculate damage using the new system
+    const damageResult = enemy.calculateAttackDamage(this.faune.getCombatStats());
+    
+    console.log(`[Game] Enemy ${enemy.npcType} L${enemy.level} attacks for ${damageResult.totalDamage} damage` +
+                `${damageResult.isCritical ? ' CRITICAL!' : ''}`);
+    
+    // Apply damage to player
+    this.faune.handleDamage(dir, damageResult.totalDamage);
 
-    sceneEvents.emit(EVENTS.PLAYER_HEALTH_CHANGED, this.faune.health);
+    // Show critical hit text if applicable
+    if (damageResult.isCritical) {
+      const critText = this.add.text(this.faune.x, this.faune.y - 20, 'CRITICAL!', {
+        fontSize: '16px',
+        color: '#ff0000',
+        fontStyle: 'bold'
+      });
+      this.tweens.add({
+        targets: critText,
+        y: critText.y - 30,
+        alpha: 0,
+        duration: 1000,
+        onComplete: () => critText.destroy()
+      });
+    }
 
     if (this.faune.health <= 0) {
       // Stop player-enemy collisions when dead
@@ -311,8 +333,22 @@ export class Game extends Phaser.Scene {
     // Always destroy the knife on hit
     knife.destroy();
 
+    // Calculate player's attack damage
+    const damageResult = DamageCalculator.calculateDamage(
+      this.faune.getCombatStats(),
+      enemy.getCombatStats(),
+      0.1  // 10% variation for knife attacks
+    );
+
+    console.log(`[Game] Player L${this.faune.level} knife hits ${enemy.npcType} L${enemy.level} for ${damageResult.totalDamage} damage` +
+                `${damageResult.isCritical ? ' CRITICAL!' : ''}`);
+
     // Apply damage to enemy and only destroy if health reaches 0
-    const isAlive = enemy.takeDamage(GAME_CONFIG.knife.damage);
+    const isAlive = enemy.takeDamage(damageResult.totalDamage);
+    
+    // Show damage number
+    this.showDamageNumber(enemy.x, enemy.y, damageResult.totalDamage, damageResult.isCritical);
+
     if (!isAlive) {
       // Award XP to player
       const xpReward = enemy.getXpReward();
@@ -360,5 +396,27 @@ export class Game extends Phaser.Scene {
 
   private setupCamera(): void {
     this.cameras.main.startFollow(this.faune, true);
+  }
+
+  private showDamageNumber(x: number, y: number, damage: number, isCritical: boolean): void {
+    const color = isCritical ? '#ff0000' : '#ffffff';
+    const fontSize = isCritical ? '18px' : '14px';
+    
+    const damageText = this.add.text(x, y - 10, damage.toString(), {
+      fontSize: fontSize,
+      color: color,
+      fontStyle: isCritical ? 'bold' : 'normal',
+      stroke: '#000000',
+      strokeThickness: 2
+    });
+    
+    this.tweens.add({
+      targets: damageText,
+      y: damageText.y - 40,
+      alpha: 0,
+      duration: 800,
+      ease: 'Power2',
+      onComplete: () => damageText.destroy()
+    });
   }
 }

@@ -1,4 +1,4 @@
-import {CharacterType, CHARACTER_CONFIGS, CharacterConfig, GAME_CONFIG} from "../constants";
+import {CharacterType, CHARACTER_CONFIGS, CharacterConfig, GAME_CONFIG, CombatStats} from "../constants";
 import {sceneEvents, EVENTS} from "../events/EventsCenter";
 import {Chest} from "../items/Chest";
 
@@ -27,6 +27,7 @@ export class BaseCharacter extends Phaser.Physics.Arcade.Sprite {
   protected _level!: number;
   protected _xp!: number;
   protected _damage!: number;
+  protected _defense!: number;
   protected knives?: Phaser.Physics.Arcade.Group;
   protected activeChest?: Chest;
   protected _energy: number;
@@ -104,6 +105,10 @@ export class BaseCharacter extends Phaser.Physics.Arcade.Sprite {
     return this._damage;
   }
 
+  get defense(): number {
+    return this._defense;
+  }
+
   get energy(): number {
     return this._energy;
   }
@@ -147,6 +152,9 @@ export class BaseCharacter extends Phaser.Physics.Arcade.Sprite {
     
     // Damage = baseDamage + (level - 1) * damagePerLevel
     this._damage = this._config.baseDamage + (this._level - 1) * this._config.damagePerLevel;
+    
+    // Defense = playerBaseDefense + (level - 1) * defensePerLevel
+    this._defense = GAME_CONFIG.combat.playerBaseDefense + (this._level - 1) * GAME_CONFIG.combat.defensePerLevel;
   }
 
   protected getCurrentTime(): number {
@@ -292,7 +300,7 @@ export class BaseCharacter extends Phaser.Physics.Arcade.Sprite {
     knife.setAngularVelocity(GAME_CONFIG.knife.rotationSpeed);
   }
 
-  public handleDamage(dir: Phaser.Math.Vector2): void {
+  public handleDamage(dir: Phaser.Math.Vector2, damageAmount?: number): void {
     if (this._health <= 0) {
       return;
     }
@@ -301,8 +309,16 @@ export class BaseCharacter extends Phaser.Physics.Arcade.Sprite {
       return;
     }
 
-    this._health--;
-    sceneEvents.emit(EVENTS.PLAYER_HEALTH_CHANGED, this._health);
+    // Use provided damage amount or default to 1
+    const actualDamage = damageAmount ?? 1;
+    
+    // Apply defense
+    const finalDamage = Math.max(1, Math.round(actualDamage - this._defense));
+    
+    this._health -= finalDamage;
+    console.log(`[BaseCharacter] Took ${finalDamage} damage (${actualDamage} before defense)`);
+    
+    sceneEvents.emit(EVENTS.PLAYER_HEALTH_CHANGED, this._health, this._maxHealth);
 
     if (this._health <= 0) {
       console.log('[BaseCharacter] Player DEAD');
@@ -319,6 +335,11 @@ export class BaseCharacter extends Phaser.Physics.Arcade.Sprite {
       
       this.setVelocity(dir.x, dir.y);
       this.setTint(0xff0000);
+      
+      // Add screen shake for heavy hits (damage > 3)
+      if (finalDamage > 3) {
+        this.scene.cameras.main.shake(100, 0.005);
+      }
     }
   }
 
@@ -348,16 +369,17 @@ export class BaseCharacter extends Phaser.Physics.Arcade.Sprite {
     // Recalculate stats
     this._maxHealth = this._config.baseMaxHealth + (this._level - 1) * this._config.healthPerLevel;
     this._damage = this._config.baseDamage + (this._level - 1) * this._config.damagePerLevel;
+    this._defense = GAME_CONFIG.combat.playerBaseDefense + (this._level - 1) * GAME_CONFIG.combat.defensePerLevel;
     
     // Heal to full
     this._health = this._maxHealth;
     
     console.log(`[BaseCharacter] LEVEL UP! Now level ${this._level}`);
-    console.log(`[BaseCharacter] New stats - HP: ${this._maxHealth}, Damage: ${this._damage}`);
+    console.log(`[BaseCharacter] New stats - HP: ${this._maxHealth}, Damage: ${this._damage}, Defense: ${this._defense}`);
     
     // Emit level up event
     sceneEvents.emit(EVENTS.PLAYER_LEVEL_UP, this._level, this._maxHealth, this._damage);
-    sceneEvents.emit(EVENTS.PLAYER_HEALTH_CHANGED, this._health);
+    sceneEvents.emit(EVENTS.PLAYER_HEALTH_CHANGED, this._health, this._maxHealth);
   }
 
   protected getXpForNextLevel(): number {
@@ -380,6 +402,18 @@ export class BaseCharacter extends Phaser.Physics.Arcade.Sprite {
       this._energy = Math.min(this._maxEnergy, this._energy + regenAmount);
       sceneEvents.emit(EVENTS.PLAYER_ENERGY_CHANGED, this._energy, this._maxEnergy);
     }
+  }
+
+  /**
+   * Get combat stats for damage calculations
+   */
+  public getCombatStats(): CombatStats {
+    return {
+      damage: this._damage,
+      defense: this._defense,
+      level: this._level,
+      critChance: GAME_CONFIG.combat.criticalChance
+    };
   }
 }
 
