@@ -449,7 +449,14 @@ export const GAME_CONFIG = {
     rotationSpeed: 400
   },
   chest: {
-    coinsValue: 50
+    spawnCount: 15,
+    minSpawnDistance: 100,
+    spawnAreaMargin: 50,
+    maxSpawnAttempts: 50,
+    minCoins: 1,
+    maxCoins: 3,
+    minKnives: 3,
+    maxKnives: 5
   },
   debug: {
     collisionAlpha: 0.7

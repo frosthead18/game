@@ -3,7 +3,7 @@ import {sceneEvents, EVENTS} from '../events/EventsCenter';
 import {SCENE_KEYS, GAME_CONFIG} from '../constants';
 
 /**
- * GameUI Scene - Displays game UI elements like health hearts and coins
+ * GameUI Scene - Displays game UI elements like health and coins
  * Runs in parallel with the main Game scene
  */
 export class GameUI extends Phaser.Scene {
@@ -37,7 +37,7 @@ export class GameUI extends Phaser.Scene {
     const height = camera.height;
 
     // === LEVEL SQUARE (Left Side) ===
-    // Create black square background (smaller with minimum margins)
+    // Create black square background
     this.levelSquareBackground = this.add.graphics();
     this.levelSquareBackground.fillStyle(0x000000, 0.7);
     this.levelSquareBackground.fillRect(5, 5, 30, 30);
@@ -64,7 +64,7 @@ export class GameUI extends Phaser.Scene {
     this.updateLevelSquare(1, 0, GAME_CONFIG.player.xpForLevel(2));
 
     // === HP BAR (Right of square) ===
-    // Create HP bar background (smaller with transparency)
+    // Create HP bar background
     this.hpBarBackground = this.add.graphics();
     this.hpBarBackground.fillStyle(0x000000, 0.6);
     this.hpBarBackground.fillRect(40, 5, 120, 14);

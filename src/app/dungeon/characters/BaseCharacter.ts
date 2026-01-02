@@ -169,10 +169,21 @@ export class BaseCharacter extends Phaser.Physics.Arcade.Sprite {
     if (this.keyE && Phaser.Input.Keyboard.JustDown(this.keyE)) {
       if (this.activeChest) {
         console.log('[BaseCharacter] E pressed, attempting to open chest');
-        const coins = this.activeChest.open();
-        console.log(`[BaseCharacter] Chest opened, received ${coins} coins`);
-        this._coins += coins;
-        sceneEvents.emit(EVENTS.PLAYER_COINS_CHANGED, this._coins);
+        const loot = this.activeChest.open();
+        
+        if (loot) {
+          console.log(`[BaseCharacter] Chest opened, received ${loot.coins} coins and ${loot.knives} knives`);
+          
+          // Add coins
+          this._coins += loot.coins;
+          sceneEvents.emit(EVENTS.PLAYER_COINS_CHANGED, this._coins);
+          
+          // Add knives (up to max)
+          this._knifeCount = Math.min(this._config.maxKnifeCount, this._knifeCount + loot.knives);
+          sceneEvents.emit(EVENTS.PLAYER_KNIFE_COUNT_CHANGED, this._knifeCount);
+        } else {
+          console.log('[BaseCharacter] Chest was already opened');
+        }
       } else {
         console.log('[BaseCharacter] E pressed but no active chest');
       }

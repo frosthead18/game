@@ -102,9 +102,67 @@ export class Game extends Phaser.Scene {
       classType: Chest
     });
 
-    // Create some chests at specific positions
-    this.chests.get(32, 188, ASSET_KEYS.treasure);
-    this.chests.get(616, 284, ASSET_KEYS.treasure);
+    // Generate chests at random positions
+    const chestPositions: { x: number; y: number }[] = [];
+
+    for (let i = 0; i < GAME_CONFIG.chest.spawnCount; i++) {
+      const position = this.getRandomChestPosition(chestPositions);
+
+      if (position) {
+        chestPositions.push(position);
+        this.chests.get(position.x, position.y, ASSET_KEYS.treasure);
+        console.log(`[Game] Spawned chest ${i + 1} at (${position.x}, ${position.y})`);
+      } else {
+        console.warn(`[Game] Failed to find valid spawn position for chest ${i + 1}`);
+      }
+    }
+
+    console.log(`[Game] Successfully spawned ${chestPositions.length} chests`);
+  }
+
+  private getRandomChestPosition(existingPositions: { x: number; y: number }[]): { x: number; y: number } | null {
+    const config = GAME_CONFIG.chest;
+    const margin = config.spawnAreaMargin;
+
+    // Use actual tilemap dimensions in pixels
+    const mapWidth = this.tilemap.widthInPixels;
+    const mapHeight = this.tilemap.heightInPixels;
+
+    const minX = margin;
+    const maxX = mapWidth - margin;
+    const minY = margin;
+    const maxY = mapHeight - margin;
+
+    for (let attempt = 0; attempt < config.maxSpawnAttempts; attempt++) {
+      const x = Phaser.Math.Between(minX, maxX);
+      const y = Phaser.Math.Between(minY, maxY);
+
+      // Check if this position is on a walkable tile (not a wall)
+      if (this.wallsLayer) {
+        const tile = this.wallsLayer.getTileAtWorldXY(x, y);
+        if (tile && tile.collides) {
+          // Position is on a wall, skip it
+          continue;
+        }
+      }
+
+      // Check if this position is far enough from all existing positions
+      let validPosition = true;
+      for (const existing of existingPositions) {
+        const distance = Phaser.Math.Distance.Between(x, y, existing.x, existing.y);
+        if (distance < config.minSpawnDistance) {
+          validPosition = false;
+          break;
+        }
+      }
+
+      if (validPosition) {
+        return { x, y };
+      }
+    }
+
+    // Failed to find a valid position after max attempts
+    return null;
   }
 
   private createCorpses(): void {

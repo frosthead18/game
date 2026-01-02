@@ -2,6 +2,14 @@ import Phaser from 'phaser';
 import {GAME_CONFIG} from '../constants';
 
 /**
+ * Loot interface representing items dropped from a chest
+ */
+export interface ChestLoot {
+  coins: number;
+  knives: number;
+}
+
+/**
  * Chest - Interactive treasure chest that can be opened by the player
  */
 export class Chest extends Phaser.Physics.Arcade.Sprite {
@@ -20,13 +28,13 @@ export class Chest extends Phaser.Physics.Arcade.Sprite {
   }
 
   /**
-   * Opens the chest and returns the coins value
-   * @returns The number of coins obtained, or 0 if already opened
+   * Opens the chest and returns the loot
+   * @returns ChestLoot object containing coins and knives, or null if already opened
    */
-  open(): number {
+  open(): ChestLoot | null {
     if (this.opened) {
-      console.log('[Chest] Already opened, returning 0 coins');
-      return 0;
+      console.log('[Chest] Already opened, returning null');
+      return null;
     }
 
     console.log('[Chest] Opening chest, playing animation');
@@ -41,7 +49,13 @@ export class Chest extends Phaser.Physics.Arcade.Sprite {
       this.setFrame('chest_empty_open_anim_f2.png');
     }
 
-    return GAME_CONFIG.chest.coinsValue;
+    // Generate random loot
+    const coins = Phaser.Math.Between(GAME_CONFIG.chest.minCoins, GAME_CONFIG.chest.maxCoins);
+    const knives = Phaser.Math.Between(GAME_CONFIG.chest.minKnives, GAME_CONFIG.chest.maxKnives);
+
+    console.log(`[Chest] Generated loot: ${coins} coins, ${knives} knives`);
+    
+    return { coins, knives };
   }
 
   /**
