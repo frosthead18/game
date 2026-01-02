@@ -10,14 +10,14 @@ export class GameUI extends Phaser.Scene {
   private hpBarBackground!: Phaser.GameObjects.Graphics;
   private hpBarFill!: Phaser.GameObjects.Graphics;
   private hpText!: Phaser.GameObjects.Text;
+  private levelSquareBackground!: Phaser.GameObjects.Graphics;
+  private levelSquareFill!: Phaser.GameObjects.Graphics;
   private levelText!: Phaser.GameObjects.Text;
-  private xpBarBackground!: Phaser.GameObjects.Graphics;
-  private xpBarFill!: Phaser.GameObjects.Graphics;
-  private xpText!: Phaser.GameObjects.Text;
   private energyBarBackground!: Phaser.GameObjects.Graphics;
   private energyBarFill!: Phaser.GameObjects.Graphics;
   private energyText!: Phaser.GameObjects.Text;
   private knifeCountText!: Phaser.GameObjects.Text;
+  private coinsText!: Phaser.GameObjects.Text;
   private deathOverlay?: Phaser.GameObjects.Container;
   private enterKey?: Phaser.Input.Keyboard.Key;
 
@@ -31,81 +31,28 @@ export class GameUI extends Phaser.Scene {
       this.enterKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
     }
 
-    // Coins display
-    this.add.image(10, 10, 'treasure', 0).setOrigin(0, 0).setScale(1.5);
+    // Get camera dimensions for positioning
+    const camera = this.cameras.main;
+    const width = camera.width;
+    const height = camera.height;
 
-    const coinsLabel = this.add.text(30, 10, '0', {
-      fontSize: '14px',
-      color: '#ffffff'
-    }).setOrigin(0, 0);
+    // === LEVEL SQUARE (Left Side) ===
+    // Create black square background (smaller with minimum margins)
+    this.levelSquareBackground = this.add.graphics();
+    this.levelSquareBackground.fillStyle(0x000000, 0.7);
+    this.levelSquareBackground.fillRect(5, 5, 30, 30);
+    this.levelSquareBackground.lineStyle(2, 0x000000, 0.8);
+    this.levelSquareBackground.strokeRect(5, 5, 30, 30);
 
-    // Listen for coin changes
-    sceneEvents.on(EVENTS.PLAYER_COINS_CHANGED, (coins: number) => {
-      coinsLabel.text = coins.toString();
-    });
+    // Create yellow fill for XP progress
+    this.levelSquareFill = this.add.graphics();
 
-    // Knife count display
-    const knifeIcon = this.add.image(70, 10, 'knife').setOrigin(0, 0).setScale(1.5);
-    this.knifeCountText = this.add.text(95, 10, '5', {
-      fontSize: '14px',
-      color: '#ffffff'
-    }).setOrigin(0, 0);
-
-    // Listen for knife count changes
-    sceneEvents.on(EVENTS.PLAYER_KNIFE_COUNT_CHANGED, (count: number) => {
-      this.knifeCountText.text = count.toString();
-    });
-
-    // === NEW HP BAR SYSTEM ===
-    // Create HP bar background
-    this.hpBarBackground = this.add.graphics();
-    this.hpBarBackground.fillStyle(0x000000, 0.5);
-    this.hpBarBackground.fillRect(10, 40, 150, 20);
-    
-    // Add border to HP bar
-    this.hpBarBackground.lineStyle(2, 0x000000, 1);
-    this.hpBarBackground.strokeRect(10, 40, 150, 20);
-
-    // Create HP bar fill
-    this.hpBarFill = this.add.graphics();
-
-    // Create HP text (centered on bar)
-    this.hpText = this.add.text(85, 50, '3 / 3', {
-      fontSize: '14px',
-      color: '#ffffff',
-      fontStyle: 'bold',
-      stroke: '#000000',
-      strokeThickness: 3
-    }).setOrigin(0.5, 0.5);
-
-    // Listen for health changes
-    sceneEvents.on(EVENTS.PLAYER_HEALTH_CHANGED, this.handleHealthChanged, this);
-
-    // Initialize HP bar with starting health
-    const startingHealth = GAME_CONFIG.player.baseMaxHealth;
-    this.updateHpBar(startingHealth, startingHealth);
-    // === END HP BAR SYSTEM ===
-
-    // Create level display
-    this.levelText = this.add.text(10, 70, 'Level 1', {
+    // Create level number text (centered in square)
+    this.levelText = this.add.text(20, 20, '1', {
       fontSize: '16px',
       color: '#ffffff',
       fontStyle: 'bold'
-    }).setOrigin(0, 0);
-
-    // Create XP bar background
-    this.xpBarBackground = this.add.graphics();
-    this.xpBarBackground.fillStyle(0x000000, 0.5);
-    this.xpBarBackground.fillRect(10, 95, 150, 16);
-
-    // Create XP bar fill
-    this.xpBarFill = this.add.graphics();
-
-    // Create XP text
-    this.xpText = this.add.text(85, 95, '0 / 100', {
-      fontSize: '12px',
-      color: '#ffffff'
-    }).setOrigin(0.5, 0);
+    }).setOrigin(0.5, 0.5).setAlpha(0.9);
 
     // Listen for XP changes
     sceneEvents.on(EVENTS.PLAYER_XP_CHANGED, this.handleXpChanged, this);
@@ -114,27 +61,84 @@ export class GameUI extends Phaser.Scene {
     sceneEvents.on(EVENTS.PLAYER_LEVEL_UP, this.handleLevelUp, this);
 
     // Initialize with starting values
-    this.updateXpBar(0, GAME_CONFIG.player.xpForLevel(2));
+    this.updateLevelSquare(1, 0, GAME_CONFIG.player.xpForLevel(2));
 
-    // Create Energy bar
+    // === HP BAR (Right of square) ===
+    // Create HP bar background (smaller with transparency)
+    this.hpBarBackground = this.add.graphics();
+    this.hpBarBackground.fillStyle(0x000000, 0.6);
+    this.hpBarBackground.fillRect(40, 5, 120, 14);
+    
+    // Add border to HP bar
+    this.hpBarBackground.lineStyle(1, 0x000000, 0.8);
+    this.hpBarBackground.strokeRect(40, 5, 120, 14);
+
+    // Create HP bar fill
+    this.hpBarFill = this.add.graphics();
+
+    // Create HP text (centered on bar)
+    this.hpText = this.add.text(100, 12, '3 / 3', {
+      fontSize: '11px',
+      color: '#ffffff',
+      fontStyle: 'bold',
+      stroke: '#000000',
+      strokeThickness: 2
+    }).setOrigin(0.5, 0.5).setAlpha(0.9);
+
+    // Listen for health changes
+    sceneEvents.on(EVENTS.PLAYER_HEALTH_CHANGED, this.handleHealthChanged, this);
+
+    // Initialize HP bar with starting health
+    const startingHealth = GAME_CONFIG.player.baseMaxHealth;
+    this.updateHpBar(startingHealth, startingHealth);
+
+    // === ENERGY BAR (Below HP bar) ===
     this.energyBarBackground = this.add.graphics();
-    this.energyBarBackground.fillStyle(0x000000, 0.5);
-    this.energyBarBackground.fillRect(10, 120, 150, 16);
+    this.energyBarBackground.fillStyle(0x000000, 0.6);
+    this.energyBarBackground.fillRect(40, 21, 120, 14);
+    
+    // Add border to Energy bar
+    this.energyBarBackground.lineStyle(1, 0x000000, 0.8);
+    this.energyBarBackground.strokeRect(40, 21, 120, 14);
 
     // Create Energy bar fill
     this.energyBarFill = this.add.graphics();
 
     // Create Energy text
-    this.energyText = this.add.text(85, 120, '100 / 100', {
-      fontSize: '12px',
+    this.energyText = this.add.text(100, 28, '100 / 100', {
+      fontSize: '10px',
       color: '#ffffff'
-    }).setOrigin(0.5, 0);
+    }).setOrigin(0.5, 0.5).setAlpha(0.9);
 
     // Listen for energy changes
     sceneEvents.on(EVENTS.PLAYER_ENERGY_CHANGED, this.handleEnergyChanged, this);
 
     // Initialize energy bar with full energy
     this.updateEnergyBar(GAME_CONFIG.player.maxEnergy, GAME_CONFIG.player.maxEnergy);
+
+    // === KNIFE COUNT (Below bars) ===
+    const knifeIcon = this.add.image(40, 38, 'knife').setOrigin(0, 0).setScale(1).setAlpha(0.85);
+    this.knifeCountText = this.add.text(48, 50, '5', {
+      fontSize: '9px',
+      color: '#ffffff'
+    }).setOrigin(0.5, 0).setAlpha(0.9);
+
+    // Listen for knife count changes
+    sceneEvents.on(EVENTS.PLAYER_KNIFE_COUNT_CHANGED, (count: number) => {
+      this.knifeCountText.text = count.toString();
+    });
+
+    // === COINS DISPLAY (Bottom right corner) ===
+    const coinIcon = this.add.image(width - 25, height - 5, 'treasure', 0).setOrigin(1, 1).setScale(1).setAlpha(0.85);
+    this.coinsText = this.add.text(width - 5, height - 5, '0', {
+      fontSize: '11px',
+      color: '#ffffff'
+    }).setOrigin(1, 1).setAlpha(0.9);
+
+    // Listen for coin changes
+    sceneEvents.on(EVENTS.PLAYER_COINS_CHANGED, (coins: number) => {
+      this.coinsText.text = coins.toString();
+    });
 
     // Listen for player death
     sceneEvents.on(EVENTS.PLAYER_DIED, this.handlePlayerDeath, this);
@@ -164,24 +168,19 @@ export class GameUI extends Phaser.Scene {
 
     // Calculate fill percentage
     const percentage = Math.max(0, Math.min(currentHp / maxHp, 1));
-    const barWidth = 150;
+    const barWidth = 120;
     const fillWidth = barWidth * percentage;
 
-    // Choose color based on HP percentage
-    let color = 0xff0000; // Red
-    if (percentage > 0.6) {
-      color = 0x00ff00; // Green when above 60%
-    } else if (percentage > 0.3) {
-      color = 0xffff00; // Yellow when between 30-60%
-    }
+    // Always use red color for HP
+    const color = 0xff0000;
 
     // Draw new fill with gradient effect
-    this.hpBarFill.fillStyle(color, 0.9);
-    this.hpBarFill.fillRect(10, 40, fillWidth, 20);
+    this.hpBarFill.fillStyle(color, 0.8);
+    this.hpBarFill.fillRect(40, 5, fillWidth, 14);
     
     // Add shine effect (lighter color on top half)
     this.hpBarFill.fillStyle(color, 0.3);
-    this.hpBarFill.fillRect(10, 40, fillWidth, 10);
+    this.hpBarFill.fillRect(40, 5, fillWidth, 7);
 
     // Update text
     this.hpText.setText(`${Math.floor(currentHp)} / ${maxHp}`);
@@ -198,26 +197,30 @@ export class GameUI extends Phaser.Scene {
     }
   }
 
-  // Helper to get current max health (stores last known value)
+  // Helper to store current values
   private _currentMaxHealth: number = GAME_CONFIG.player.baseMaxHealth;
+  private _currentLevel: number = 1;
   
   private getCurrentMaxHealth(): number {
     return this._currentMaxHealth;
   }
-  // === END HP BAR UPDATES ===
 
   private handleXpChanged(currentXp: number, xpNeeded: number): void {
-    this.updateXpBar(currentXp, xpNeeded);
+    const level = this._currentLevel || 1;
+    this.updateLevelSquare(level, currentXp, xpNeeded);
   }
 
   private handleLevelUp(newLevel: number, maxHealth: number, damage: number): void {
+    // Store current level
+    this._currentLevel = newLevel;
+    
     // Update level text
-    this.levelText.setText(`Level ${newLevel}`);
+    this.levelText.setText(`${newLevel}`);
 
-    // Show a level up effect
+    // Show a level up effect on the square
     this.tweens.add({
-      targets: this.levelText,
-      scale: { from: 1, to: 1.3 },
+      targets: [this.levelSquareBackground, this.levelSquareFill, this.levelText],
+      scale: { from: 1, to: 1.2 },
       duration: 200,
       yoyo: true,
       ease: 'Power2'
@@ -235,23 +238,26 @@ export class GameUI extends Phaser.Scene {
     // Update stored max health and refresh HP bar
     this._currentMaxHealth = maxHealth;
     // Health will be updated via PLAYER_HEALTH_CHANGED event
+    
+    // Update level square with new level
+    this.updateLevelSquare(newLevel, 0, GAME_CONFIG.player.xpForLevel(newLevel + 1));
   }
 
-  private updateXpBar(currentXp: number, xpNeeded: number): void {
+  private updateLevelSquare(level: number, currentXp: number, xpNeeded: number): void {
     // Clear previous fill
-    this.xpBarFill.clear();
+    this.levelSquareFill.clear();
 
-    // Calculate fill percentage
+    // Calculate fill percentage (bottom to top)
     const percentage = Math.min(currentXp / xpNeeded, 1);
-    const barWidth = 150;
-    const fillWidth = barWidth * percentage;
+    const squareSize = 30;
+    const fillHeight = squareSize * percentage;
 
-    // Draw new fill
-    this.xpBarFill.fillStyle(0x00ff00, 0.8);
-    this.xpBarFill.fillRect(10, 95, fillWidth, 16);
+    // Draw yellow fill from bottom to top with transparency
+    this.levelSquareFill.fillStyle(0xffff00, 0.5);
+    this.levelSquareFill.fillRect(5, 5 + (squareSize - fillHeight), squareSize, fillHeight);
 
-    // Update text
-    this.xpText.setText(`${currentXp} / ${xpNeeded}`);
+    // Update level text
+    this.levelText.setText(`${level}`);
   }
 
 
@@ -265,12 +271,12 @@ export class GameUI extends Phaser.Scene {
 
     // Calculate fill percentage
     const percentage = Math.min(currentEnergy / maxEnergy, 1);
-    const barWidth = 150;
+    const barWidth = 120;
     const fillWidth = barWidth * percentage;
 
-    // Draw new fill with cyan/blue color
-    this.energyBarFill.fillStyle(0x00bfff, 0.8);
-    this.energyBarFill.fillRect(10, 120, fillWidth, 16);
+    // Draw new fill with green color and transparency
+    this.energyBarFill.fillStyle(0x00ff00, 0.7);
+    this.energyBarFill.fillRect(40, 21, fillWidth, 14);
 
     // Update text
     this.energyText.setText(`${Math.floor(currentEnergy)} / ${maxEnergy}`);
