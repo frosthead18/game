@@ -1,0 +1,104 @@
+{
+	"textures": [
+		{
+			"image": "bishop.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 48,
+				"h": 28
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "Bishop_Idle + Walk_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 4,
+						"w": 14,
+						"h": 28
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 28
+					}
+				},
+				{
+					"filename": "Bishop_Idle + Walk_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 5,
+						"w": 16,
+						"h": 27
+					},
+					"frame": {
+						"x": 14,
+						"y": 0,
+						"w": 16,
+						"h": 27
+					}
+				},
+				{
+					"filename": "Bishop_Idle + Walk_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 5,
+						"w": 16,
+						"h": 27
+					},
+					"frame": {
+						"x": 14,
+						"y": 0,
+						"w": 16,
+						"h": 27
+					}
+				},
+				{
+					"filename": "Bishop_Idle + Walk_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 6,
+						"w": 18,
+						"h": 26
+					},
+					"frame": {
+						"x": 30,
+						"y": 0,
+						"w": 18,
+						"h": 26
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:695cc38631f443170d3bf344b73b2416:9e4ce53e98e2a0f58163dc1ce0042593:07b7dadd119687300bbf3d73df90cf6d$"
+	}
+}

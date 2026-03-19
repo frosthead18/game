@@ -1,0 +1,188 @@
+{
+	"textures": [
+		{
+			"image": "skelet.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 12,
+				"h": 115
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "skelet_idle_anim_f0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 1,
+						"w": 12,
+						"h": 15
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 12,
+						"h": 15
+					}
+				},
+				{
+					"filename": "skelet_idle_anim_f1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 3,
+						"w": 12,
+						"h": 13
+					},
+					"frame": {
+						"x": 0,
+						"y": 15,
+						"w": 12,
+						"h": 13
+					}
+				},
+				{
+					"filename": "skelet_idle_anim_f2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 4,
+						"w": 12,
+						"h": 12
+					},
+					"frame": {
+						"x": 0,
+						"y": 28,
+						"w": 12,
+						"h": 12
+					}
+				},
+				{
+					"filename": "skelet_idle_anim_f3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 2,
+						"w": 12,
+						"h": 14
+					},
+					"frame": {
+						"x": 0,
+						"y": 40,
+						"w": 12,
+						"h": 14
+					}
+				},
+				{
+					"filename": "skelet_run_anim_f0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 0,
+						"w": 12,
+						"h": 16
+					},
+					"frame": {
+						"x": 0,
+						"y": 54,
+						"w": 12,
+						"h": 16
+					}
+				},
+				{
+					"filename": "skelet_run_anim_f1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 0,
+						"w": 12,
+						"h": 14
+					},
+					"frame": {
+						"x": 0,
+						"y": 70,
+						"w": 12,
+						"h": 14
+					}
+				},
+				{
+					"filename": "skelet_run_anim_f2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 0,
+						"w": 12,
+						"h": 16
+					},
+					"frame": {
+						"x": 0,
+						"y": 84,
+						"w": 12,
+						"h": 16
+					}
+				},
+				{
+					"filename": "skelet_run_anim_f3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 1,
+						"w": 12,
+						"h": 15
+					},
+					"frame": {
+						"x": 0,
+						"y": 100,
+						"w": 12,
+						"h": 15
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:3c166dd9d47298fb263523db8fc76dca:cff5c9ab6d7c7bacfeba1539897b65a3:daa74e5485b8f515abd53d9547a7c228$"
+	}
+}

@@ -1,0 +1,188 @@
+{
+	"textures": [
+		{
+			"image": "tiny_zombie.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 90,
+				"h": 12
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "tiny_zombie_idle_anim_f0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 5,
+						"w": 11,
+						"h": 11
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 11,
+						"h": 11
+					}
+				},
+				{
+					"filename": "tiny_zombie_idle_anim_f1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 6,
+						"w": 11,
+						"h": 10
+					},
+					"frame": {
+						"x": 11,
+						"y": 0,
+						"w": 11,
+						"h": 10
+					}
+				},
+				{
+					"filename": "tiny_zombie_idle_anim_f2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 7,
+						"w": 11,
+						"h": 9
+					},
+					"frame": {
+						"x": 22,
+						"y": 0,
+						"w": 11,
+						"h": 9
+					}
+				},
+				{
+					"filename": "tiny_zombie_idle_anim_f3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 6,
+						"w": 11,
+						"h": 10
+					},
+					"frame": {
+						"x": 33,
+						"y": 0,
+						"w": 11,
+						"h": 10
+					}
+				},
+				{
+					"filename": "tiny_zombie_run_anim_f0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 4,
+						"w": 11,
+						"h": 12
+					},
+					"frame": {
+						"x": 44,
+						"y": 0,
+						"w": 11,
+						"h": 12
+					}
+				},
+				{
+					"filename": "tiny_zombie_run_anim_f1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 3,
+						"w": 13,
+						"h": 12
+					},
+					"frame": {
+						"x": 55,
+						"y": 0,
+						"w": 13,
+						"h": 12
+					}
+				},
+				{
+					"filename": "tiny_zombie_run_anim_f2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 4,
+						"w": 11,
+						"h": 12
+					},
+					"frame": {
+						"x": 68,
+						"y": 0,
+						"w": 11,
+						"h": 12
+					}
+				},
+				{
+					"filename": "tiny_zombie_run_anim_f3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 5,
+						"w": 11,
+						"h": 11
+					},
+					"frame": {
+						"x": 79,
+						"y": 0,
+						"w": 11,
+						"h": 11
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:8157bb289f8385cb6f37efa8502888c7:a1dac1170afba739b4ae199256e5fadb:afa0fe5e310853876d1691b69cdc5f85$"
+	}
+}

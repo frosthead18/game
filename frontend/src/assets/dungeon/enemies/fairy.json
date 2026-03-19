@@ -1,0 +1,104 @@
+{
+	"textures": [
+		{
+			"image": "fairy.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 26,
+				"h": 77
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "fairy_Idle + Walk_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 14,
+						"w": 24,
+						"h": 18
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 24,
+						"h": 18
+					}
+				},
+				{
+					"filename": "fairy_Idle + Walk_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 15,
+						"w": 24,
+						"h": 17
+					},
+					"frame": {
+						"x": 1,
+						"y": 21,
+						"w": 24,
+						"h": 17
+					}
+				},
+				{
+					"filename": "fairy_Idle + Walk_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 16,
+						"w": 24,
+						"h": 16
+					},
+					"frame": {
+						"x": 1,
+						"y": 40,
+						"w": 24,
+						"h": 16
+					}
+				},
+				{
+					"filename": "fairy_Idle + Walk_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 14,
+						"w": 22,
+						"h": 18
+					},
+					"frame": {
+						"x": 1,
+						"y": 58,
+						"w": 22,
+						"h": 18
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:9ff229d906e669f79b08d1a9bd974435:e8e1fc82a0bfa1ec1c8aeb0810bdfc3e:f30cbba2f5db7260871a5426cffc03ac$"
+	}
+}

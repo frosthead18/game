@@ -1,0 +1,188 @@
+{
+	"textures": [
+		{
+			"image": "butcher.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 109,
+				"h": 20
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "Butcher_Walk_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 10,
+						"w": 16,
+						"h": 20
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 20
+					}
+				},
+				{
+					"filename": "Butcher_Walk_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 11,
+						"w": 16,
+						"h": 20
+					},
+					"frame": {
+						"x": 16,
+						"y": 0,
+						"w": 16,
+						"h": 20
+					}
+				},
+				{
+					"filename": "Butcher_Walk_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 12,
+						"w": 15,
+						"h": 20
+					},
+					"frame": {
+						"x": 32,
+						"y": 0,
+						"w": 15,
+						"h": 20
+					}
+				},
+				{
+					"filename": "Butcher_Idle_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 13,
+						"w": 15,
+						"h": 19
+					},
+					"frame": {
+						"x": 47,
+						"y": 0,
+						"w": 15,
+						"h": 19
+					}
+				},
+				{
+					"filename": "Butcher_Walk_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 13,
+						"w": 15,
+						"h": 19
+					},
+					"frame": {
+						"x": 62,
+						"y": 0,
+						"w": 15,
+						"h": 19
+					}
+				},
+				{
+					"filename": "Butcher_Idle_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 14,
+						"w": 15,
+						"h": 18
+					},
+					"frame": {
+						"x": 77,
+						"y": 0,
+						"w": 15,
+						"h": 18
+					}
+				},
+				{
+					"filename": "Butcher_Idle_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 14,
+						"w": 15,
+						"h": 18
+					},
+					"frame": {
+						"x": 77,
+						"y": 0,
+						"w": 15,
+						"h": 18
+					}
+				},
+				{
+					"filename": "Butcher_Idle_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 15,
+						"w": 17,
+						"h": 17
+					},
+					"frame": {
+						"x": 92,
+						"y": 0,
+						"w": 17,
+						"h": 17
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:d9c15b2d404f69a4da3c4b9ae155158c:2a3aa90e58ccab6f1d57ff075bf2b4ef:70accc3531178c44c04132d8f2498c9a$"
+	}
+}

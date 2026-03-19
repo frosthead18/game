@@ -1,0 +1,104 @@
+{
+	"textures": [
+		{
+			"image": "nun_fat.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 57,
+				"h": 17
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "FatNun_Idle + Walk_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 17,
+						"w": 22,
+						"h": 15
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 22,
+						"h": 15
+					}
+				},
+				{
+					"filename": "FatNun_Idle + Walk_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 16,
+						"w": 18,
+						"h": 16
+					},
+					"frame": {
+						"x": 22,
+						"y": 0,
+						"w": 18,
+						"h": 16
+					}
+				},
+				{
+					"filename": "FatNun_Idle + Walk_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 16,
+						"w": 18,
+						"h": 16
+					},
+					"frame": {
+						"x": 22,
+						"y": 0,
+						"w": 18,
+						"h": 16
+					}
+				},
+				{
+					"filename": "FatNun_Idle + Walk_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 15,
+						"w": 17,
+						"h": 17
+					},
+					"frame": {
+						"x": 40,
+						"y": 0,
+						"w": 17,
+						"h": 17
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:be4f3c008532a9378e400ee1b6ca4134:b44325c7502a08a1160a6c101fe38e85:2fb31cd8e39847d08f10f9ae3a3c483a$"
+	}
+}

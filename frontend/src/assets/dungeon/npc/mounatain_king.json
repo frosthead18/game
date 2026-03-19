@@ -1,0 +1,104 @@
+{
+	"textures": [
+		{
+			"image": "mounatain_king.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 32,
+				"h": 32
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "MountainKing_Idle + Walk_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 17,
+						"w": 18,
+						"h": 15
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 18,
+						"h": 15
+					}
+				},
+				{
+					"filename": "MountainKing_Idle + Walk_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 15,
+						"w": 16,
+						"h": 17
+					},
+					"frame": {
+						"x": 0,
+						"y": 15,
+						"w": 16,
+						"h": 17
+					}
+				},
+				{
+					"filename": "MountainKing_Idle + Walk_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 16,
+						"w": 16,
+						"h": 16
+					},
+					"frame": {
+						"x": 16,
+						"y": 15,
+						"w": 16,
+						"h": 16
+					}
+				},
+				{
+					"filename": "MountainKing_Idle + Walk_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 16,
+						"w": 16,
+						"h": 16
+					},
+					"frame": {
+						"x": 16,
+						"y": 15,
+						"w": 16,
+						"h": 16
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:1fc2f78e1fd9f0bcd50a6e491783b927:4c134b87166fbc47de283e85cb5dc612:09f025037cd0585a1afc3f43d462e997$"
+	}
+}

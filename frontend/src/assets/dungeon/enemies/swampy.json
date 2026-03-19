@@ -1,0 +1,104 @@
+{
+	"textures": [
+		{
+			"image": "swampy.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 16,
+				"h": 60
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "swampy_anim_f0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 2,
+						"w": 16,
+						"h": 14
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 14
+					}
+				},
+				{
+					"filename": "swampy_anim_f1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 16,
+						"h": 15
+					},
+					"frame": {
+						"x": 0,
+						"y": 14,
+						"w": 16,
+						"h": 15
+					}
+				},
+				{
+					"filename": "swampy_anim_f2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 16
+					},
+					"frame": {
+						"x": 0,
+						"y": 29,
+						"w": 16,
+						"h": 16
+					}
+				},
+				{
+					"filename": "swampy_anim_f3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 16,
+						"h": 15
+					},
+					"frame": {
+						"x": 0,
+						"y": 45,
+						"w": 16,
+						"h": 15
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:59a27179b539cfd1fb65c713294ee9b6:a3bfd712d19c247bd1d9b52f5c208b30:8a6bc410bc75859d2c48a94487348939$"
+	}
+}

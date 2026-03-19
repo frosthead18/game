@@ -1,0 +1,40 @@
+// Custom Angular Material Theme
+@use '@angular/material' as mat;
+
+// Include the common styles for Angular Material
+@include mat.core();
+
+// Define the theme using Material 3
+$game-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$azure-palette,
+    tertiary: mat.$blue-palette,
+  ),
+  typography: (
+    brand-family: 'Roboto, "Helvetica Neue", sans-serif',
+    plain-family: 'Roboto, "Helvetica Neue", sans-serif',
+  ),
+  density: (
+    scale: 0,
+  )
+));
+
+// Include theme styles for all components
+html {
+  @include mat.all-component-themes($game-theme);
+}
+
+// Dark theme (optional - you can toggle this)
+.dark-theme {
+  $game-dark-theme: mat.define-theme((
+    color: (
+      theme-type: dark,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+  ));
+
+  @include mat.all-component-themes($game-dark-theme);
+}
+

@@ -1,0 +1,209 @@
+{
+	"textures": [
+		{
+			"image": "wizzard_m.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 16,
+				"h": 184
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "wizzard_m_hit_anim_f0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 28
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 3,
+						"w": 15,
+						"h": 23
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 23
+					}
+				},
+				{
+					"filename": "wizzard_m_idle_anim_f0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 28
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 8,
+						"w": 15,
+						"h": 20
+					},
+					"frame": {
+						"x": 0,
+						"y": 23,
+						"w": 15,
+						"h": 20
+					}
+				},
+				{
+					"filename": "wizzard_m_idle_anim_f1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 28
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 7,
+						"w": 15,
+						"h": 21
+					},
+					"frame": {
+						"x": 0,
+						"y": 43,
+						"w": 15,
+						"h": 21
+					}
+				},
+				{
+					"filename": "wizzard_m_idle_anim_f2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 28
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 9,
+						"w": 16,
+						"h": 19
+					},
+					"frame": {
+						"x": 0,
+						"y": 64,
+						"w": 16,
+						"h": 19
+					}
+				},
+				{
+					"filename": "wizzard_m_idle_anim_f3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 28
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 9,
+						"w": 15,
+						"h": 19
+					},
+					"frame": {
+						"x": 0,
+						"y": 83,
+						"w": 15,
+						"h": 19
+					}
+				},
+				{
+					"filename": "wizzard_m_run_anim_f0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 28
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 9,
+						"w": 16,
+						"h": 19
+					},
+					"frame": {
+						"x": 0,
+						"y": 102,
+						"w": 16,
+						"h": 19
+					}
+				},
+				{
+					"filename": "wizzard_m_run_anim_f1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 28
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 7,
+						"w": 15,
+						"h": 21
+					},
+					"frame": {
+						"x": 0,
+						"y": 121,
+						"w": 15,
+						"h": 21
+					}
+				},
+				{
+					"filename": "wizzard_m_run_anim_f2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 28
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 6,
+						"w": 16,
+						"h": 22
+					},
+					"frame": {
+						"x": 0,
+						"y": 142,
+						"w": 16,
+						"h": 22
+					}
+				},
+				{
+					"filename": "wizzard_m_run_anim_f3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 28
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 8,
+						"w": 16,
+						"h": 20
+					},
+					"frame": {
+						"x": 0,
+						"y": 164,
+						"w": 16,
+						"h": 20
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:a6900fa65fc8456b311052a4b8c15eba:75c6f844202ec42aa76141614efc0934:da82e5b4767ad3ac1354bec21db954e1$"
+	}
+}

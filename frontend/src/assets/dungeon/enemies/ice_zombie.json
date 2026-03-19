@@ -1,0 +1,104 @@
+{
+	"textures": [
+		{
+			"image": "ice_zombie.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 48,
+				"h": 16
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "ice_zombie_anim_f0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 0,
+						"w": 10,
+						"h": 16
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 10,
+						"h": 16
+					}
+				},
+				{
+					"filename": "ice_zombie_anim_f1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 0,
+						"w": 12,
+						"h": 16
+					},
+					"frame": {
+						"x": 10,
+						"y": 0,
+						"w": 12,
+						"h": 16
+					}
+				},
+				{
+					"filename": "ice_zombie_anim_f2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 2,
+						"w": 14,
+						"h": 14
+					},
+					"frame": {
+						"x": 22,
+						"y": 0,
+						"w": 14,
+						"h": 14
+					}
+				},
+				{
+					"filename": "ice_zombie_anim_f3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 0,
+						"w": 12,
+						"h": 16
+					},
+					"frame": {
+						"x": 36,
+						"y": 0,
+						"w": 12,
+						"h": 16
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:4ccb639e1b6a47198a57bc2a0bdc5246:6e29dc45f0c0e7dbdef826c0e57e6e29:e75ab158c998b01325948f730be03dce$"
+	}
+}

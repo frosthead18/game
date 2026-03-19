@@ -1,0 +1,188 @@
+{
+	"textures": [
+		{
+			"image": "ranger.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 26,
+				"h": 207
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "ranger_walk_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 6,
+						"w": 24,
+						"h": 26
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 24,
+						"h": 26
+					}
+				},
+				{
+					"filename": "ranger_walk_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 6,
+						"w": 24,
+						"h": 25
+					},
+					"frame": {
+						"x": 1,
+						"y": 29,
+						"w": 24,
+						"h": 25
+					}
+				},
+				{
+					"filename": "ranger_walk_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 7,
+						"w": 24,
+						"h": 25
+					},
+					"frame": {
+						"x": 1,
+						"y": 56,
+						"w": 24,
+						"h": 25
+					}
+				},
+				{
+					"filename": "ranger_walk_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 8,
+						"w": 24,
+						"h": 24
+					},
+					"frame": {
+						"x": 1,
+						"y": 83,
+						"w": 24,
+						"h": 24
+					}
+				},
+				{
+					"filename": "ranger_idle_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 8,
+						"w": 23,
+						"h": 24
+					},
+					"frame": {
+						"x": 1,
+						"y": 109,
+						"w": 23,
+						"h": 24
+					}
+				},
+				{
+					"filename": "ranger_idle_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 8,
+						"w": 23,
+						"h": 24
+					},
+					"frame": {
+						"x": 1,
+						"y": 135,
+						"w": 23,
+						"h": 24
+					}
+				},
+				{
+					"filename": "ranger_idle_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 9,
+						"w": 23,
+						"h": 23
+					},
+					"frame": {
+						"x": 1,
+						"y": 161,
+						"w": 23,
+						"h": 23
+					}
+				},
+				{
+					"filename": "ranger_idle_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 12,
+						"w": 23,
+						"h": 20
+					},
+					"frame": {
+						"x": 1,
+						"y": 186,
+						"w": 23,
+						"h": 20
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:d3be826bb77922ac7c44f677ba26f8da:9c947b4807a567d3d539bcb3a032c10f:0382d817b29eaecccdc7ec7490ddbb9f$"
+	}
+}

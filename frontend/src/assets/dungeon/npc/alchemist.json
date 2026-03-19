@@ -1,0 +1,188 @@
+{
+	"textures": [
+		{
+			"image": "alchemist.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 92,
+				"h": 20
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "Alchemist_Walk_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 11,
+						"w": 14,
+						"h": 20
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 20
+					}
+				},
+				{
+					"filename": "Alchemist_Walk_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 12,
+						"w": 14,
+						"h": 20
+					},
+					"frame": {
+						"x": 14,
+						"y": 0,
+						"w": 14,
+						"h": 20
+					}
+				},
+				{
+					"filename": "Alchemist_Walk_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 13,
+						"w": 13,
+						"h": 19
+					},
+					"frame": {
+						"x": 28,
+						"y": 0,
+						"w": 13,
+						"h": 19
+					}
+				},
+				{
+					"filename": "Alchemist_Walk_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 13,
+						"w": 13,
+						"h": 19
+					},
+					"frame": {
+						"x": 41,
+						"y": 0,
+						"w": 13,
+						"h": 19
+					}
+				},
+				{
+					"filename": "Alchemist_Idle_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 10,
+						"y": 13,
+						"w": 12,
+						"h": 19
+					},
+					"frame": {
+						"x": 54,
+						"y": 0,
+						"w": 12,
+						"h": 19
+					}
+				},
+				{
+					"filename": "Alchemist_Idle_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 10,
+						"y": 14,
+						"w": 12,
+						"h": 18
+					},
+					"frame": {
+						"x": 66,
+						"y": 0,
+						"w": 12,
+						"h": 18
+					}
+				},
+				{
+					"filename": "Alchemist_Idle_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 10,
+						"y": 14,
+						"w": 12,
+						"h": 18
+					},
+					"frame": {
+						"x": 66,
+						"y": 0,
+						"w": 12,
+						"h": 18
+					}
+				},
+				{
+					"filename": "Alchemist_Idle_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 15,
+						"w": 14,
+						"h": 17
+					},
+					"frame": {
+						"x": 78,
+						"y": 0,
+						"w": 14,
+						"h": 17
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:0606d0e5fe361f36cc4c41335ba2a06d:036baeee2a79d203d1eaabbf6a2c2104:70eb0b2aa36f0679af2160401c63cafd$"
+	}
+}

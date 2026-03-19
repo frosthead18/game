@@ -1,0 +1,188 @@
+{
+	"textures": [
+		{
+			"image": "knight_elite.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 16,
+				"h": 146
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "eliteknight_walk_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 9,
+						"w": 16,
+						"h": 22
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 22
+					}
+				},
+				{
+					"filename": "eliteknight_walk_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 10,
+						"w": 16,
+						"h": 22
+					},
+					"frame": {
+						"x": 0,
+						"y": 22,
+						"w": 16,
+						"h": 22
+					}
+				},
+				{
+					"filename": "eliteknight_walk_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 11,
+						"w": 16,
+						"h": 21
+					},
+					"frame": {
+						"x": 0,
+						"y": 44,
+						"w": 16,
+						"h": 21
+					}
+				},
+				{
+					"filename": "eliteknight_walk_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 11,
+						"w": 16,
+						"h": 21
+					},
+					"frame": {
+						"x": 0,
+						"y": 65,
+						"w": 16,
+						"h": 21
+					}
+				},
+				{
+					"filename": "eliteknight_idle_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 13,
+						"w": 15,
+						"h": 19
+					},
+					"frame": {
+						"x": 0,
+						"y": 86,
+						"w": 15,
+						"h": 19
+					}
+				},
+				{
+					"filename": "eliteknight_idle_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 11,
+						"w": 14,
+						"h": 21
+					},
+					"frame": {
+						"x": 0,
+						"y": 105,
+						"w": 14,
+						"h": 21
+					}
+				},
+				{
+					"filename": "eliteknight_idle_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 12,
+						"w": 14,
+						"h": 20
+					},
+					"frame": {
+						"x": 0,
+						"y": 126,
+						"w": 14,
+						"h": 20
+					}
+				},
+				{
+					"filename": "eliteknight_idle_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 12,
+						"w": 14,
+						"h": 20
+					},
+					"frame": {
+						"x": 0,
+						"y": 126,
+						"w": 14,
+						"h": 20
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:dbce68883cc157b3203157ed73a00173:1789c4854ec41ba231e0600ba126f41e:10927ef66cccb6a980663faf31ec18ab$"
+	}
+}

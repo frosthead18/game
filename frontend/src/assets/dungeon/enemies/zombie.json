@@ -1,0 +1,104 @@
+{
+	"textures": [
+		{
+			"image": "zombie.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 48,
+				"h": 16
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "zombie_anim_f0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 0,
+						"w": 12,
+						"h": 16
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 12,
+						"h": 16
+					}
+				},
+				{
+					"filename": "zombie_anim_f1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 1,
+						"w": 14,
+						"h": 15
+					},
+					"frame": {
+						"x": 12,
+						"y": 0,
+						"w": 14,
+						"h": 15
+					}
+				},
+				{
+					"filename": "zombie_anim_f2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 0,
+						"w": 12,
+						"h": 16
+					},
+					"frame": {
+						"x": 26,
+						"y": 0,
+						"w": 12,
+						"h": 16
+					}
+				},
+				{
+					"filename": "zombie_anim_f3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 0,
+						"w": 10,
+						"h": 16
+					},
+					"frame": {
+						"x": 38,
+						"y": 0,
+						"w": 10,
+						"h": 16
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:4b451a6194f8ffe1adb631deb723a4f2:bbae835bfefb6e675189938f7e64b469:671cfcca2facf02865d2d7530477df67$"
+	}
+}
