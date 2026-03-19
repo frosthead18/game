@@ -1,0 +1,188 @@
+{
+	"textures": [
+		{
+			"image": "bandit.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 26,
+				"h": 158
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "bandit_walk_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 11,
+						"w": 24,
+						"h": 20
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 24,
+						"h": 20
+					}
+				},
+				{
+					"filename": "bandit_walk_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 12,
+						"w": 24,
+						"h": 19
+					},
+					"frame": {
+						"x": 1,
+						"y": 23,
+						"w": 24,
+						"h": 19
+					}
+				},
+				{
+					"filename": "bandit_idle_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 14,
+						"w": 24,
+						"h": 18
+					},
+					"frame": {
+						"x": 1,
+						"y": 44,
+						"w": 24,
+						"h": 18
+					}
+				},
+				{
+					"filename": "bandit_walk_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 14,
+						"w": 24,
+						"h": 18
+					},
+					"frame": {
+						"x": 1,
+						"y": 64,
+						"w": 24,
+						"h": 18
+					}
+				},
+				{
+					"filename": "bandit_idle_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 15,
+						"w": 24,
+						"h": 17
+					},
+					"frame": {
+						"x": 1,
+						"y": 84,
+						"w": 24,
+						"h": 17
+					}
+				},
+				{
+					"filename": "bandit_idle_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 15,
+						"w": 24,
+						"h": 17
+					},
+					"frame": {
+						"x": 1,
+						"y": 103,
+						"w": 24,
+						"h": 17
+					}
+				},
+				{
+					"filename": "bandit_walk_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 15,
+						"w": 24,
+						"h": 17
+					},
+					"frame": {
+						"x": 1,
+						"y": 122,
+						"w": 24,
+						"h": 17
+					}
+				},
+				{
+					"filename": "bandit_idle_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 16,
+						"w": 24,
+						"h": 16
+					},
+					"frame": {
+						"x": 1,
+						"y": 141,
+						"w": 24,
+						"h": 16
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:0de90700f114f68e934516ebd6d04eb3:08a3e5a755273bec4ee00b1baa3c66f5:dad2a50fd0fda5c24dd204f70b3cfa2d$"
+	}
+}

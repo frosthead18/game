@@ -1,0 +1,188 @@
+{
+	"textures": [
+		{
+			"image": "masked_orc.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 57,
+				"h": 35
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "masked_orc_idle_anim_f0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 6,
+						"w": 14,
+						"h": 17
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 17
+					}
+				},
+				{
+					"filename": "masked_orc_idle_anim_f1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 7,
+						"w": 14,
+						"h": 16
+					},
+					"frame": {
+						"x": 14,
+						"y": 0,
+						"w": 14,
+						"h": 16
+					}
+				},
+				{
+					"filename": "masked_orc_idle_anim_f2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 8,
+						"w": 14,
+						"h": 15
+					},
+					"frame": {
+						"x": 28,
+						"y": 0,
+						"w": 14,
+						"h": 15
+					}
+				},
+				{
+					"filename": "masked_orc_idle_anim_f3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 7,
+						"w": 14,
+						"h": 16
+					},
+					"frame": {
+						"x": 42,
+						"y": 0,
+						"w": 14,
+						"h": 16
+					}
+				},
+				{
+					"filename": "masked_orc_run_anim_f0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 5,
+						"w": 14,
+						"h": 18
+					},
+					"frame": {
+						"x": 0,
+						"y": 17,
+						"w": 14,
+						"h": 18
+					}
+				},
+				{
+					"filename": "masked_orc_run_anim_f1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 4,
+						"w": 15,
+						"h": 18
+					},
+					"frame": {
+						"x": 14,
+						"y": 17,
+						"w": 15,
+						"h": 18
+					}
+				},
+				{
+					"filename": "masked_orc_run_anim_f2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 5,
+						"w": 14,
+						"h": 18
+					},
+					"frame": {
+						"x": 29,
+						"y": 17,
+						"w": 14,
+						"h": 18
+					}
+				},
+				{
+					"filename": "masked_orc_run_anim_f3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 6,
+						"w": 14,
+						"h": 17
+					},
+					"frame": {
+						"x": 43,
+						"y": 17,
+						"w": 14,
+						"h": 17
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:af33a7cf1ed4b36a2c8115ebde38eca0:e7a77c8e24c40ec363df658c780df407:d55f988565d48197e8dcc6bc2f3e3671$"
+	}
+}

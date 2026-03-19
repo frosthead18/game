@@ -1,0 +1,104 @@
+{
+	"textures": [
+		{
+			"image": "magic_shopkeeper.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 16,
+				"h": 51
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "MagicShopKeeper_Idle + Walk_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 16,
+						"w": 16,
+						"h": 16
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 16
+					}
+				},
+				{
+					"filename": "MagicShopKeeper_Idle + Walk_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 14,
+						"w": 14,
+						"h": 18
+					},
+					"frame": {
+						"x": 0,
+						"y": 16,
+						"w": 14,
+						"h": 18
+					}
+				},
+				{
+					"filename": "MagicShopKeeper_Idle + Walk_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 15,
+						"w": 14,
+						"h": 17
+					},
+					"frame": {
+						"x": 0,
+						"y": 34,
+						"w": 14,
+						"h": 17
+					}
+				},
+				{
+					"filename": "MagicShopKeeper_Idle + Walk_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 15,
+						"w": 14,
+						"h": 17
+					},
+					"frame": {
+						"x": 0,
+						"y": 34,
+						"w": 14,
+						"h": 17
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:ad0f9681d80fefeb469ee8f12e610c20:c63d620ea894f1071678ab79875a7735:c79ad4022554db32f515afa893b0499c$"
+	}
+}

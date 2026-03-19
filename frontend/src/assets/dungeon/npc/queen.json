@@ -1,0 +1,188 @@
+{
+	"textures": [
+		{
+			"image": "queen.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 53,
+				"h": 55
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "Queen_Walk_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 11,
+						"w": 17,
+						"h": 21
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 17,
+						"h": 21
+					}
+				},
+				{
+					"filename": "Queen_Walk_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 12,
+						"w": 17,
+						"h": 20
+					},
+					"frame": {
+						"x": 0,
+						"y": 21,
+						"w": 17,
+						"h": 20
+					}
+				},
+				{
+					"filename": "Queen_Idle_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 14,
+						"w": 18,
+						"h": 18
+					},
+					"frame": {
+						"x": 17,
+						"y": 0,
+						"w": 18,
+						"h": 18
+					}
+				},
+				{
+					"filename": "Queen_Idle_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 14,
+						"w": 18,
+						"h": 18
+					},
+					"frame": {
+						"x": 35,
+						"y": 0,
+						"w": 18,
+						"h": 18
+					}
+				},
+				{
+					"filename": "Queen_Walk_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 14,
+						"w": 18,
+						"h": 18
+					},
+					"frame": {
+						"x": 17,
+						"y": 18,
+						"w": 18,
+						"h": 18
+					}
+				},
+				{
+					"filename": "Queen_Idle_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 13,
+						"w": 17,
+						"h": 19
+					},
+					"frame": {
+						"x": 35,
+						"y": 18,
+						"w": 17,
+						"h": 19
+					}
+				},
+				{
+					"filename": "Queen_Walk_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 13,
+						"w": 17,
+						"h": 19
+					},
+					"frame": {
+						"x": 17,
+						"y": 36,
+						"w": 17,
+						"h": 19
+					}
+				},
+				{
+					"filename": "Queen_Idle_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 15,
+						"w": 19,
+						"h": 17
+					},
+					"frame": {
+						"x": 34,
+						"y": 37,
+						"w": 19,
+						"h": 17
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:a4327d56caa7205cd358e9027082686c:a5a154dd3e17024b7271b162928af249:f0366217b4730dfc90839ea9a2987b7f$"
+	}
+}

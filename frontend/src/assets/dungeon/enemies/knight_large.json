@@ -1,0 +1,188 @@
+{
+	"textures": [
+		{
+			"image": "knight_large.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 28,
+				"h": 238
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "largeknight_walk_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 0,
+						"w": 28,
+						"h": 31
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 28,
+						"h": 31
+					}
+				},
+				{
+					"filename": "largeknight_walk_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 1,
+						"w": 28,
+						"h": 31
+					},
+					"frame": {
+						"x": 0,
+						"y": 31,
+						"w": 28,
+						"h": 31
+					}
+				},
+				{
+					"filename": "largeknight_idle_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 2,
+						"w": 28,
+						"h": 30
+					},
+					"frame": {
+						"x": 0,
+						"y": 62,
+						"w": 28,
+						"h": 30
+					}
+				},
+				{
+					"filename": "largeknight_walk_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 2,
+						"w": 28,
+						"h": 30
+					},
+					"frame": {
+						"x": 0,
+						"y": 92,
+						"w": 28,
+						"h": 30
+					}
+				},
+				{
+					"filename": "largeknight_walk_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 2,
+						"w": 28,
+						"h": 30
+					},
+					"frame": {
+						"x": 0,
+						"y": 122,
+						"w": 28,
+						"h": 30
+					}
+				},
+				{
+					"filename": "largeknight_idle_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 3,
+						"w": 28,
+						"h": 29
+					},
+					"frame": {
+						"x": 0,
+						"y": 152,
+						"w": 28,
+						"h": 29
+					}
+				},
+				{
+					"filename": "largeknight_idle_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 3,
+						"w": 28,
+						"h": 29
+					},
+					"frame": {
+						"x": 0,
+						"y": 181,
+						"w": 28,
+						"h": 29
+					}
+				},
+				{
+					"filename": "largeknight_idle_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 4,
+						"w": 28,
+						"h": 28
+					},
+					"frame": {
+						"x": 0,
+						"y": 210,
+						"w": 28,
+						"h": 28
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:b5714c29a71597cb093e38888fba8dd3:2465d364b02b4e7fbf443a692f83821e:2e6e0ad60e5c7cbd1f5fb25ec03b30b9$"
+	}
+}

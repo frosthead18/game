@@ -1,0 +1,37 @@
+<div class="w-screen h-screen overflow-hidden">
+  <!-- Preview Page -->
+  <div *ngIf="viewState === 'preview'" 
+       class="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-black bg-cover bg-center bg-no-repeat relative"
+       style="background-image: url('assets/images/frosthead.png');">
+    <!-- Dark overlay for better text readability -->
+    <div class="absolute inset-0 bg-black/60"></div>
+    
+    <div class="max-w-2xl mx-auto px-8 text-center relative z-10">
+      <h1 class="text-5xl font-bold mb-6 text-white">{{ config.gameTitle }}</h1>
+      
+      <p class="text-lg text-gray-300 mb-8">
+        {{ config.gameDescription }}
+      </p>
+
+      <div class="mb-10 text-left bg-gray-800/50 rounded-lg p-6">
+        <h2 class="text-2xl font-semibold mb-4 text-white">Features</h2>
+        <ul class="space-y-3 text-gray-300">
+          <li *ngFor="let feature of config.features" class="flex items-start">
+            <span class="text-green-400 mr-3">✓</span>
+            <span>{{ feature }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <button mat-raised-button color="primary" class="!text-lg !px-12 !py-6" (click)="onPlayClicked()">
+        Play Game
+      </button>
+    </div>
+  </div>
+
+  <!-- Game Container -->
+  <div *ngIf="viewState === 'playing'" [id]="config.containerElementId || 'gameContainer'" class="w-full h-full bg-black">
+    <!-- Canvas will be injected here by Phaser -->
+  </div>
+</div>
+

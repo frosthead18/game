@@ -1,0 +1,272 @@
+{
+	"textures": [
+		{
+			"image": "golem.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 52,
+				"h": 446
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "golem_walk_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 25,
+						"w": 50,
+						"h": 37
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 50,
+						"h": 37
+					}
+				},
+				{
+					"filename": "golem_walk_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 27,
+						"w": 50,
+						"h": 37
+					},
+					"frame": {
+						"x": 1,
+						"y": 40,
+						"w": 50,
+						"h": 37
+					}
+				},
+				{
+					"filename": "golem_idle_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 28,
+						"w": 50,
+						"h": 36
+					},
+					"frame": {
+						"x": 1,
+						"y": 79,
+						"w": 50,
+						"h": 36
+					}
+				},
+				{
+					"filename": "golem_walk_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 28,
+						"w": 50,
+						"h": 36
+					},
+					"frame": {
+						"x": 1,
+						"y": 117,
+						"w": 50,
+						"h": 36
+					}
+				},
+				{
+					"filename": "golem_walk_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 26,
+						"w": 50,
+						"h": 36
+					},
+					"frame": {
+						"x": 1,
+						"y": 155,
+						"w": 50,
+						"h": 36
+					}
+				},
+				{
+					"filename": "golem_idle_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 29,
+						"w": 50,
+						"h": 35
+					},
+					"frame": {
+						"x": 1,
+						"y": 193,
+						"w": 50,
+						"h": 35
+					}
+				},
+				{
+					"filename": "golem_idle_5.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 29,
+						"w": 50,
+						"h": 35
+					},
+					"frame": {
+						"x": 1,
+						"y": 230,
+						"w": 50,
+						"h": 35
+					}
+				},
+				{
+					"filename": "golem_walk_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 29,
+						"w": 50,
+						"h": 35
+					},
+					"frame": {
+						"x": 1,
+						"y": 267,
+						"w": 50,
+						"h": 35
+					}
+				},
+				{
+					"filename": "golem_idle_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 30,
+						"w": 50,
+						"h": 34
+					},
+					"frame": {
+						"x": 1,
+						"y": 304,
+						"w": 50,
+						"h": 34
+					}
+				},
+				{
+					"filename": "golem_idle_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 30,
+						"w": 50,
+						"h": 34
+					},
+					"frame": {
+						"x": 1,
+						"y": 340,
+						"w": 50,
+						"h": 34
+					}
+				},
+				{
+					"filename": "golem_walk_5.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 30,
+						"w": 50,
+						"h": 34
+					},
+					"frame": {
+						"x": 1,
+						"y": 376,
+						"w": 50,
+						"h": 34
+					}
+				},
+				{
+					"filename": "golem_idle_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 64,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 31,
+						"w": 50,
+						"h": 33
+					},
+					"frame": {
+						"x": 1,
+						"y": 412,
+						"w": 50,
+						"h": 33
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:50c9c114e193a8528ff271598cd3763f:1ebf918bd0d3d0be0fbeb431ec0f9d47:4ac9190e07869895319abdaddf310eff$"
+	}
+}

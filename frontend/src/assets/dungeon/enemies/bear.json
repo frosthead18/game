@@ -1,0 +1,188 @@
+{
+	"textures": [
+		{
+			"image": "bear.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 265,
+				"h": 25
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "bear_idle_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 9,
+						"w": 31,
+						"h": 23
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 31,
+						"h": 23
+					}
+				},
+				{
+					"filename": "bear_idle_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 9,
+						"w": 31,
+						"h": 23
+					},
+					"frame": {
+						"x": 34,
+						"y": 1,
+						"w": 31,
+						"h": 23
+					}
+				},
+				{
+					"filename": "bear_walk_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 8,
+						"w": 31,
+						"h": 23
+					},
+					"frame": {
+						"x": 67,
+						"y": 1,
+						"w": 31,
+						"h": 23
+					}
+				},
+				{
+					"filename": "bear_walk_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 9,
+						"w": 31,
+						"h": 23
+					},
+					"frame": {
+						"x": 100,
+						"y": 1,
+						"w": 31,
+						"h": 23
+					}
+				},
+				{
+					"filename": "bear_walk_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 10,
+						"w": 32,
+						"h": 22
+					},
+					"frame": {
+						"x": 133,
+						"y": 1,
+						"w": 32,
+						"h": 22
+					}
+				},
+				{
+					"filename": "bear_idle_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 10,
+						"w": 31,
+						"h": 22
+					},
+					"frame": {
+						"x": 167,
+						"y": 1,
+						"w": 31,
+						"h": 22
+					}
+				},
+				{
+					"filename": "bear_walk_0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 10,
+						"w": 31,
+						"h": 22
+					},
+					"frame": {
+						"x": 200,
+						"y": 1,
+						"w": 31,
+						"h": 22
+					}
+				},
+				{
+					"filename": "bear_idle_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 11,
+						"w": 31,
+						"h": 21
+					},
+					"frame": {
+						"x": 233,
+						"y": 1,
+						"w": 31,
+						"h": 21
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:5b334c99f726178e3ddaa8a95d6a8a1a:0eff746b9a0766f9571405358e54cf0f:6295e075e3238db0ec40ff984cf0523c$"
+	}
+}

@@ -1,0 +1,104 @@
+{
+	"textures": [
+		{
+			"image": "high_elf_m.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 19,
+				"h": 100
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "HighElf_M_Idle + Walk_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 8,
+						"w": 17,
+						"h": 24
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 17,
+						"h": 24
+					}
+				},
+				{
+					"filename": "HighElf_M_Idle + Walk_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 9,
+						"w": 17,
+						"h": 23
+					},
+					"frame": {
+						"x": 1,
+						"y": 27,
+						"w": 17,
+						"h": 23
+					}
+				},
+				{
+					"filename": "HighElf_M_Idle + Walk_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 9,
+						"w": 17,
+						"h": 23
+					},
+					"frame": {
+						"x": 1,
+						"y": 52,
+						"w": 17,
+						"h": 23
+					}
+				},
+				{
+					"filename": "HighElf_M_Idle + Walk_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 10,
+						"w": 17,
+						"h": 22
+					},
+					"frame": {
+						"x": 1,
+						"y": 77,
+						"w": 17,
+						"h": 22
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:a36885bb8a3e9c47ad86d312717eda5b:77ca895b66a6347d832d5181b3c62ad1:6da2c63918d8b8a7aeabfffa5de8b645$"
+	}
+}

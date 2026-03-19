@@ -1,0 +1,56 @@
+@use '@angular/material' as mat;
+
+// Toolbar layout fix
+mat-toolbar {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 1rem;
+}
+
+// Router outlet visibility and flex behavior
+router-outlet {
+  display: none;
+}
+
+// Global styles for all game page components
+game-dungeon-page,
+game-page-game-page,
+game-planes-page,
+game-tutorial-page,
+game-radical-page,
+game-battle-armour-page {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0;
+}
+
+// Material list item hover states
+mat-list-item {
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+
+  &.active {
+    background-color: rgba(0, 0, 0, 0.08);
+  }
+}
+
+// Dark theme specific overrides
+.dark-theme {
+  mat-list-item {
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+
+    &.active {
+      background-color: rgba(255, 255, 255, 0.12);
+    }
+  }
+}
+
+

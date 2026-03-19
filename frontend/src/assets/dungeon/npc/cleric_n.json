@@ -1,0 +1,104 @@
+{
+	"textures": [
+		{
+			"image": "cleric_n.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 50,
+				"h": 21
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "NormalCleric_Idle + Walk_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 13,
+						"w": 14,
+						"h": 19
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 14,
+						"h": 19
+					}
+				},
+				{
+					"filename": "NormalCleric_Idle + Walk_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 14,
+						"w": 14,
+						"h": 18
+					},
+					"frame": {
+						"x": 17,
+						"y": 1,
+						"w": 14,
+						"h": 18
+					}
+				},
+				{
+					"filename": "NormalCleric_Idle + Walk_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 14,
+						"w": 14,
+						"h": 18
+					},
+					"frame": {
+						"x": 17,
+						"y": 1,
+						"w": 14,
+						"h": 18
+					}
+				},
+				{
+					"filename": "NormalCleric_Idle + Walk_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 15,
+						"w": 16,
+						"h": 17
+					},
+					"frame": {
+						"x": 33,
+						"y": 1,
+						"w": 16,
+						"h": 17
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:bc2415b43043a0f442b5be7dbd8be91d:574a50ce181572b6ed2b411acd16ba21:3743b9755fe72e5cc4a735f5639b1ab9$"
+	}
+}

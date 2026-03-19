@@ -1,0 +1,188 @@
+{
+	"textures": [
+		{
+			"image": "ogre.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 46,
+				"h": 109
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "ogre_idle_anim_f2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 36
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 10,
+						"w": 24,
+						"h": 26
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 24,
+						"h": 26
+					}
+				},
+				{
+					"filename": "ogre_idle_anim_f3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 36
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 10,
+						"w": 22,
+						"h": 26
+					},
+					"frame": {
+						"x": 24,
+						"y": 0,
+						"w": 22,
+						"h": 26
+					}
+				},
+				{
+					"filename": "ogre_idle_anim_f0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 36
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 9,
+						"w": 22,
+						"h": 27
+					},
+					"frame": {
+						"x": 0,
+						"y": 26,
+						"w": 22,
+						"h": 27
+					}
+				},
+				{
+					"filename": "ogre_idle_anim_f1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 36
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 9,
+						"w": 22,
+						"h": 27
+					},
+					"frame": {
+						"x": 22,
+						"y": 26,
+						"w": 22,
+						"h": 27
+					}
+				},
+				{
+					"filename": "ogre_run_anim_f0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 36
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 9,
+						"w": 22,
+						"h": 27
+					},
+					"frame": {
+						"x": 0,
+						"y": 53,
+						"w": 22,
+						"h": 27
+					}
+				},
+				{
+					"filename": "ogre_run_anim_f3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 36
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 9,
+						"w": 24,
+						"h": 27
+					},
+					"frame": {
+						"x": 22,
+						"y": 53,
+						"w": 24,
+						"h": 27
+					}
+				},
+				{
+					"filename": "ogre_run_anim_f1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 36
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 8,
+						"w": 22,
+						"h": 28
+					},
+					"frame": {
+						"x": 0,
+						"y": 80,
+						"w": 22,
+						"h": 28
+					}
+				},
+				{
+					"filename": "ogre_run_anim_f2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 36
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 7,
+						"w": 22,
+						"h": 29
+					},
+					"frame": {
+						"x": 22,
+						"y": 80,
+						"w": 22,
+						"h": 29
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:49c94a68d9c0ca865e215b3c35d9b164:601a1c7ca6176e320b7f8814dc5d391e:365b63dda70564996f0a94fcfa0ad655$"
+	}
+}

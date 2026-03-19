@@ -1,0 +1,188 @@
+{
+	"textures": [
+		{
+			"image": "merchant.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 15,
+				"h": 132
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "Merchant_Walk_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 11,
+						"w": 15,
+						"h": 20
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 20
+					}
+				},
+				{
+					"filename": "Merchant_Walk_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 12,
+						"w": 15,
+						"h": 20
+					},
+					"frame": {
+						"x": 0,
+						"y": 20,
+						"w": 15,
+						"h": 20
+					}
+				},
+				{
+					"filename": "Merchant_Idle_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 13,
+						"w": 15,
+						"h": 19
+					},
+					"frame": {
+						"x": 0,
+						"y": 40,
+						"w": 15,
+						"h": 19
+					}
+				},
+				{
+					"filename": "Merchant_Walk_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 13,
+						"w": 15,
+						"h": 19
+					},
+					"frame": {
+						"x": 0,
+						"y": 59,
+						"w": 15,
+						"h": 19
+					}
+				},
+				{
+					"filename": "Merchant_Walk_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 13,
+						"w": 15,
+						"h": 19
+					},
+					"frame": {
+						"x": 0,
+						"y": 78,
+						"w": 15,
+						"h": 19
+					}
+				},
+				{
+					"filename": "Merchant_Idle_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 14,
+						"w": 15,
+						"h": 18
+					},
+					"frame": {
+						"x": 0,
+						"y": 97,
+						"w": 15,
+						"h": 18
+					}
+				},
+				{
+					"filename": "Merchant_Idle_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 14,
+						"w": 15,
+						"h": 18
+					},
+					"frame": {
+						"x": 0,
+						"y": 97,
+						"w": 15,
+						"h": 18
+					}
+				},
+				{
+					"filename": "Merchant_Idle_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 15,
+						"w": 15,
+						"h": 17
+					},
+					"frame": {
+						"x": 0,
+						"y": 115,
+						"w": 15,
+						"h": 17
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:6aa3627988d47c38df89f744c4689f76:91cbe43a0bdf7a98a3af8a0bc01600e7:9d120e5a3106995674fbf40b3277cc7e$"
+	}
+}

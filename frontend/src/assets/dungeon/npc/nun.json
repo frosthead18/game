@@ -1,0 +1,104 @@
+{
+	"textures": [
+		{
+			"image": "nun.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 47,
+				"h": 18
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "NormalNun_Idle + Walk_1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 14,
+						"w": 15,
+						"h": 18
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 18
+					}
+				},
+				{
+					"filename": "NormalNun_Idle + Walk_2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 15,
+						"w": 15,
+						"h": 17
+					},
+					"frame": {
+						"x": 15,
+						"y": 0,
+						"w": 15,
+						"h": 17
+					}
+				},
+				{
+					"filename": "NormalNun_Idle + Walk_4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 15,
+						"w": 15,
+						"h": 17
+					},
+					"frame": {
+						"x": 15,
+						"y": 0,
+						"w": 15,
+						"h": 17
+					}
+				},
+				{
+					"filename": "NormalNun_Idle + Walk_3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 16,
+						"w": 17,
+						"h": 16
+					},
+					"frame": {
+						"x": 30,
+						"y": 0,
+						"w": 17,
+						"h": 16
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:65c3c885f0c348f0d8b8eca604189c9f:1cde625e53d1c7d78f38a8a5e4083dc4:c2e3f160761a47055927b1c56492a637$"
+	}
+}

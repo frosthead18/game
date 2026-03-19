@@ -1,0 +1,104 @@
+{
+	"textures": [
+		{
+			"image": "muddy.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 16,
+				"h": 60
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "muddy_anim_f0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 2,
+						"w": 16,
+						"h": 14
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 14
+					}
+				},
+				{
+					"filename": "muddy_anim_f1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 16,
+						"h": 15
+					},
+					"frame": {
+						"x": 0,
+						"y": 14,
+						"w": 16,
+						"h": 15
+					}
+				},
+				{
+					"filename": "muddy_anim_f2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 16
+					},
+					"frame": {
+						"x": 0,
+						"y": 29,
+						"w": 16,
+						"h": 16
+					}
+				},
+				{
+					"filename": "muddy_anim_f3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 16,
+						"h": 16
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 16,
+						"h": 15
+					},
+					"frame": {
+						"x": 0,
+						"y": 45,
+						"w": 16,
+						"h": 15
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:9ee29bc779a53ae3c0938006cd163de5:f3824d42e926cb97438be8793415b76e:ece661abf326d4b1d565b77c1ed03d29$"
+	}
+}
