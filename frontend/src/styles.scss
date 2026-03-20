@@ -28,3 +28,50 @@ body {
 .mat-drawer-container {
   height: 100%;
 }
+
+// Auth page shared styles
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 8px 16px 16px;
+
+  mat-card-title {
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+  }
+
+  mat-card-content {
+    margin-top: 16px;
+  }
+
+  mat-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 8px 0 0;
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+
+.submit-btn {
+  margin-top: 8px;
+  height: 44px;
+}
+
+.error-message {
+  color: #f44336;
+  font-size: 0.875rem;
+  margin: 4px 0 8px;
+}

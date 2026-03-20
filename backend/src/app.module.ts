@@ -6,7 +6,7 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ConfigModule } from '@config/config.module';
 import { ConfigService } from '@config/config.service';
 import { DatabaseModule } from '@infrastructure/database/database.module';
-import { JwtAuthGuard } from '@common/guards/jwt-auth.guard';
+import { CognitoAuthGuard } from '@common/guards/cognito-auth.guard';
 import { AuthModule } from '@modules/auth/auth.module';
 import { UsersModule } from '@modules/users/users.module';
 import { GameSessionsModule } from '@modules/game-sessions/game-sessions.module';
@@ -33,7 +33,7 @@ import { HealthModule } from '@modules/health/health.module';
     GlobalExceptionFilter,
     {
       provide: APP_GUARD,
-      useClass: JwtAuthGuard,
+      useClass: CognitoAuthGuard,
     },
   ],
 })

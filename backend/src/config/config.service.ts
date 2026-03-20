@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService as NestConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
+import { CognitoIdentityProviderClientConfig } from '@aws-sdk/client-cognito-identity-provider';
 import { SnakeNamingStrategy } from '@infrastructure/database/snake-naming.strategy';
 import { Params as PinoParams } from 'nestjs-pino';
 
@@ -44,20 +45,21 @@ export class ConfigService implements TypeOrmOptionsFactory {
     return this.config.getOrThrow<string>('DB_NAME');
   }
 
-  get jwtAccessSecret(): string {
-    return this.config.getOrThrow<string>('JWT_ACCESS_SECRET');
+  get awsDefaultRegion(): string {
+    return this.config.getOrThrow<string>('AWS_REGION');
   }
 
-  get jwtAccessExpiry(): string {
-    return this.config.getOrThrow<string>('JWT_ACCESS_EXPIRY');
+  get cognitoVerifierConfig(): { userPoolId: string; clientId: string } {
+    return {
+      userPoolId: this.config.getOrThrow<string>('USER_POOL_ID'),
+      clientId: this.config.getOrThrow<string>('USER_POOL_CLIENT_ID'),
+    };
   }
 
-  get jwtRefreshSecret(): string {
-    return this.config.getOrThrow<string>('JWT_REFRESH_SECRET');
-  }
-
-  get jwtRefreshExpiry(): string {
-    return this.config.getOrThrow<string>('JWT_REFRESH_EXPIRY');
+  get cognitoClientConfig(): CognitoIdentityProviderClientConfig {
+    return {
+      region: this.awsDefaultRegion,
+    };
   }
 
   get sentryDsn(): string | undefined {

@@ -10,10 +10,9 @@ export const validationSchema = Joi.object({
   DB_PASSWORD: Joi.string().required(),
   DB_NAME: Joi.string().required(),
 
-  JWT_ACCESS_SECRET: Joi.string().min(32).required(),
-  JWT_ACCESS_EXPIRY: Joi.string().default('15m'),
-  JWT_REFRESH_SECRET: Joi.string().min(32).required(),
-  JWT_REFRESH_EXPIRY: Joi.string().default('7d'),
+  USER_POOL_ID: Joi.string().required(),
+  USER_POOL_CLIENT_ID: Joi.string().required(),
+  AWS_REGION: Joi.string().default('us-east-1'),
 
   SENTRY_DSN: Joi.string().uri().optional().allow(''),
   CORS_ORIGIN: Joi.string().default('http://localhost:4200'),

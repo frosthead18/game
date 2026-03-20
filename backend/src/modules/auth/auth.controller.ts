@@ -1,15 +1,22 @@
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post, Req } from '@nestjs/common';
 import {
   ApiBearerAuth,
   ApiOperation,
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { Request } from 'express';
 import { Public } from '@common/decorators/public.decorator';
-import { AuthUser } from '@common/decorators/auth-user.decorator';
-import { AuthenticatedUser } from '@common/types';
 import { AuthService } from './auth.service';
-import { LoginDto, RefreshTokenDto, RegisterDto, TokenResponseDto } from './auth.dto';
+import {
+  SignUpDto,
+  ConfirmSignUpDto,
+  SignInDto,
+  RefreshDto,
+  ForgotPasswordDto,
+  ResetPasswordDto,
+  CognitoTokenResponseDto,
+} from './auth.dto';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -17,40 +24,70 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Public()
-  @Post('register')
+  @Post('signup')
   @ApiOperation({ summary: 'Register a new player account' })
-  @ApiResponse({ status: 201, description: 'Account created', type: TokenResponseDto })
+  @ApiResponse({ status: 201, description: 'Account created — confirmation email sent' })
   @ApiResponse({ status: 409, description: 'Username or email already taken' })
-  register(@Body() dto: RegisterDto): Promise<TokenResponseDto> {
-    return this.authService.register(dto);
+  signUp(@Body() dto: SignUpDto): Promise<{ userSub: string }> {
+    return this.authService.signUp(dto);
   }
 
   @Public()
-  @Post('login')
+  @Post('confirm')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiOperation({ summary: 'Confirm account with emailed verification code' })
+  @ApiResponse({ status: 204, description: 'Account confirmed' })
+  @ApiResponse({ status: 400, description: 'Invalid or expired code' })
+  confirmSignUp(@Body() dto: ConfirmSignUpDto): Promise<void> {
+    return this.authService.confirmSignUp(dto);
+  }
+
+  @Public()
+  @Post('signin')
   @HttpCode(HttpStatus.OK)
-  @ApiOperation({ summary: 'Login with email and password' })
-  @ApiResponse({ status: 200, description: 'Authenticated', type: TokenResponseDto })
-  @ApiResponse({ status: 401, description: 'Invalid credentials' })
-  login(@Body() dto: LoginDto): Promise<TokenResponseDto> {
-    return this.authService.login(dto);
+  @ApiOperation({ summary: 'Sign in with email and password' })
+  @ApiResponse({ status: 200, description: 'Authenticated', type: CognitoTokenResponseDto })
+  @ApiResponse({ status: 401, description: 'Invalid credentials or unconfirmed account' })
+  signIn(@Body() dto: SignInDto): Promise<CognitoTokenResponseDto> {
+    return this.authService.signIn(dto);
   }
 
   @Public()
   @Post('refresh')
   @HttpCode(HttpStatus.OK)
-  @ApiOperation({ summary: 'Rotate access/refresh token pair' })
-  @ApiResponse({ status: 200, description: 'Tokens refreshed', type: TokenResponseDto })
+  @ApiOperation({ summary: 'Refresh access token using a Cognito refresh token' })
+  @ApiResponse({ status: 200, description: 'New access token issued', type: CognitoTokenResponseDto })
   @ApiResponse({ status: 401, description: 'Invalid or expired refresh token' })
-  refresh(@Body() dto: RefreshTokenDto): Promise<TokenResponseDto> {
-    return this.authService.refresh(dto.refreshToken);
+  refresh(@Body() dto: RefreshDto): Promise<CognitoTokenResponseDto> {
+    return this.authService.refresh(dto);
   }
 
-  @Post('logout')
+  @Post('signout')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiBearerAuth()
-  @ApiOperation({ summary: 'Invalidate current refresh token' })
-  @ApiResponse({ status: 204, description: 'Logged out' })
-  logout(@AuthUser() user: AuthenticatedUser): Promise<void> {
-    return this.authService.logout(user.id);
+  @ApiOperation({ summary: 'Invalidate all tokens for the current user' })
+  @ApiResponse({ status: 204, description: 'Signed out' })
+  signOut(@Req() req: Request): Promise<void> {
+    const [, token] = (req.headers.authorization ?? '').split(' ');
+    return this.authService.signOut(token);
+  }
+
+  @Public()
+  @Post('forgot-password')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiOperation({ summary: 'Send password reset code to email' })
+  @ApiResponse({ status: 204, description: 'Reset code sent' })
+  forgotPassword(@Body() dto: ForgotPasswordDto): Promise<void> {
+    return this.authService.forgotPassword(dto);
+  }
+
+  @Public()
+  @Post('reset-password')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiOperation({ summary: 'Set new password with reset code' })
+  @ApiResponse({ status: 204, description: 'Password reset' })
+  @ApiResponse({ status: 400, description: 'Invalid or expired reset code' })
+  resetPassword(@Body() dto: ResetPasswordDto): Promise<void> {
+    return this.authService.resetPassword(dto);
   }
 }

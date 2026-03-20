@@ -1,8 +1,7 @@
 import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 import { Socket } from 'socket.io';
+import { CognitoJwtVerifier } from 'aws-jwt-verify';
 import { ConfigService } from '@config/config.service';
-import { JwtPayload } from '@common/types';
 
 export interface AuthenticatedSocket extends Socket {
   userId: string;
@@ -11,12 +10,18 @@ export interface AuthenticatedSocket extends Socket {
 
 @Injectable()
 export class WsJwtGuard implements CanActivate {
-  constructor(
-    private readonly jwtService: JwtService,
-    private readonly configService: ConfigService,
-  ) {}
+  private readonly verifier: ReturnType<typeof CognitoJwtVerifier.create>;
 
-  canActivate(context: ExecutionContext): boolean {
+  constructor(private readonly configService: ConfigService) {
+    const { userPoolId, clientId } = this.configService.cognitoVerifierConfig;
+    this.verifier = CognitoJwtVerifier.create({
+      userPoolId,
+      clientId,
+      tokenUse: 'access',
+    });
+  }
+
+  async canActivate(context: ExecutionContext): Promise<boolean> {
     const client = context.switchToWs().getClient<Socket>();
     const token =
       (client.handshake.auth as Record<string, string>)['token'] ??
@@ -26,15 +31,12 @@ export class WsJwtGuard implements CanActivate {
       throw new UnauthorizedException('Missing auth token');
     }
 
-    try {
-      const payload = this.jwtService.verify<JwtPayload>(token, {
-        secret: this.configService.jwtAccessSecret,
-      });
-      (client as AuthenticatedSocket).userId = payload.sub;
-      (client as AuthenticatedSocket).username = payload.username;
-      return true;
-    } catch {
+    const payload = await this.verifier.verify(token).catch(() => {
       throw new UnauthorizedException('Invalid auth token');
-    }
+    });
+
+    (client as AuthenticatedSocket).userId = payload.sub;
+    (client as AuthenticatedSocket).username = (payload['preferred_username'] as string | undefined) ?? payload.sub;
+    return true;
   }
 }

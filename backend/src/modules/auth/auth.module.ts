@@ -1,20 +1,22 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { JwtModule } from '@nestjs/jwt';
-import { PassportModule } from '@nestjs/passport';
+import { CognitoIdentityProviderClient } from '@aws-sdk/client-cognito-identity-provider';
+import { ConfigService } from '@config/config.service';
 import { User } from './user.entity';
-import { RefreshToken } from './refresh-token.entity';
-import { AuthService } from './auth.service';
+import { AuthService, COGNITO_CLIENT } from './auth.service';
 import { AuthController } from './auth.controller';
-import { JwtStrategy } from './jwt.strategy';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([User, RefreshToken]),
-    PassportModule.register({ defaultStrategy: 'jwt' }),
-    JwtModule.register({}),
+  imports: [TypeOrmModule.forFeature([User])],
+  providers: [
+    {
+      provide: COGNITO_CLIENT,
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) =>
+        new CognitoIdentityProviderClient(configService.cognitoClientConfig),
+    },
+    AuthService,
   ],
-  providers: [AuthService, JwtStrategy],
   controllers: [AuthController],
   exports: [AuthService, TypeOrmModule],
 })

@@ -1,45 +1,83 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsString, MaxLength, MinLength } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsEmail, IsString, Length, MinLength, IsNotEmpty } from 'class-validator';
 
-export class RegisterDto {
-  @ApiProperty({ description: 'Unique username', example: 'hero123', minLength: 3, maxLength: 50 })
+export class SignUpDto {
+  @ApiProperty({ example: 'player123' })
   @IsString()
-  @MinLength(3)
-  @MaxLength(50)
+  @Length(3, 50)
   username!: string;
 
-  @ApiProperty({ description: 'User email address', example: 'hero@game.com' })
+  @ApiProperty({ example: 'player@example.com' })
   @IsEmail()
-  @MaxLength(255)
   email!: string;
 
-  @ApiProperty({ description: 'Password', minLength: 8, maxLength: 100 })
+  @ApiProperty({ example: 'Str0ng!Pass' })
   @IsString()
   @MinLength(8)
-  @MaxLength(100)
   password!: string;
 }
 
-export class LoginDto {
-  @ApiProperty({ description: 'Email address', example: 'hero@game.com' })
+export class ConfirmSignUpDto {
+  @ApiProperty({ example: 'player@example.com' })
   @IsEmail()
   email!: string;
 
-  @ApiProperty({ description: 'Password' })
+  @ApiProperty({ example: '123456' })
   @IsString()
+  @IsNotEmpty()
+  code!: string;
+}
+
+export class SignInDto {
+  @ApiProperty({ example: 'player@example.com' })
+  @IsEmail()
+  email!: string;
+
+  @ApiProperty({ example: 'Str0ng!Pass' })
+  @IsString()
+  @IsNotEmpty()
   password!: string;
 }
 
-export class RefreshTokenDto {
-  @ApiProperty({ description: 'Refresh token issued at login' })
+export class RefreshDto {
+  @ApiProperty()
   @IsString()
+  @IsNotEmpty()
   refreshToken!: string;
 }
 
-export class TokenResponseDto {
-  @ApiProperty({ description: 'JWT access token' })
+export class ForgotPasswordDto {
+  @ApiProperty({ example: 'player@example.com' })
+  @IsEmail()
+  email!: string;
+}
+
+export class ResetPasswordDto {
+  @ApiProperty({ example: 'player@example.com' })
+  @IsEmail()
+  email!: string;
+
+  @ApiProperty({ example: '123456' })
+  @IsString()
+  @IsNotEmpty()
+  code!: string;
+
+  @ApiProperty({ example: 'NewStr0ng!Pass' })
+  @IsString()
+  @MinLength(8)
+  newPassword!: string;
+}
+
+export class CognitoTokenResponseDto {
+  @ApiProperty()
   accessToken!: string;
 
-  @ApiProperty({ description: 'JWT refresh token' })
-  refreshToken!: string;
+  @ApiPropertyOptional()
+  idToken?: string;
+
+  @ApiPropertyOptional()
+  refreshToken?: string;
+
+  @ApiPropertyOptional()
+  expiresIn?: number;
 }

@@ -3,28 +3,27 @@ import {
   CreateDateColumn,
   Entity,
   Index,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { UserRole } from '@common/enums';
-import { RefreshToken } from './refresh-token.entity';
 
 @Entity('users')
 @Index(['username'])
 @Index(['email'])
+@Index(['cognitoSub'])
 export class User {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
+
+  @Column({ name: 'cognito_sub', unique: true })
+  cognitoSub!: string;
 
   @Column({ unique: true, length: 50 })
   username!: string;
 
   @Column({ unique: true, length: 255 })
   email!: string;
-
-  @Column({ name: 'password_hash', select: false })
-  passwordHash!: string;
 
   @Column({ type: 'enum', enum: UserRole, default: UserRole.PLAYER })
   role!: UserRole;
@@ -34,7 +33,4 @@ export class User {
 
   @UpdateDateColumn({ type: 'timestamptz', name: 'updated_at' })
   updatedAt!: Date;
-
-  @OneToMany(() => RefreshToken, (token) => token.user)
-  refreshTokens?: RefreshToken[];
 }
