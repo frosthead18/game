@@ -2,7 +2,7 @@ import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino';
-import { User } from '@modules/auth/user.entity';
+import { User } from '@modules/users/user.entity';
 import { PublicUserDto, UpdateProfileDto, UserProfileDto } from './users.dto';
 
 @Injectable()

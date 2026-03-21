@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { GameType } from '@common/enums';
-import { User } from '@modules/auth/user.entity';
+import { User } from '@modules/users/user.entity';
 
 @Entity('leaderboard_scores')
 @Index(['gameType', 'score'])

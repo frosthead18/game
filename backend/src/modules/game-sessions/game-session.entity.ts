@@ -9,7 +9,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { GameType, SessionStatus } from '@common/enums';
-import { User } from '@modules/auth/user.entity';
+import { User } from '@modules/users/user.entity';
 import { GameSessionPlayer } from './game-session-player.entity';
 
 @Entity('game_sessions')

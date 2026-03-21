@@ -8,7 +8,7 @@ import {
   Unique,
 } from 'typeorm';
 import { CharacterType, PlayerSessionStatus } from '@common/enums';
-import { User } from '@modules/auth/user.entity';
+import { User } from '@modules/users/user.entity';
 import { GameSession } from './game-session.entity';
 
 @Entity('game_session_players')

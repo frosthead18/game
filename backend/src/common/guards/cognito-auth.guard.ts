@@ -8,7 +8,7 @@ import { PinoLogger, InjectPinoLogger } from 'nestjs-pino';
 import { IS_PUBLIC_KEY } from '@common/decorators/public.decorator';
 import { setAuthUser } from '@common/decorators/auth-user.decorator';
 import { ConfigService } from '@config/config.service';
-import { User } from '@modules/auth/user.entity';
+import { User } from '@modules/users/user.entity';
 
 @Injectable()
 export class CognitoAuthGuard implements CanActivate {
