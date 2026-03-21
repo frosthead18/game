@@ -1,0 +1,183 @@
+<div class="w-screen h-screen overflow-hidden">
+
+  <!-- ===== PREVIEW ===== -->
+  <div *ngIf="viewState === 'preview'"
+       class="w-full h-full flex items-center justify-center bg-cover bg-center relative"
+       style="background-image: url('assets/images/frosthead.png');">
+    <div class="absolute inset-0 bg-black/60"></div>
+
+    <div class="max-w-2xl mx-auto px-8 text-center relative z-10">
+      <h1 class="text-5xl font-bold mb-6 text-white">Dungeon Explorer</h1>
+      <p class="text-lg text-gray-300 mb-8">
+        Embark on an epic adventure through mysterious dungeons filled with treasures, enemies, and secrets.
+      </p>
+
+      <div class="mb-10 text-left bg-gray-800/50 rounded-lg p-6">
+        <h2 class="text-2xl font-semibold mb-4 text-white">Features</h2>
+        <ul class="space-y-3 text-gray-300">
+          <li class="flex items-start">
+            <span class="text-green-400 mr-3">✓</span>
+            <span>Explore handcrafted dungeon levels with unique challenges</span>
+          </li>
+          <li class="flex items-start">
+            <span class="text-green-400 mr-3">✓</span>
+            <span>Battle dangerous enemies and collect powerful items</span>
+          </li>
+          <li class="flex items-start">
+            <span class="text-green-400 mr-3">✓</span>
+            <span>Play solo or team up with friends in real-time multiplayer</span>
+          </li>
+          <li class="flex items-start">
+            <span class="text-green-400 mr-3">✓</span>
+            <span>Immersive fullscreen experience</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="flex gap-4 justify-center">
+        <button mat-raised-button color="primary"
+                class="!text-lg !px-10 !py-5"
+                (click)="onSinglePlayer()">
+          Single Player
+        </button>
+        <button mat-raised-button color="accent"
+                class="!text-lg !px-10 !py-5"
+                (click)="onMultiplayer()">
+          Multiplayer
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SESSION LIST ===== -->
+  <div *ngIf="viewState === 'session-list'"
+       class="w-full h-full flex items-center justify-center bg-gray-900">
+    <div class="w-full max-w-2xl px-6">
+
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-3xl font-bold text-white">Multiplayer Sessions</h2>
+        <button mat-stroked-button color="warn" (click)="onBack()">← Back</button>
+      </div>
+
+      <!-- Loading -->
+      <div *ngIf="loading" class="flex justify-center py-12">
+        <mat-spinner diameter="48"></mat-spinner>
+      </div>
+
+      <!-- Error -->
+      <div *ngIf="errorMessage && !loading"
+           class="bg-red-900/40 border border-red-600 rounded-lg p-4 mb-4 text-red-300">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Sessions list -->
+      <div *ngIf="!loading" class="space-y-3 mb-6 max-h-96 overflow-y-auto">
+        <div *ngIf="sessions.length === 0" class="text-gray-400 text-center py-8">
+          No open sessions found. Be the first to create one!
+        </div>
+
+        <div *ngFor="let s of sessions"
+             class="flex items-center justify-between bg-gray-800 rounded-lg p-4 border border-gray-700 hover:border-gray-500 transition-colors">
+          <div>
+            <p class="text-white font-semibold">{{ s.name }}</p>
+            <p class="text-gray-400 text-sm mt-1">
+              Host: {{ s.hostEmail || s.hostUserId }}
+            </p>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="text-gray-300 text-sm">
+              <mat-icon class="align-middle text-sm mr-1">people</mat-icon>
+              {{ s.playerCount }} / {{ s.maxPlayers }}
+            </span>
+            <button mat-raised-button color="primary"
+                    [disabled]="s.playerCount >= s.maxPlayers"
+                    (click)="onJoinSession(s)">
+              Join
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex gap-3">
+        <button mat-raised-button color="accent"
+                class="flex-1"
+                [disabled]="loading"
+                (click)="onCreateSession()">
+          + Create New Game
+        </button>
+        <button mat-icon-button
+                color="primary"
+                matTooltip="Refresh list"
+                [disabled]="loading"
+                (click)="loadSessions()">
+          <mat-icon>refresh</mat-icon>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== SESSION LOBBY ===== -->
+  <div *ngIf="viewState === 'session-lobby'"
+       class="w-full h-full flex items-center justify-center bg-gray-900">
+    <div class="w-full max-w-lg px-6">
+
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-3xl font-bold text-white">
+          {{ currentSession?.name || 'Lobby' }}
+        </h2>
+        <button mat-stroked-button color="warn" (click)="onLeaveSession()">Leave</button>
+      </div>
+
+      <div class="bg-gray-800 rounded-lg p-5 mb-6 border border-gray-700">
+        <h3 class="text-gray-400 text-sm uppercase tracking-widest mb-4">Players</h3>
+
+        <div *ngIf="!currentSession" class="flex justify-center py-4">
+          <mat-spinner diameter="36"></mat-spinner>
+        </div>
+
+        <ul *ngIf="currentSession" class="space-y-3">
+          <li *ngFor="let p of currentSession.players"
+              class="flex items-center gap-3">
+            <mat-icon class="text-green-400">person</mat-icon>
+            <span class="text-white flex-1">{{ p.username }}</span>
+            <span *ngIf="p.userId === currentSession.hostUserId"
+                  class="text-xs bg-yellow-700 text-yellow-200 rounded px-2 py-0.5">
+              Host
+            </span>
+            <span class="text-xs text-gray-400">{{ p.status }}</span>
+          </li>
+        </ul>
+
+        <p class="text-gray-500 text-sm mt-4 text-center">
+          {{ currentSession?.playerCount || 0 }} / {{ currentSession?.maxPlayers || 4 }} players joined
+        </p>
+      </div>
+
+      <div *ngIf="errorMessage"
+           class="bg-red-900/40 border border-red-600 rounded-lg p-4 mb-4 text-red-300">
+        {{ errorMessage }}
+      </div>
+
+      <div *ngIf="!isHost" class="text-center text-gray-400 text-sm mb-4">
+        Waiting for the host to start the game…
+      </div>
+
+      <button *ngIf="isHost"
+              mat-raised-button color="primary"
+              class="w-full !text-lg !py-4"
+              [disabled]="(currentSession?.playerCount || 0) < 1"
+              (click)="onStartSession()">
+        Start Game
+      </button>
+
+    </div>
+  </div>
+
+  <!-- ===== PLAYING ===== -->
+  <div *ngIf="viewState === 'playing'"
+       id="dungeonGameContainer"
+       class="w-full h-full bg-black">
+  </div>
+
+</div>

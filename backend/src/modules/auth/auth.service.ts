@@ -24,7 +24,7 @@ import {
 } from '@aws-sdk/client-cognito-identity-provider';
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino';
 import { ConfigService } from '@config/config.service';
-import { User } from './user.entity';
+import { User } from '@modules/users/user.entity';
 import {
   SignUpDto,
   ConfirmSignUpDto,

@@ -2,12 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { TokenInterceptor } from './token.interceptor';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { ConfirmPageComponent } from './confirm-page/confirm-page.component';
@@ -30,8 +28,6 @@ const routes: Routes = [
     MatInputModule,
     MatButtonModule,
   ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
-  ],
+  providers: [],
 })
 export class AuthModule {}

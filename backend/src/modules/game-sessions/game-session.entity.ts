@@ -3,6 +3,7 @@ import {
   CreateDateColumn,
   Entity,
   Index,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -41,6 +42,7 @@ export class GameSession {
   updatedAt!: Date;
 
   @ManyToOne(() => User, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'host_user_id' })
   host?: User;
 
   @OneToMany(() => GameSessionPlayer, (player) => player.session, { cascade: true })
