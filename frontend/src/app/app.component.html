@@ -1,12 +1,21 @@
 <mat-drawer-container class="w-screen h-screen transition-colors duration-300" [class.dark-theme]="isDarkTheme">
   <mat-drawer #drawer class="p-5 min-w-[200px]" mode="side">
-    <mat-list role="list">
-      @for (item of navigation; track item) {
-        <mat-list-item [routerLink]="item.link" [routerLinkActive]="item.link" role="listitem">
-          {{item.label}}
-        </mat-list-item>
-      }
-    </mat-list>
+    <div class="flex flex-col h-full">
+      <mat-list role="list" class="flex-1">
+        @for (item of navigation; track item) {
+          <mat-list-item [routerLink]="item.link" [routerLinkActive]="item.link" role="listitem">
+            {{item.label}}
+          </mat-list-item>
+        }
+      </mat-list>
+
+      <div class="p-2 border-t border-gray-200 dark:border-gray-700">
+        <button mat-button (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          Logout
+        </button>
+      </div>
+    </div>
   </mat-drawer>
 
   <mat-drawer-content class="flex flex-col">

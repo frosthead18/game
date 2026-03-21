@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {routPaths} from "./app-routing.module";
+import { routPaths } from './app-routing.module';
+import { AuthService } from './auth/auth.service';
 
 @Component({
     selector: 'game-root',
@@ -9,6 +10,8 @@ import {routPaths} from "./app-routing.module";
 })
 export class AppComponent implements OnInit {
   public isDarkTheme = false;
+
+  constructor(private readonly authService: AuthService) {}
 
   public navigation = [
     {
@@ -45,7 +48,10 @@ export class AppComponent implements OnInit {
 
   toggleTheme() {
     this.isDarkTheme = !this.isDarkTheme;
-    // Save theme preference
     localStorage.setItem('theme', this.isDarkTheme ? 'dark' : 'light');
+  }
+
+  logout(): void {
+    void this.authService.signOut();
   }
 }
